@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
-import { Button, Card, ReportStatus } from '../../components';
-import { Status } from '../../shared';
+import { Status } from '../../../shared';
+import { Button, Card, ReportStatus } from '../..';
 
 interface ReportLinkProps {
   children: string;
