@@ -65,6 +65,14 @@ p {
   background-color: var(--primary-main);
   color: var(--primary-contrast);
   border-radius: 50px;
+
+
+}
+
+.button:hover {
+  background-color: var(--primary-dark);
+  transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .button-outline {
@@ -73,6 +81,13 @@ p {
   color: var(--text-primary);
   border: var(--primary-main) solid 2px;
   border-radius: 50px;
+}
+
+.button-outline:hover {
+  border-color: var(--primary-dark);
+  color: var(--text-secondary);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .buttonText {
