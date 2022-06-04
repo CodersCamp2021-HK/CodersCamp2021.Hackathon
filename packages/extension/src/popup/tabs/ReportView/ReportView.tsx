@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 
 import { Card, ReportStatus } from '../../components';
+import { Status } from '../../shared';
 
 const linkOverflow = css`
   display: block;
@@ -20,7 +21,7 @@ const ReportView = () => {
         padding: 12px;
       `}
     >
-      <ReportStatus text='FAŁSZ' icon='X' />
+      <ReportStatus status={Status.Fake} />
       <Card>
         <div
           css={css`

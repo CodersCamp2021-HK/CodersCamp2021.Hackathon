@@ -10,7 +10,10 @@ const colors = {
   secondary: {},
   action: {},
   status: {
+    truth: '#2EC4B6',
     fake: '#ff3366',
+    warning: '#FCCA46',
+    unverifiable: '#858AE3',
   },
 };
 
