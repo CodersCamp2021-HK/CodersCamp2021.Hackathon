@@ -96,7 +96,6 @@
 .partnersText {
   text-align: center;
   padding: 0 10rem;
-  margin-bottom: 4rem;
 }
 
 .link {
@@ -111,7 +110,7 @@
 .logosContainer {
   display: flex;
   gap: 2rem;
-  margin-bottom: 4rem;
+  margin: 10rem 0;
 }
 
 .logoImage {
@@ -119,3 +118,57 @@
   height: 5.0625rem;
   position: relative;
 }
+
+/** Contact Section **/
+
+.contactSection {
+  background-color: var(--common-gray);
+}
+
+.contactWrapper {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+}
+
+.contactInfoContainer {
+  background-color: var(--common-white);
+  padding: 4rem 6rem;
+}
+
+.contactElement {
+  display: flex;
+  gap: 2rem;
+}
+
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.formLabel {
+  font-size: 1rem;
+  padding-bottom: 0.2;
+  margin: 0;
+}
+
+.contactFormEmail, .contactFormContent {
+  padding: 0;
+  margin: 0;
+  width : 40rem;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.contactFormEmail {
+  height: 3rem;
+}
+
+.contactFormContent {
+  height: 20rem;
+  resize: none; 
+}
+
