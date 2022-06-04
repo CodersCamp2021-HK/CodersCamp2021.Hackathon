@@ -17,20 +17,28 @@ const Footer = () => {
       </section>
 
       <section className={styles.gridItem}>
-        <p className={styles.text}>O wtyczce</p>
-        <p className={styles.text}>Jak to działa</p>
+        <a href='/#hero'>
+          <p className={styles.text}>O wtyczce</p>
+        </a>
+        <a href='#cards'>
+          <p className={styles.text}>Jak to działa</p>
+        </a>
         <p className={styles.text}>Zostań partnerem</p>
       </section>
 
       <section className={styles.gridItem}>
         <p className={styles.text}>O nas</p>
-        <p className={styles.text}>Kontakt</p>
+        <a href='#contact'>
+          <p className={styles.text}>Kontakt</p>
+        </a>
         <p className={styles.text}>Kariera</p>
       </section>
 
       <section className={styles.gridItem}>
         <div className={styles.icon} style={{ padding: '0 5rem 0 0' }}>
-          <Image src={GitIcon} alt='github' />
+          <a href='https://github.com/CodersCamp2021-HK/CodersCamp2021.Hackathon' target='_blank' rel='noreferrer'>
+            <Image src={GitIcon} alt='github' />
+          </a>
           <Image src={FbIcon} alt='fb' />
           <Image src={IgIcon} alt='ig' />
         </div>
