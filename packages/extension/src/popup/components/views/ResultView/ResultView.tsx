@@ -41,7 +41,7 @@ const ResultView = ({ result }: ResultViewProps) => {
         gap: 1.5rem;
       `}
     >
-      <img alt={alt} src={src} />
+      <img alt={alt} src={src} width='80' />
       <div
         css={css`
           font-size: 0.75rem;
