@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { Status } from '../../../shared';
+import { Status, useArticleFactcheck, useCurrentUrl } from '../../../shared';
 import { Button, Card, ReportStatus } from '../..';
 
 interface ReportLinkProps {
@@ -27,16 +27,12 @@ const ReportLink = ({ children }: ReportLinkProps) => {
   );
 };
 
-const report = {
-  status: Status.Fake,
-  verifierLink: 'https://demagog.org.pl',
-  sourceLink: 'https://onet.pl/wiceminister-wsciekl-sie-w-programie-na-zywo',
-  factCheckLink: 'https://demagog.org.pl/fake_news/rosja-zniszczyla-dolara-i-powiazala-rubla-ze-zlotem-fake-news/',
-  description:
-    'Informacje na ten temat są nieprawdziwe. W Rosji nie funkcjonuje system złotej waluty, a wzrosty wartości rubla są związane m.in. z manipulacjami dokonywanymi na rynku, co nie odzwierciedla realnej wartości rosyjskiej waluty.',
-};
-
 const ReportView = () => {
+  const url = useCurrentUrl();
+  const report = useArticleFactcheck(url);
+
+  if (!report) return null;
+
   return (
     <div
       css={css`
@@ -47,7 +43,7 @@ const ReportView = () => {
         padding: 1rem;
       `}
     >
-      <ReportStatus status={report.status} />
+      <ReportStatus status={Status.deserialize(report.status)} />
       <Card>
         <div
           css={css`
@@ -58,11 +54,13 @@ const ReportView = () => {
         >
           <p>
             Weryfikator: <br />
-            <ReportLink>{report.verifierLink}</ReportLink>
+            <a target='_blank' href={report.verificationSrc} rel='noreferrer'>
+              {report.verifiedBy}
+            </a>
           </p>
           <p>
             Link do źródła: <br />
-            <ReportLink>{report.sourceLink}</ReportLink>
+            <ReportLink>{report.url}</ReportLink>
           </p>
         </div>
       </Card>
@@ -80,7 +78,7 @@ const ReportView = () => {
         >
           {report.description}
         </p>
-        <Button href={report.factCheckLink}>Zobacz pełną alternatywę</Button>
+        <Button href={report.verificationSrc}>Zobacz pełną alternatywę</Button>
       </Card>
     </div>
   );

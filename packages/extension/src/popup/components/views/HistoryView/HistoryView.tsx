@@ -1,60 +1,19 @@
 import { css } from '@emotion/react';
+import { useEffect, useState } from 'react';
 
 import { Notification } from '../../../components/Notification';
-import websiteLogo from '../../../images/fakt_logo.png';
-import { Status } from '../../../shared';
+import { StorageFactchecks } from '../../../shared';
 
-const historyFeed = [
-  {
-    reportedWebsiteLogo: websiteLogo,
-    reportedWebsite: 'Fakt.pl',
-    title: 'Wiceminister wściekł się w programie na żywo. Wyrzucić wszystkich...',
-    status: Status.Fake,
-    sourceLink: 'fakt.pl/24353y',
-    reportLink: 'demagog.pl/24353',
-    verifierLink: 'demagog.pl',
-  },
-  {
-    reportedWebsiteLogo: websiteLogo,
-    reportedWebsite: 'Fakt.pl',
-    title: 'Wiceminister wściekł się w programie na żywo. Wyrzucić wszystkich...',
-    status: Status.Warning,
-    sourceLink: 'fakt.pl/24353y',
-    reportLink: 'demagog.pl/24353',
-    verifierLink: 'demagog.pl',
-  },
-  {
-    reportedWebsiteLogo: websiteLogo,
-    reportedWebsite: 'Fakt.pl',
-    title: 'Wiceminister wściekł się w programie na żywo. Wyrzucić wszystkich...',
-    status: Status.Truth,
-    sourceLink: 'fakt.pl/24353y',
-    reportLink: 'demagog.pl/24353',
-    verifierLink: 'demagog.pl',
-  },
-  {
-    reportedWebsiteLogo: websiteLogo,
-    reportedWebsite: 'Fakt.pl',
-    title: 'Wiceminister wściekł się w programie na żywo. Wyrzucić wszystkich...',
-    status: Status.Warning,
-    sourceLink: 'fakt.pl/24353y',
-    reportLink: 'demagog.pl/24353',
-    verifierLink: 'demagog.pl',
-  },
-  {
-    reportedWebsiteLogo: websiteLogo,
-    reportedWebsite: 'Fakt.pl',
-    title: 'Wiceminister wściekł się w programie na żywo. Wyrzucić wszystkich...',
-    status: Status.Warning,
-    sourceLink: 'fakt.pl/24353y',
-    reportLink: 'demagog.pl/24353',
-    verifierLink: 'demagog.pl',
-  },
-];
 const HistoryView = () => {
-  const mappedHistory = historyFeed.map(({ ...feed }) => {
-    return <Notification key={feed.reportLink} {...feed}></Notification>;
-  });
+  const [history, setHistory] = useState<StorageFactchecks>([]);
+
+  useEffect(() => {
+    chrome.storage.sync
+      .get(['factchecks'])
+      .then(({ factchecks }) =>
+        setHistory(((factchecks as StorageFactchecks) ?? []).filter(({ inHistory }) => inHistory)),
+      );
+  }, []);
 
   return (
     <div
@@ -62,10 +21,14 @@ const HistoryView = () => {
         display: flex;
         flex-direction: column;
         gap: 20px;
-        margin: 20px 15px;
+        padding: 20px 15px;
+        max-height: 350px;
+        overflow-y: scroll;
       `}
     >
-      {mappedHistory}
+      {history.map((factcheck) => {
+        return <Notification key={factcheck.id} factcheck={factcheck}></Notification>;
+      })}
     </div>
   );
 };

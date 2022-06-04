@@ -1,0 +1,68 @@
+.instructionContainer {
+  display: flex;
+  align-items: center;
+}
+
+.instructionStepWrapper {
+  transition: transform 0.3s ease-in-out;
+}
+
+.instructionStep {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  padding: 5rem;
+}
+
+.instructionImage {
+  position: relative;
+  width: 36.875rem;
+  height: 29.25rem;
+}
+
+.instructionText {
+  width: 45%
+}
+
+.instructionText h3 {
+  color: var(--primary-main);
+}
+
+.imageLeft .instructionImage, .imageRight .instructionText {
+  order: 1;
+}
+
+.imageRight .instructionImage, .imageLeft .instructionText {
+  order: 2;
+}
+
+.prevStep, .nextStep {
+  font-size: 3rem;
+  cursor: pointer;
+  color: var(--primary-main);
+}
+
+.prevStep:hover, .nextStep:hover {
+  color: var(--primary-dark);
+  transition: color 0.2s ease-in-out;
+}
+
+.instructionDots {
+  text-align: center;
+}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: var(--primary-light);
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.dot:hover {
+  background-color: var(--primary-main);
+}
