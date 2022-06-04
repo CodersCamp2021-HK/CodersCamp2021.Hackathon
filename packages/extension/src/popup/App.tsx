@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { TopBar } from './components';
+import { Tabs, TopBar } from './components';
 import { colors } from './shared/theme';
 import { ReportView } from './tabs';
 
@@ -13,7 +13,7 @@ const App = () => {
           background-color: ${colors.common.grey};
         `}
       >
-        {/* TODO: Tabs go here */}
+        <Tabs />
         <ReportView />
       </main>
     </>
