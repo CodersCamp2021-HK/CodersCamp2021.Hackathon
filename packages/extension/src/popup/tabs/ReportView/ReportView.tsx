@@ -43,8 +43,8 @@ const ReportView = () => {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 12px;
-        padding: 12px;
+        gap: 0.75rem;
+        padding: 1rem;
       `}
     >
       <ReportStatus status={report.status} />
