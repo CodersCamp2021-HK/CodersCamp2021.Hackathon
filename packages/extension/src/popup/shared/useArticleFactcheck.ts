@@ -1,7 +1,7 @@
 import { FactcheckDto } from '@faktyczka/sdk';
 import { useEffect, useState } from 'react';
 
-import { StorageFactchecks } from './storageFactchecks';
+import { readFactchecks } from './storage';
 
 /**
  * Returns `undefined` when factcheck was not yet checked, `null` when there isn't a factcheck for a given
@@ -12,10 +12,7 @@ const useArticleFactcheck = (url: string) => {
 
   useEffect(() => {
     setArticleInfo(undefined);
-    chrome.storage.sync.get(['factchecks']).then(({ factchecks }) => {
-      const factcheck = ((factchecks as StorageFactchecks) ?? []).find((fc) => fc.url === url);
-      setArticleInfo(factcheck ?? null);
-    });
+    readFactchecks().then((factchecks) => setArticleInfo(factchecks.find((fc) => fc.url === url) ?? null));
   }, [url]);
 
   return articleInfo;
