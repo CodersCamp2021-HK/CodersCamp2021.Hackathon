@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Tabs, TopBar } from './components';
 import { TabId } from './shared/tabs';
 import { colors } from './shared/theme';
-import { ReportView } from './tabs';
+import { FormView, ReportView } from './tabs';
 
 interface ViewProps {
   selectedTab: TabId;
@@ -15,7 +15,7 @@ const View = ({ selectedTab }: ViewProps) => {
     case 'report':
       return <ReportView />;
     case 'form':
-      return <div />;
+      return <FormView />;
     case 'history':
       return <div />;
   }
