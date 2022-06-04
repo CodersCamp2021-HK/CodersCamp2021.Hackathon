@@ -15,11 +15,13 @@ const Badge = ({ status, size }: BadgeProps) => {
         color: ${colors.common.white};
         width: ${size}px;
         height: ${size}px;
-        text-align: center;
-        line-height: ${size}px;
         border-radius: 50%;
+        display: grid;
+        place-items: center;
       `}
-    ></div>
+    >
+      <img width={size * 0.66} height={size * 0.66} alt='' src={status.iconPath} />
+    </div>
   );
 };
 

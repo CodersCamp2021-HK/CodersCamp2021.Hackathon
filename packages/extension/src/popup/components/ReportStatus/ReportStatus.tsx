@@ -22,6 +22,7 @@ export const ReportStatus = ({ status }: ReportStatusProps) => {
         css={css`
           color: ${status.color};
           font-weight: bold;
+          text-transform: uppercase;
         `}
       >
         {status.text}
