@@ -2,15 +2,17 @@ import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 
 import { Notification } from '../../../components/Notification';
-import { StorageItem } from '../../../shared';
+import { StorageFactchecks } from '../../../shared';
 
 const HistoryView = () => {
-  const [history, setHistory] = useState<StorageItem[]>([]);
+  const [history, setHistory] = useState<StorageFactchecks>([]);
 
   useEffect(() => {
     chrome.storage.sync
       .get(['factchecks'])
-      .then(({ factchecks }) => setHistory(((factchecks as StorageItem[]) ?? []).filter(({ inHistory }) => inHistory)));
+      .then(({ factchecks }) =>
+        setHistory(((factchecks as StorageFactchecks) ?? []).filter(({ inHistory }) => inHistory)),
+      );
   }, []);
 
   return (
