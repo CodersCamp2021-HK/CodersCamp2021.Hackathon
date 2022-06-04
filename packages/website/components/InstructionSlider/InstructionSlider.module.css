@@ -3,6 +3,16 @@
   align-items: center;
 }
 
+.instructionWrapper {
+  width: 100%;
+  height: auto;
+}
+
+.instructionSlide {
+  width: 100%;
+  height: auto;
+}
+
 .instructionStepWrapper {
   transition: transform 0.3s ease-in-out;
 }
@@ -22,28 +32,32 @@
 }
 
 .instructionText {
-  width: 45%
+  width: 45%;
 }
 
 .instructionText h3 {
   color: var(--primary-main);
 }
 
-.imageLeft .instructionImage, .imageRight .instructionText {
+.imageLeft .instructionImage,
+.imageRight .instructionText {
   order: 1;
 }
 
-.imageRight .instructionImage, .imageLeft .instructionText {
+.imageRight .instructionImage,
+.imageLeft .instructionText {
   order: 2;
 }
 
-.prevStep, .nextStep {
+.prevStep,
+.nextStep {
   font-size: 3rem;
   cursor: pointer;
   color: var(--primary-main);
 }
 
-.prevStep:hover, .nextStep:hover {
+.prevStep:hover,
+.nextStep:hover {
   color: var(--primary-dark);
   transition: color 0.2s ease-in-out;
 }

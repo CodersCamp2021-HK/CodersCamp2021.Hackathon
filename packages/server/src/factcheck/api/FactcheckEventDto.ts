@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 import { ApiObjectIdProperty } from '../../shared';
 import { Factcheck } from '../database';
-import { FactcheckStatus } from '../domain';
+import { FactcheckEvent, FactcheckStatus } from '../domain';
 
 class FactcheckDataDto {
   @ApiObjectIdProperty()
@@ -16,7 +16,7 @@ class FactcheckDataDto {
     enumName: 'FactcheckStatusEnum',
     example: [FactcheckStatus.Truth, FactcheckStatus.Fake, FactcheckStatus.Warning, FactcheckStatus.Unverifable],
   })
-  readonly status: string;
+  readonly status: FactcheckStatus;
 }
 
 class FactcheckEventDto {
@@ -29,7 +29,7 @@ class FactcheckEventDto {
   @ApiProperty({ enum: ['factcheck'] })
   readonly type: 'factcheck';
 
-  static from(entity: Factcheck): FactcheckEventDto {
+  static from(entity: FactcheckEvent): FactcheckEventDto {
     return {
       data: {
         id: entity.id,
