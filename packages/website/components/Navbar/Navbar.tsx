@@ -6,10 +6,14 @@ import Image from 'next/image';
 const Navbar = () => {
   return (
     <div className={styles.flexContainer}>
-      <Image src={LogoIcon} alt='Logo' />
+      <a href='/'>
+        <Image src={LogoIcon} alt='Logo' />
+      </a>
       <div className={styles.leftFlexContainer}>
         <p>O nas</p>
-        <p>Instalacja</p>
+        <a href='/installation'>
+          <p>Instalacja</p>
+        </a>
         <p>Partnerzy</p>
         <p>Kontakt</p>
       </div>
