@@ -7,6 +7,10 @@
   padding: 5rem 0;
 }
 
+.sectionGray {
+  background-color: var(--common-gray);
+}
+
 .heroContainer {
   display: flex;
   gap: 3rem;
@@ -40,11 +44,6 @@
 }
 
 /** Cards Section **/
-
-.cardsSection {
-  background-color: var(--common-gray);
-}
-
 .cardsContainer {
   display: flex;
   gap: 2rem;
@@ -129,10 +128,6 @@
 
 /** Contact Section **/
 
-.contactSection {
-  background-color: var(--common-gray);
-}
-
 .contactWrapper {
   display: flex;
   align-items: center;
@@ -214,4 +209,3 @@
     margin: 6rem 0;
   }
 }
-
