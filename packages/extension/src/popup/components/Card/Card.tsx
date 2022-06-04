@@ -13,7 +13,7 @@ const Card = ({ children }: CardProps) => {
       css={css`
         background-color: ${colors.common.white};
         border: 1px solid ${colors.primary.dark};
-        padding: 6px 16px;
+        padding: 16px;
         border-radius: 16px;
         width: 100%;
         font-size: 0.75rem;

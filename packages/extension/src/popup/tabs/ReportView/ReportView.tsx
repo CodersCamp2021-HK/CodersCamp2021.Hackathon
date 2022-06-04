@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { Card, ReportStatus } from '../../components';
+import { Button, Card, ReportStatus } from '../../components';
 import { Status } from '../../shared';
 
 interface ReportLinkProps {
@@ -17,7 +17,9 @@ const ReportLink = ({ children }: ReportLinkProps) => {
         overflow: hidden;
         text-overflow: ellipsis;
       `}
+      target='_blank'
       href={children}
+      rel='noreferrer'
     >
       {url.hostname}
       {url.pathname !== '/' && url.pathname}
@@ -30,6 +32,7 @@ const ReportView = () => {
     status: Status.Fake,
     verifierLink: 'https://demagog.org.pl',
     sourceLink: 'https://onet.pl/wiceminister-wsciekl-sie-w-programie-na-zywo',
+    factCheckLink: 'https://demagog.org.pl/fake_news/rosja-zniszczyla-dolara-i-powiazala-rubla-ze-zlotem-fake-news/',
     description:
       'Informacje na ten temat są nieprawdziwe. W Rosji nie funkcjonuje system złotej waluty, a wzrosty wartości rubla są związane m.in. z manipulacjami dokonywanymi na rynku, co nie odzwierciedla realnej wartości rosyjskiej waluty.',
   };
@@ -50,7 +53,7 @@ const ReportView = () => {
           css={css`
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 0.75rem;
           `}
         >
           <p>
@@ -72,10 +75,12 @@ const ReportView = () => {
             -webkit-line-clamp: 5;
             line-clamp: 5;
             -webkit-box-orient: vertical;
+            margin-bottom: 1rem;
           `}
         >
           {report.description}
         </p>
+        <Button href={report.factCheckLink}></Button>
       </Card>
     </div>
   );
