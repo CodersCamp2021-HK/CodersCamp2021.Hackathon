@@ -10,15 +10,21 @@ export type TabProps = {
   iconComponent: ReactNode;
   state?: 'active' | undefined;
   status?: Status | undefined;
+  onClick: () => void;
+  disabled?: boolean;
 };
 
-const Tab = ({ name, iconComponent, state, status = undefined }: TabProps) => {
+const Tab = ({ name, iconComponent, state, status, onClick, disabled }: TabProps) => {
   return (
     <button
+      onClick={onClick}
+      disabled={disabled}
       className={state}
       css={css`
+        cursor: ${disabled ? 'default' : 'pointer'};
         background-color: transparent;
         border: 0;
+        transition: ${transition.default};
         flex: 1;
         display: flex;
         justify-content: center;
@@ -41,6 +47,7 @@ const Tab = ({ name, iconComponent, state, status = undefined }: TabProps) => {
           background-color: ${colors.primary.main};
         }
         &:hover,
+        &:not([disabled]):hover,
         &.active {
           &:before {
             transform: scaleX(100%);

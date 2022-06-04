@@ -1,9 +1,10 @@
 .section {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
   height: 100vh;
+  padding: 5rem 0;
 }
 
 .heroContainer {
@@ -11,11 +12,15 @@
   gap: 3rem;
   justify-content: center;
   align-items: center;
-  width: 100.875rem;
+}
+
+.heroLeftContainer {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
 }
 
 .heroTextContainer {
-  width: 53.75rem;
   margin-bottom: 5rem;
 }
 
@@ -64,121 +69,149 @@
   position: relative;
 }
 
-/**
-.container {
-  padding: 0 2rem;
-}
+/** Why Faktyczka Section **/
 
-.main {
-  min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
+.whyWrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  gap: 3rem;
 }
 
-.footer {
+.whyContainer {
   display: flex;
-  flex: 1;
-  padding: 2rem 0;
-  border-top: 1px solid #eaeaea;
-  justify-content: center;
   align-items: center;
+  margin-bottom: 2rem;
+  gap: 7rem;
 }
 
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
+.whyTextContainer {
+  width: 50%;
 }
 
-.title a {
-  color: #0070f3;
-  text-decoration: none;
+.whyImage {
+  width: 38.875rem;
+  height: 25.3125rem;
+  position: relative;
 }
 
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
-}
+/** Partners Section **/
 
-.title {
-  margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
-}
-
-.title,
-.description {
+.partnersText {
   text-align: center;
+  padding: 0 10rem;
 }
 
-.description {
-  margin: 4rem 0;
-  line-height: 1.5;
-  font-size: 1.5rem;
+.link {
+  color: var(--primary-main);
 }
 
-.code {
-  background: #fafafa;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
+.link:hover {
+  color: var(--primary-light);
+  transition: color 0.2s ease-in-out;
 }
 
-.grid {
+.logosContainer {
+  display: flex;
+  gap: 2rem;
+  margin: 10rem 0;
+}
+
+.logoImage {
+  width: 25rem;
+  height: 5.0625rem;
+  position: relative;
+}
+
+.logoImage:hover {
+  filter: grayscale(60%);
+}
+
+/** Contact Section **/
+
+.contactSection {
+  background-color: var(--common-gray);
+}
+
+.contactWrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  max-width: 800px;
+  gap: 5rem;
 }
 
-.card {
-  margin: 1rem;
-  padding: 1.5rem;
-  text-align: left;
-  color: inherit;
-  text-decoration: none;
-  border: 1px solid #eaeaea;
-  border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 300px;
+.contactInfoContainer {
+  background-color: var(--common-white);
+  padding: 4rem 6rem;
 }
 
-.card:hover,
-.card:focus,
-.card:active {
-  color: #0070f3;
-  border-color: #0070f3;
+.contactElement {
+  display: flex;
+  gap: 2rem;
 }
 
-.card h2 {
-  margin: 0 0 1rem 0;
-  font-size: 1.5rem;
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
 }
 
-.card p {
+.formLabel {
+  font-size: 1rem;
+  padding-bottom: 0.2;
   margin: 0;
-  font-size: 1.25rem;
-  line-height: 1.5;
 }
 
-.logo {
-  height: 1em;
-  margin-left: 0.5rem;
+.contactFormEmail, .contactFormContent {
+  padding: 0;
+  margin: 0;
+  width : 40rem;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 1rem;
 }
 
-@media (max-width: 600px) {
-  .grid {
-    width: 100%;
+.contactFormEmail {
+  height: 3rem;
+}
+
+.contactFormContent {
+  height: 20rem;
+  resize: none; 
+}
+
+/** Media **/
+
+@media (max-width: 1700px) {
+  .section {
+    height: auto;
+  }
+
+  .heroContainer,
+  .whyContainer,
+  .cardsContainer, 
+  .logosContainer,
+  .contactWrapper {
     flex-direction: column;
   }
+
+  .heroLeftContainer {
+    align-items: center;
+    text-align: center;
+    width: 80%;
+    order: 2;
+  }
+
+  .heroImage {
+    order: 1;
+  }
+
+  .heroButtons {
+    flex-direction: column;
+  }
+
+  .logosContainer {
+    margin: 6rem 0;
+  }
 }
-**/
+

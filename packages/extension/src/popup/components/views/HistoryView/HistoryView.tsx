@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 
-import { Notification } from '../../components/Notification';
-import websiteLogo from '../../images/fakt_logo.png';
-import { Status } from '../../shared';
+import { Notification } from '../../../components/Notification';
+import websiteLogo from '../../../images/fakt_logo.png';
+import { Status } from '../../../shared';
 
 const historyFeed = [
   {

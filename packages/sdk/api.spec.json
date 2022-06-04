@@ -80,6 +80,90 @@
         },
         "tags": ["Factcheck"]
       }
+    },
+    "/api/tickets": {
+      "post": {
+        "operationId": "TicketController_create",
+        "summary": "Create a new ticket.",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateTicketDto" } } }
+        },
+        "responses": {
+          "201": {
+            "description": "The ticket has been successfully created.",
+            "headers": { "Location": { "schema": { "type": "string" } } }
+          },
+          "400": {
+            "description": "Parameters are not valid or they are missing.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ValidationErrorDto" } } }
+          },
+          "default": {
+            "description": "",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/DefaultResponseDto" } } }
+          }
+        },
+        "tags": ["Tickets"]
+      },
+      "get": {
+        "operationId": "TicketController_listTicketsByUrl",
+        "summary": "Retrieve a list of tickets.",
+        "parameters": [
+          { "name": "url", "required": true, "in": "query", "schema": { "type": "string" } },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": { "default": 1, "type": "number", "minimum": 1 }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": { "default": 10, "type": "number", "minimum": 1, "maximum": 100 }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully returned list of tickets.",
+            "headers": { "link": { "schema": { "type": "string" } } },
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/TicketListDto" } } }
+          },
+          "400": {
+            "description": "Parameters are not valid or they are missing.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ValidationErrorDto" } } }
+          },
+          "default": {
+            "description": "",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/DefaultResponseDto" } } }
+          }
+        },
+        "tags": ["Tickets"]
+      }
+    },
+    "/api/tickets/{id}": {
+      "get": {
+        "operationId": "TicketController_findById",
+        "summary": "Retrieve a ticket by id.",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "responses": {
+          "200": {
+            "description": "Successfully returned ticket.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/TicketDto" } } }
+          },
+          "400": {
+            "description": "Parameters are not valid or they are missing.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ValidationErrorDto" } } }
+          },
+          "404": { "description": "Ticket does not exist." },
+          "default": {
+            "description": "",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/DefaultResponseDto" } } }
+          }
+        },
+        "tags": ["Tickets"]
+      }
     }
   },
   "info": {
@@ -88,7 +172,10 @@
     "version": "1.0.0",
     "contact": {}
   },
-  "tags": [{ "name": "Factcheck", "description": "Operations on factchecks" }],
+  "tags": [
+    { "name": "Factcheck", "description": "Operations on factchecks" },
+    { "name": "Tickets", "description": "Operations on tickets" }
+  ],
   "servers": [],
   "components": {
     "schemas": {
@@ -145,30 +232,126 @@
       "CreateFactcheckDto": {
         "type": "object",
         "properties": {
-          "url": { "type": "string" },
+          "url": {
+            "type": "string",
+            "format": "url",
+            "maxLength": 1000,
+            "example": "https://twitter.com/JkmMikke/status/1511628185150136325",
+            "description": "RFC 3886 standard url format"
+          },
           "status": {
             "example": ["Truth", "Fake", "Warning", "Unverifable"],
             "$ref": "#/components/schemas/FactcheckStatusEnum"
           },
-          "verifiedBy": { "type": "string" },
-          "verificationSrc": { "type": "string" },
-          "description": { "type": "string" }
+          "verifiedBy": { "type": "string", "minLength": 5, "maxLength": 200, "example": "demagog@.org.pl" },
+          "verificationSrc": {
+            "type": "string",
+            "format": "url",
+            "maxLength": 1000,
+            "example": "https://demagog.org.pl/wypowiedzi/w-mariupolu-doszlo-do-tragedii-janusz-korwin-mikke-powiela-fake-newsy/",
+            "description": "RFC 3886 standard url format"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 2000,
+            "example": "9 marca doszło do zbombardowania szpitala w Mariupolu, co oprócz władz ukraińskich potwierdziła Światowa Organizacja Zdrowia (WHO) oraz Biuro Wysokiego Komisarza Narodów Zjednoczonych ds. Praw Człowieka (OHCHR)."
+          }
         },
         "required": ["url", "status", "verifiedBy", "verificationSrc", "description"]
       },
       "FactcheckDto": {
         "type": "object",
         "properties": {
-          "url": { "type": "string" },
+          "url": {
+            "type": "string",
+            "format": "url",
+            "maxLength": 1000,
+            "example": "https://twitter.com/JkmMikke/status/1511628185150136325",
+            "description": "RFC 3886 standard url format"
+          },
           "status": {
             "example": ["Truth", "Fake", "Warning", "Unverifable"],
             "$ref": "#/components/schemas/FactcheckStatusEnum"
           },
-          "verifiedBy": { "type": "string" },
-          "verificationSrc": { "type": "string" },
-          "description": { "type": "string" }
+          "verifiedBy": { "type": "string", "minLength": 5, "maxLength": 200, "example": "demagog@.org.pl" },
+          "verificationSrc": {
+            "type": "string",
+            "format": "url",
+            "maxLength": 1000,
+            "example": "https://demagog.org.pl/wypowiedzi/w-mariupolu-doszlo-do-tragedii-janusz-korwin-mikke-powiela-fake-newsy/",
+            "description": "RFC 3886 standard url format"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 2000,
+            "example": "9 marca doszło do zbombardowania szpitala w Mariupolu, co oprócz władz ukraińskich potwierdziła Światowa Organizacja Zdrowia (WHO) oraz Biuro Wysokiego Komisarza Narodów Zjednoczonych ds. Praw Człowieka (OHCHR)."
+          }
         },
         "required": ["url", "status", "verifiedBy", "verificationSrc", "description"]
+      },
+      "CreateTicketDto": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "url",
+            "maxLength": 1000,
+            "example": "https://twitter.com/JkmMikke/status/1511628185150136325",
+            "description": "RFC 3886 standard url format"
+          },
+          "name": { "type": "string", "minLength": 5, "maxLength": 2000, "example": "Jan Kowalski" },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 64,
+            "example": "jan.kowalski@email.com",
+            "description": "RFC 5322 standard email format"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 2000,
+            "example": "Przedstawiony artykuł zawiera fałszywe informację, proszę sprawdzić tą stronę https://www.ohchr.org/en/statements/2022/03/situation-ukraine"
+          }
+        },
+        "required": ["url", "name", "email", "description"]
+      },
+      "TicketDto": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "url",
+            "maxLength": 1000,
+            "example": "https://twitter.com/JkmMikke/status/1511628185150136325",
+            "description": "RFC 3886 standard url format"
+          },
+          "name": { "type": "string", "minLength": 5, "maxLength": 2000, "example": "Jan Kowalski" },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 64,
+            "example": "jan.kowalski@email.com",
+            "description": "RFC 5322 standard email format"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 2000,
+            "example": "Przedstawiony artykuł zawiera fałszywe informację, proszę sprawdzić tą stronę https://www.ohchr.org/en/statements/2022/03/situation-ukraine"
+          }
+        },
+        "required": ["url", "name", "email", "description"]
+      },
+      "TicketListDto": {
+        "type": "object",
+        "properties": {
+          "data": { "type": "array", "items": { "$ref": "#/components/schemas/TicketDto" } },
+          "pages": { "type": "number" }
+        },
+        "required": ["data", "pages"]
       }
     }
   },

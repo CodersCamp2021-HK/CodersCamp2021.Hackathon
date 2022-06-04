@@ -1,10 +1,5 @@
 import { applyDecorators, Controller, Logger } from '@nestjs/common';
-import {
-  ApiConsumes,
-  ApiDefaultResponse,
-  ApiProduces,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiConsumes, ApiDefaultResponse, ApiProduces, ApiTags } from '@nestjs/swagger';
 
 import { DefaultResponseDto } from '../dtos';
 
@@ -18,11 +13,7 @@ type TagMetadata = Readonly<{ description?: string }>;
 
 const TagMap = new Map<string, TagMetadata>();
 
-function ApiController({
-  path,
-  name,
-  description,
-}: ApiControllerOptions): ClassDecorator {
+function ApiController({ path, name, description }: ApiControllerOptions): ClassDecorator {
   const rname = name ?? path;
   if (TagMap.has(rname)) {
     Logger.error(`Reasignment of tag ${rname}`, ApiController.name);

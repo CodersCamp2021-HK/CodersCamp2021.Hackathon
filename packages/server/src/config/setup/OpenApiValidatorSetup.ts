@@ -3,14 +3,12 @@ import { OpenAPIObject } from '@nestjs/swagger';
 import * as bodyParser from 'body-parser';
 import { Application } from 'express';
 import * as OpenApiValidator from 'express-openapi-validator';
-import {
-  Format,
-  OpenAPIV3,
-} from 'express-openapi-validator/dist/framework/types';
+import { Format, OpenAPIV3 } from 'express-openapi-validator/dist/framework/types';
 
+import { ApiEmailFormat, ApiUrlFormat } from '../../shared';
 import { env } from '../Env';
 
-const formats: Format[] = [];
+const formats: Format[] = [ApiEmailFormat, ApiUrlFormat];
 
 function setupOpenApiValidator(app: INestApplication, apiSpec: OpenAPIObject) {
   const express: Application = app.getHttpAdapter().getInstance();

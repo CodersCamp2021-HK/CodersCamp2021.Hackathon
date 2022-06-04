@@ -1,28 +1,16 @@
 import { css } from '@emotion/react';
 
-import { FormIcon } from '../../images/form';
-import { HistoryIcon } from '../../images/history';
-import { ReportIcon } from '../../images/report';
-import { Status } from '../../shared/statuses';
+import { TabId, TABS_DATA } from '../../shared';
 import { colors } from '../../shared/theme';
 import { Tab } from './Tab';
 
-const tabs = [
-  {
-    name: 'Raport',
-    iconComponent: <ReportIcon></ReportIcon>,
-  },
-  {
-    name: 'Zgłoś',
-    iconComponent: <FormIcon></FormIcon>,
-  },
-  {
-    name: 'Historia',
-    iconComponent: <HistoryIcon></HistoryIcon>,
-  },
-];
+interface TabsProps {
+  selectedTab: TabId;
+  setSelectedTab: (tabId: TabId) => void;
+  disabledTabs: TabId[];
+}
 
-const Tabs = () => {
+const Tabs = ({ selectedTab, setSelectedTab, disabledTabs }: TabsProps) => {
   return (
     <div
       css={css`
@@ -40,8 +28,17 @@ const Tabs = () => {
         }
       `}
     >
-      {tabs.map(({ name, iconComponent }) => {
-        return <Tab key={name} name={name} iconComponent={iconComponent}></Tab>;
+      {TABS_DATA.map(({ id, name, iconComponent }) => {
+        return (
+          <Tab
+            key={id}
+            name={name}
+            iconComponent={iconComponent}
+            state={selectedTab === id ? 'active' : undefined}
+            onClick={() => setSelectedTab(id)}
+            disabled={disabledTabs.includes(id)}
+          />
+        );
       })}
     </div>
   );

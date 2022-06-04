@@ -39,7 +39,7 @@ type ApiOptions = Readonly<
   } & Partial<{
     path: string;
     name: string;
-    operation: Readonly<OperationObject>;
+    operation: Readonly<Partial<OperationObject>>;
   }>
 >;
 

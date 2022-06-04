@@ -1,22 +1,22 @@
 import { css } from '@emotion/react';
 
-// eslint-disable-next-line import/namespace
-import { Tabs, TopBar } from './components';
-import { colors } from './shared/theme';
-import { HistoryView, ReportView } from './tabs';
+import { ResultView, TopBar, ViewSelector } from './components';
+import { useFormFeedback } from './contexts';
+import { colors, useCurrentUrl } from './shared';
 
 const App = () => {
+  const { result } = useFormFeedback();
+  const url = useCurrentUrl();
+
   return (
     <>
+      <TopBar />
       <main
         css={css`
           background-color: ${colors.common.grey};
         `}
       >
-        <TopBar />
-        <Tabs />
-        {/* <ReportView /> */}
-        <HistoryView />
+        {result !== null ? <ResultView result={result} /> : url && <ViewSelector url={url} />}
       </main>
     </>
   );

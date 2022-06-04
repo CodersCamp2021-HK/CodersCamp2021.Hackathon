@@ -1,9 +1,5 @@
 .container {
-  padding: 0 2rem 0 2rem;
-  /* display: flex;
-  justify-content: center;
-  flex-direction: column; */
-  width: 100%;
+  padding: 0 20rem 0 20rem;
 }
 
 .section {
@@ -17,9 +13,4 @@
 .text {
   display: flex;
   flex-direction: column;
-}
-
-.btn {
-  width: fit-content;
-  border-radius: 10px;
 }

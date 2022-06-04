@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
-import { Button, Card, ReportStatus } from '../../components';
-import { Status } from '../../shared';
+import { Status } from '../../../shared';
+import { Button, Card, ReportStatus } from '../..';
 
 interface ReportLinkProps {
   children: string;
@@ -43,8 +43,8 @@ const ReportView = () => {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 12px;
-        padding: 12px;
+        gap: 0.75rem;
+        padding: 1rem;
       `}
     >
       <ReportStatus status={report.status} />
@@ -80,7 +80,7 @@ const ReportView = () => {
         >
           {report.description}
         </p>
-        <Button href={report.factCheckLink}></Button>
+        <Button href={report.factCheckLink}>Zobacz pełną alternatywę</Button>
       </Card>
     </div>
   );

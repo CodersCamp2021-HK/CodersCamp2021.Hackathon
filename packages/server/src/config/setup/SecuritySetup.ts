@@ -4,7 +4,7 @@ import helmet from 'helmet';
 import { env } from '../Env';
 
 function setupSecurity(app: INestApplication) {
-  app.enableCors();
+  app.enableCors({ credentials: true });
 
   if (env.NODE_ENV === 'production') {
     app.use(helmet());
