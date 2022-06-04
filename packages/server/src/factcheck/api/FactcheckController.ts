@@ -5,7 +5,7 @@ import { Response } from 'express';
 import { Observable, Subject } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 
-import { ApiController, ApiCreate, ApiGet, ApiObjectIdParam, Url, ValidationErrorDto } from '../../shared';
+import { ApiController, ApiCreate, ApiGet, Url, ValidationErrorDto } from '../../shared';
 import { CreateFactcheckDto, FactcheckDto } from './FactcheckDto';
 import { FactcheckEventDto } from './FactcheckEventDto';
 import { FactcheckSyncQuery } from './FactcheckSyncQuery';

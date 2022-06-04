@@ -27,6 +27,7 @@ class TicketDto {
     maxLength: TICKET_CONSTANTS.description.maxLength,
     example:
       'Przedstawiony artykuł zawiera fałszywe informację, proszę sprawdzić tą stronę https://www.ohchr.org/en/statements/2022/03/situation-ukraine',
+    required: false,
   })
   readonly description: string;
 }

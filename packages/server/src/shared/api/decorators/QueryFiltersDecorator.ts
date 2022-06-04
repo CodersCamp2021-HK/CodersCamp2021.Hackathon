@@ -5,10 +5,7 @@ import _ from 'lodash';
 const QueryFilters = (filters: ApiQueryOptions[]) =>
   createParamDecorator(
     (_data, context: ExecutionContext) =>
-      _.pick(
-        context.switchToHttp().getRequest().query,
-        _.compact(_.map(filters, 'name')),
-      ),
+      _.pick(context.switchToHttp().getRequest().query, _.compact(_.map(filters, 'name'))),
     [
       (target: object, key: string | symbol) => {
         const propertyDescriptor = Object.getOwnPropertyDescriptor(target, key);

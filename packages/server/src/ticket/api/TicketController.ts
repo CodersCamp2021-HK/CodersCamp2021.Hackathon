@@ -9,11 +9,13 @@ import {
   ApiCreate,
   ApiGet,
   ApiList,
+  ApiUrlParam,
   createPaginationLink,
   Pagination,
   PaginationQuery,
   Url,
 } from '../../shared';
+import { TicketCountDto } from './TicketCountDto';
 import { CreateTicketDto, TicketDto } from './TicketDto';
 import { TicketListDto } from './TicketListDto';
 
@@ -59,6 +61,17 @@ class TicketController {
     const paginatedTickets = { pages: raw.length, data: raw };
     res.setHeader('Link', createPaginationLink(url, paginatedTickets.pages));
     return plainToInstance(TicketListDto, paginatedTickets);
+  }
+
+  @ApiUrlParam()
+  @ApiGet({
+    path: '/count/:url',
+    response: TicketCountDto,
+    operation: { summary: 'Retrive number of tickets for specific url' },
+  })
+  countTicketsByUrl(@Param('url') url: string) {
+    const count = (this.repository.get(url) ?? []).length;
+    return plainToInstance(TicketCountDto, { count });
   }
 }
 
