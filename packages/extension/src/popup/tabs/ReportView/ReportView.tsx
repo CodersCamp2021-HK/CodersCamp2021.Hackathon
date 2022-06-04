@@ -80,7 +80,7 @@ const ReportView = () => {
         >
           {report.description}
         </p>
-        <Button href={report.factCheckLink}></Button>
+        <Button href={report.factCheckLink}>Zobacz pełną alternatywę</Button>
       </Card>
     </div>
   );

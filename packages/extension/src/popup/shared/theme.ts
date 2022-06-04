@@ -11,7 +11,9 @@ const colors = {
     dark: '#03009d',
   },
   secondary: {},
-  action: {},
+  action: {
+    disabled: '#00000042',
+  },
   status: {
     truth: '#2EC4B6',
     fake: '#ff3366',
