@@ -20,7 +20,7 @@ import { exists, mapValues } from '../runtime';
  */
 export interface CreateTicketDto {
   /**
-   *
+   * RFC 3886 standard url format
    * @type {string}
    * @memberof CreateTicketDto
    */
@@ -32,7 +32,7 @@ export interface CreateTicketDto {
    */
   name: string;
   /**
-   *
+   * RFC 5322 standard email format
    * @type {string}
    * @memberof CreateTicketDto
    */
