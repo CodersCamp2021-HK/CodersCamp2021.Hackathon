@@ -2,9 +2,10 @@ import { css } from '@emotion/react';
 import { useState } from 'react';
 
 import { Tabs, TopBar } from './components';
+import { FormView, ReportView, ResultView } from './components/tabs';
+import { useFormFeedback } from './contexts';
 import { TabId } from './shared/tabs';
 import { colors } from './shared/theme';
-import { FormView, ReportView } from './tabs';
 
 interface ViewProps {
   selectedTab: TabId;
@@ -23,6 +24,8 @@ const View = ({ selectedTab }: ViewProps) => {
 
 const App = () => {
   const [selectedTab, setSelectedTab] = useState<TabId>('report');
+  const { wasSent } = useFormFeedback();
+  console.log(wasSent);
 
   return (
     <>
@@ -32,8 +35,14 @@ const App = () => {
           background-color: ${colors.common.grey};
         `}
       >
-        <Tabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
-        <View selectedTab={selectedTab} />
+        {wasSent ? (
+          <ResultView />
+        ) : (
+          <>
+            <Tabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+            <View selectedTab={selectedTab} />
+          </>
+        )}
       </main>
     </>
   );
