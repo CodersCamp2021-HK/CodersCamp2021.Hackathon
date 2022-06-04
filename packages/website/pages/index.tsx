@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
@@ -13,9 +14,35 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href='https://nextjs.org'>Next.js!</a>
-        </h1>
+        <section className={styles.heroSection}>
+          <div className={styles.heroContainer}>
+            <div className={styles.heroLeftContainer}>
+              <div className={styles.heroTextContainer}>
+                <h1 className={styles.heroTitle}>Nie daj się oszukać</h1>
+                <p>
+                  Faktyczka to rozszerzenie do przeglądarki, które ochroni Cię przed fake newsami. Stale rosnąca baza
+                  zweryfikowanych artykułów i szerokie grono ekspertów i ekspertek zapewniają, że dotrą do Ciebie tylko
+                  sprawdzone informacje.
+                </p>
+              </div>
+              <div className={styles.heroButtons}>
+                <div className='button'>
+                  <Link href='/'>
+                    <a className='buttonText'>Przejdź do instalacji</a>
+                  </Link>
+                </div>
+                <div className='button-outline'>
+                  <Link href='/'>
+                    <a className='buttonText'>Dowiedz się więcej</a>
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className={styles.heroImage}>
+              <Image src='/hero.svg' alt='Hero Illustration' layout='fill' objectFit='contain' />
+            </div>
+          </div>
+        </section>
 
         <p className={styles.description}>
           Get started by editing <code className={styles.code}>pages/index.tsx</code>
