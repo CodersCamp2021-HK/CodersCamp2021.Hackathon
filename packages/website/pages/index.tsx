@@ -124,6 +124,35 @@ const Home: NextPage = () => {
             </div>
           </div>
         </section>
+
+        <section className={`${styles.section} ${styles.contactSection}`}>
+          <h2>Skontaktuj się z nami</h2>
+          <div className={styles.contactWrapper}>
+            <div className={styles.contactInfoContainer}>
+              <div className={styles.contactElement}>
+                <Image src='/mail_icon.svg' alt='Logo' width='45px' height='45px' />
+                <p>kontakt@faktyczka.com</p>
+              </div>
+              <div className={styles.contactElement}>
+                <Image src='/phone_icon.svg' alt='Logo' width='45px' height='45px' />
+                <p>123456789</p>
+              </div>
+            </div>
+            <div className={styles.contactForm}>
+              <div>
+                <p className={styles.formLabel}>Twój adres e-mail</p>
+                <input className={styles.contactFormEmail}></input>
+              </div>
+              <div>
+                <p className={styles.formLabel}>Treśc wiadomości</p>
+                <textarea className={styles.contactFormContent}></textarea>
+              </div>
+              <div className='button'>
+                <a className='buttonText'>Wyślij wiadomość</a>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
     </div>
   );
