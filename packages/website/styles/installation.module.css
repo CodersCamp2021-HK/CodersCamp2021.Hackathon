@@ -1,0 +1,30 @@
+.container {
+  padding: 0 2rem 0 2rem;
+  /* display: flex;
+  justify-content: center;
+  flex-direction: column; */
+  width: 100%;
+}
+
+.section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+}
+
+.responsive {
+  width: 20%;
+  height: 10px;
+}
+
+.btn {
+  width: fit-content;
+  border-radius: 10px;
+}
