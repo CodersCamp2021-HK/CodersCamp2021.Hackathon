@@ -1,0 +1,90 @@
+import { css } from '@emotion/react';
+
+import { Status } from '../../shared';
+import { colors } from '../../shared/theme';
+import { Badge } from '../Badge';
+
+const linkStyles = {
+  textDecoration: 'none',
+  color: colors.text.primary,
+};
+
+const oneRowStyles = {
+  display: 'flex',
+  gap: '10px',
+  alignItems: 'center',
+};
+
+type NotificationProps = {
+  reportedWebsiteLogo: string;
+  reportedWebsite: string;
+  title: string;
+  status: Status;
+  sourceLink: string;
+  reportLink: string;
+  partnerDomain: string;
+};
+const Notification = ({ reportedWebsiteLogo, reportedWebsite, title, status, partnerDomain }: NotificationProps) => {
+  return (
+    <div
+      css={css`
+        padding: 20px 15px;
+        background-color: ${colors.common.white};
+        border: 1px solid ${colors.primary.dark};
+        border-radius: 16px;
+        box-shadow: 0px 4px 4px rgba(54, 0, 141, 0.15);
+        position: relative;
+        font-size: 0.75rem;
+      `}
+    >
+      <div
+        css={css`
+          display: flex;
+          gap: 10px;
+          margin-bottom: 10px;
+        `}
+      >
+        <img src={reportedWebsiteLogo} alt={reportedWebsite}></img>
+        <p
+          css={css`
+            color: ${colors.text.disabled};
+            font-weight: 100;
+          `}
+        >
+          {reportedWebsite}
+        </p>
+      </div>
+      <p
+        css={css`
+          font-weight: bold;
+          margin-bottom: 10px;
+        `}
+      >
+        {title}
+      </p>
+      <div
+        css={css`
+          margin-bottom: 10px;
+        `}
+      ></div>
+      <div
+        css={css`
+          ${oneRowStyles}
+        `}
+      >
+        <Badge size={20} status={status}></Badge>
+        <a
+          href={partnerDomain}
+          css={css`
+            ${linkStyles};
+            color: ${colors.primary.light};
+          `}
+        >
+          {partnerDomain}
+        </a>
+      </div>
+    </div>
+  );
+};
+
+export { Notification };
