@@ -129,8 +129,7 @@ const FormView = () => {
       </label>
       <Button
         onClick={() => {
-          send();
-          alert(JSON.stringify({ name, email, description, url: 'TODO' }));
+          send({ name, email, description, url: 'TODO' });
         }}
         disabled={disabled}
       >

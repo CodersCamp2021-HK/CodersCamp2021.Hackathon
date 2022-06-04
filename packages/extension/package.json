@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "dev": "vite build --watch",
+    "dev": "vite build --watch --mode development",
     "test": "",
     "lint": "eslint \"src/**/*.ts?(x)\"",
     "format": "prettier --write \"src\""
@@ -13,7 +13,8 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "@faktyczka/sdk": "workspace:^"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.188",
