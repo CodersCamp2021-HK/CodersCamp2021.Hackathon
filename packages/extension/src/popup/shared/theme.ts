@@ -3,7 +3,9 @@ const colors = {
     white: '#ffffff',
     grey: '#f7f7f7',
   },
-  text: {},
+  text: {
+    disabled: '#ACACAC',
+  },
   primary: {
     dark: '#03009d',
   },

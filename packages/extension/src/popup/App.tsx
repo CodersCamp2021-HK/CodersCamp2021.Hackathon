@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 
+// eslint-disable-next-line import/namespace
 import { Tabs, TopBar } from './components';
 import { colors } from './shared/theme';
 import { ReportView } from './tabs';
