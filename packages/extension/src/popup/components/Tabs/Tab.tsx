@@ -8,7 +8,7 @@ import { Badge } from '../Badge';
 export type TabProps = {
   name: string;
   iconComponent: ReactNode;
-  state?: string;
+  state?: 'active' | undefined;
   status?: Status | undefined;
 };
 
@@ -25,10 +25,28 @@ const Tab = ({ name, iconComponent, state, status = undefined }: TabProps) => {
         flex-direction: column;
         align-items: center;
         padding: 12px 0;
+        font-family: inherit;
+        overflow: hidden;
+        position: relative;
+        &:before {
+          content: '';
+          position: absolute;
+          z-index: 1;
+          left: 0%;
+          bottom: 0;
+          width: 100%;
+          height: 2px;
+          transform: scaleX(0);
+          transition: ${transition.default};
+          background-color: ${colors.primary.main};
+        }
         &:hover,
         &.active {
+          &:before {
+            transform: scaleX(100%);
+          }
           p {
-            color: ${colors.primary.dark};
+            color: ${colors.primary.main};
           }
           path {
             stroke: ${colors.primary.dark};
@@ -62,7 +80,9 @@ const Tab = ({ name, iconComponent, state, status = undefined }: TabProps) => {
         css={css`
           color: ${colors.text.disabled};
           font-weight: 900;
+          font-size: 14px;
           padding-top: 6px;
+          letter-spacing: 1px;
           transition: ${transition.default};
         `}
       >

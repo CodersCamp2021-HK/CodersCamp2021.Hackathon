@@ -27,7 +27,17 @@ const Tabs = () => {
     <div
       css={css`
         display: flex;
-        border-bottom: 2px solid ${colors.common.white};
+        position: relative;
+        &:before {
+          content: '';
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 2px;
+          width: 100%;
+          background-color: ${colors.common.white};
+        }
       `}
     >
       {tabs.map(({ name, iconComponent }) => {
