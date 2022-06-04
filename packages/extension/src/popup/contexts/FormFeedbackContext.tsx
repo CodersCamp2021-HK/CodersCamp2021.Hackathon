@@ -1,7 +1,7 @@
 import { CreateTicketDto, TicketsApi } from '@faktyczka/sdk';
 import { createContext, ReactNode, useContext, useState } from 'react';
 
-import { apiConfiguration } from '../shared/apiConfiguration';
+import { apiConfiguration } from '../../shared';
 
 const ticketsApi = new TicketsApi(apiConfiguration);
 
