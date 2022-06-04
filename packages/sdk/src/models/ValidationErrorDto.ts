@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Faktyczka API
- * Faktyczka API is an
+ * Faktyczka API is an server side of Faktyczka extension.
  *
  * The version of the OpenAPI document: 1.0.0
  *

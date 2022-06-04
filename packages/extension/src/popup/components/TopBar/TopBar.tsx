@@ -8,7 +8,7 @@ const TopBar = () => {
       <h1>
         <img
           css={css`
-            padding: 10px 25px;
+            padding: 0.25rem 1.5rem;
             display: block;
           `}
           src={logo}

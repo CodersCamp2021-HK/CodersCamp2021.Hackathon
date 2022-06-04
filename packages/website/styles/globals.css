@@ -22,7 +22,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: Archivo, sans-serif
+  font-family: Archivo, sans-serif;
 }
 
 a {
@@ -37,26 +37,26 @@ a {
 h1 {
   font-size: 4rem;
   font-weight: 800;
-  color: var(--text-primary)
+  color: var(--text-primary);
 }
 
 h2 {
   font-size: 3rem;
   font-weight: 800;
-  color: var(--text-primary)
+  color: var(--text-primary);
 }
 
 h3 {
   font-size: 2.25rem;
   font-weight: 600;
-  color: var(--text-primary)
+  color: var(--text-primary);
 }
 
 p {
   font-size: 1.75rem;
   font-weight: 200;
   line-height: 3.125rem;
-  color: var(--text-primary)
+  color: var(--text-primary);
 }
 
 .button {
@@ -67,12 +67,25 @@ p {
   border-radius: 50px;
 }
 
+.button:hover {
+  background-color: var(--primary-dark);
+  transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
+}
+
 .button-outline {
   display: inline-block;
   padding: 1.25rem 2.8125rem;
   color: var(--text-primary);
   border: var(--primary-main) solid 2px;
   border-radius: 50px;
+}
+
+.button-outline:hover {
+  border-color: var(--primary-dark);
+  color: var(--text-secondary);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .buttonText {

@@ -1,9 +1,4 @@
-import {
-  CallHandler,
-  ExecutionContext,
-  HttpStatus,
-  NestInterceptor,
-} from '@nestjs/common';
+import { CallHandler, ExecutionContext, HttpStatus, NestInterceptor } from '@nestjs/common';
 import { Response } from 'express';
 import { map } from 'rxjs/operators';
 
