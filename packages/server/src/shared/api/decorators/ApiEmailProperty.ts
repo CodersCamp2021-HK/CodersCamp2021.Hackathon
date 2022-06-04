@@ -28,4 +28,4 @@ const ApiEmailFormat = Object.freeze({
   validate: (v: string) => EMAIL_CONSTANTS.REGEX.test(v),
 });
 
-export { ApiEmailFormat, ApiEmailProperty };
+export { ApiEmailFormat, ApiEmailProperty, EMAIL_CONSTANTS };
