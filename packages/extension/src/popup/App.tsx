@@ -1,11 +1,14 @@
 import { css } from '@emotion/react';
+import { useState } from 'react';
 
-// eslint-disable-next-line import/namespace
 import { Tabs, TopBar } from './components';
+import { TabId } from './shared/tabs';
 import { colors } from './shared/theme';
 import { ReportView } from './tabs';
 
 const App = () => {
+  const [selectedTab, setSelectedTab] = useState<TabId>('report');
+
   return (
     <>
       <TopBar />
@@ -14,7 +17,7 @@ const App = () => {
           background-color: ${colors.common.grey};
         `}
       >
-        <Tabs />
+        <Tabs selected={selectedTab} />
         <ReportView />
       </main>
     </>
