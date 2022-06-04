@@ -1,7 +1,7 @@
 import styles from './Footer.module.css';
-import GitIcon from '../../public/git.svg';
-import FbIcon from '../../public/fb.svg';
-import IgIcon from '../../public/ig.svg';
+import GitIcon from '../../../public/git.svg';
+import FbIcon from '../../../public/fb.svg';
+import IgIcon from '../../../public/ig.svg';
 
 import Image from 'next/image';
 
