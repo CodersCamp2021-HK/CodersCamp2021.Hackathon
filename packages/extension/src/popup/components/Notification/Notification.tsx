@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { FactcheckDto } from '@faktyczka/sdk';
 
 import { Status } from '../../shared';
 import { colors } from '../../shared/theme';
@@ -15,16 +16,14 @@ const oneRowStyles = {
   alignItems: 'center',
 };
 
-type NotificationProps = {
-  reportedWebsiteLogo: string;
-  reportedWebsite: string;
-  title: string;
-  status: Status;
-  sourceLink: string;
-  reportLink: string;
-  partnerDomain: string;
-};
-const Notification = ({ reportedWebsiteLogo, reportedWebsite, title, status, partnerDomain }: NotificationProps) => {
+interface NotificationProps {
+  factcheck: FactcheckDto;
+}
+
+const Notification = ({ factcheck }: NotificationProps) => {
+  const faviconUrl = `${new URL(factcheck.url).origin}/favicon.ico`;
+  const reportedWebsite = new URL(factcheck.url).hostname;
+
   return (
     <div
       css={css`
@@ -42,9 +41,10 @@ const Notification = ({ reportedWebsiteLogo, reportedWebsite, title, status, par
           display: flex;
           gap: 10px;
           margin-bottom: 10px;
+          align-items: center;
         `}
       >
-        <img src={reportedWebsiteLogo} alt={reportedWebsite}></img>
+        <img height='16' src={faviconUrl} alt={reportedWebsite}></img>
         <p
           css={css`
             color: ${colors.text.disabled};
@@ -58,9 +58,25 @@ const Notification = ({ reportedWebsiteLogo, reportedWebsite, title, status, par
         css={css`
           font-weight: bold;
           margin-bottom: 10px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          line-clamp: 3;
+          -webkit-box-orient: vertical;
         `}
       >
-        {title}
+        <a
+          href={factcheck.url}
+          target='_blank'
+          rel='noreferrer'
+          css={css`
+            color: inherit;
+            text-decoration: none;
+          `}
+        >
+          {factcheck.title}
+        </a>
       </p>
       <div
         css={css`
@@ -72,15 +88,17 @@ const Notification = ({ reportedWebsiteLogo, reportedWebsite, title, status, par
           ${oneRowStyles}
         `}
       >
-        <Badge size={20} status={status}></Badge>
+        <Badge size={20} status={Status.Truth}></Badge>
         <a
-          href={partnerDomain}
+          href={factcheck.verificationSrc}
+          target='_blank'
           css={css`
             ${linkStyles};
             color: ${colors.primary.light};
           `}
+          rel='noreferrer'
         >
-          {partnerDomain}
+          {factcheck.verifiedBy}
         </a>
       </div>
     </div>

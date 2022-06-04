@@ -20,6 +20,12 @@ import { exists, mapValues } from '../runtime';
  */
 export interface TicketDto {
   /**
+   *
+   * @type {string}
+   * @memberof TicketDto
+   */
+  id: string;
+  /**
    * RFC 3886 standard url format
    * @type {string}
    * @memberof TicketDto
@@ -54,6 +60,7 @@ export function TicketDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     return json;
   }
   return {
+    id: json['id'],
     url: json['url'],
     name: json['name'],
     email: json['email'],
@@ -69,6 +76,7 @@ export function TicketDtoToJSON(value?: TicketDto | null): any {
     return null;
   }
   return {
+    id: value.id,
     url: value.url,
     name: value.name,
     email: value.email,
