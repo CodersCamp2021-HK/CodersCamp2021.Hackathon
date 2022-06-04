@@ -25,7 +25,10 @@ const FormFeedbackContext = createContext({
 const FormFeedbackContextProvider = ({ children }: { children: ReactNode }) => {
   const [result, setResult] = useState<boolean | null>(null);
 
-  const send = (createTicketDto: CreateTicketDto) => submitTicket(createTicketDto).then(setResult);
+  const send = (createTicketDto: CreateTicketDto) => {
+    submitTicket(createTicketDto).then(setResult);
+    chrome.storage.sync.set({ name: createTicketDto.name, email: createTicketDto.email });
+  };
 
   return <FormFeedbackContext.Provider value={{ result, send }}>{children}</FormFeedbackContext.Provider>;
 };
