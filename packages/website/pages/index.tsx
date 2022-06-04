@@ -70,6 +70,38 @@ const Home: NextPage = () => {
           </div>
         </section>
 
+        <section className={styles.section}>
+          <h2>Dlaczego Faktyczka?</h2>
+          <div className={styles.whyWrapper}>
+            <div className={styles.whyContainer}>
+              <div className={styles.whyImage}>
+                <Image src='/why.svg' alt='Card Illustration' layout='fill' objectFit='contain' />
+              </div>
+              <div className={styles.whyTextContainer}>
+                <p>
+                  W obecnych czasach praktycznie każdy może umieścić w sieci informacje pod różną postacią – artykułu na
+                  portalu informacyjnym czy posta na Facebooku. Tak zwane fake newsy, czyli nieprawdziwe informacje,
+                  stały się narzędziem, które ma ogromną moc kreowania opinii i niesie ze sobą wiele zagrożeń. Dzięki
+                  Faktyczce:
+                </p>
+                <ul>
+                  <li>
+                    dowiesz się, czy artykuł nie jest fake newsem bez konieczności odwiedzania innych stron
+                    weryfikujących informacje
+                  </li>
+                  <li>będziesz mieć pewność co do prawdziwości informacji</li>
+                  <li>nie dasz się manipulacjom mediów.</li>
+                </ul>
+              </div>
+            </div>
+            <div className='button'>
+              <Link href='/'>
+                <a className='buttonText'>Przejdź do instalacji</a>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         <p className={styles.description}>
           Get started by editing <code className={styles.code}>pages/index.tsx</code>
         </p>

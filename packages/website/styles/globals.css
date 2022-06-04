@@ -52,11 +52,16 @@ h3 {
   color: var(--text-primary);
 }
 
-p {
+p, li {
   font-size: 1.75rem;
   font-weight: 200;
   line-height: 3.125rem;
   color: var(--text-primary);
+}
+
+li {
+  list-style-image: url(/checkmark.svg);
+  padding-inline-start: 1ch;
 }
 
 .button {
