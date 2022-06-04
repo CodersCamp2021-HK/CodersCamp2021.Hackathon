@@ -27,7 +27,9 @@ const Footer = () => {
       </section>
 
       <section className={styles.gridItem}>
-        <p className={styles.text}>O nas</p>
+        <a href='/authors'>
+          <p className={styles.text}>O nas</p>
+        </a>
         <a href='/#contact'>
           <p className={styles.text}>Kontakt</p>
         </a>
