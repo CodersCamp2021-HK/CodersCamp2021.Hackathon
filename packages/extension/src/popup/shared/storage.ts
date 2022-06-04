@@ -4,11 +4,11 @@ import { useEffect } from 'react';
 type StorageFactchecks = (FactcheckDto & { inHistory: boolean })[];
 
 const readFactchecks = async () => {
-  const { factchecks } = await chrome.storage.sync.get(['factchecks']);
+  const { factchecks } = await chrome.storage.local.get(['factchecks']);
   return (factchecks ?? []) as StorageFactchecks;
 };
 
-const storeFactchecks = async (factchecks: StorageFactchecks) => chrome.storage.sync.set({ factchecks });
+const storeFactchecks = async (factchecks: StorageFactchecks) => chrome.storage.local.set({ factchecks });
 
 const useOnFactchecksChange = (onChange: (newValue: StorageFactchecks) => void) => {
   useEffect(() => {
