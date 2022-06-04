@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { Card } from '../../components';
+import { Card, ReportStatus } from '../../components';
 
 const linkOverflow = css`
   display: block;
@@ -15,9 +15,12 @@ const ReportView = () => {
       css={css`
         display: flex;
         flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 12px;
       `}
     >
-      <div>FAŁSZ</div>
+      <ReportStatus text='FAŁSZ' icon='X' />
       <Card>
         <div
           css={css`

@@ -13,7 +13,7 @@ const TopBar = () => {
           `}
           src={logo}
           alt='Faktyczka'
-          height={20}
+          height={40}
         />
       </h1>
     </header>
