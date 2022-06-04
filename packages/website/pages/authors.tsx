@@ -14,6 +14,20 @@ const Authors = () => {
       </Head>
 
       <main>
+        <section style={{ padding: '20px 50px 50px 50px' }}>
+          <h1> O nas</h1>
+          <div className={styles.text}>
+            <p>
+              Chęć wykorzystania naszej wiedzy i umiejętności do poprawy bezpieczeństwa osób korzystających z Internetu
+              zmotywowała nas do rozpoczęcia prac nad rozwiązaniem, które usprawni ostrzeganie użytkowników przed
+              nieprawdziwymi informacjami.{' '}
+            </p>
+            <p>
+              Tak powstał pomysł stworzenia Faktyczki („fakt” + „wtyczka”) – rozszerzenia do przeglądarki, dzięki
+              któremu użytkownik od razu może sprawdzić, czy czytany artykuł jest prawdziwy i nie zawiera fake newsów.{' '}
+            </p>
+          </div>
+        </section>
         <section>
           <Image src={TeamImg} alt='Team Image' />
         </section>
