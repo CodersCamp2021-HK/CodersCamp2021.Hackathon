@@ -1,12 +1,5 @@
 import { Exclude, Expose, plainToInstance } from 'class-transformer';
-import {
-  IsIn,
-  IsInt,
-  IsNotEmpty,
-  IsPositive,
-  IsString,
-  validateSync,
-} from 'class-validator';
+import { IsIn, IsInt, IsNotEmpty, IsOptional, IsPositive, IsString, validateSync } from 'class-validator';
 import dotenv from 'dotenv';
 
 const isProduction = process.env['NODE_ENV'] === 'production';
@@ -32,15 +25,28 @@ class EnvVariables {
   readonly PORT: number;
 
   @Expose()
+  @IsInt()
+  @IsPositive()
+  readonly CACHE_SIZE: number;
+
+  @Expose()
   @IsString()
   @IsNotEmpty()
   readonly SERVER_URL: string;
 }
 
-const env = plainToInstance(EnvVariables, process.env, {
-  excludeExtraneousValues: true,
-  enableImplicitConversion: true,
-});
+const defaultConfig = {
+  CACHE_SIZE: 1000,
+};
+
+const env = plainToInstance(
+  EnvVariables,
+  { ...defaultConfig, ...process.env },
+  {
+    excludeExtraneousValues: true,
+    enableImplicitConversion: true,
+  },
+);
 
 const errors = validateSync(env);
 
