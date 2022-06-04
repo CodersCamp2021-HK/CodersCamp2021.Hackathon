@@ -14,7 +14,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <section className={styles.section}>
+        <section id='hero' className={styles.section}>
           <div className={styles.heroContainer}>
             <div className={styles.heroLeftContainer}>
               <div className={styles.heroTextContainer}>
@@ -27,12 +27,14 @@ const Home: NextPage = () => {
               </div>
               <div className={styles.heroButtons}>
                 <div className='button'>
-                  <Link href='/'>
-                    <a className='buttonText'>Przejdź do instalacji</a>
+                  <Link href='/installation'>
+                    <a target='_blank' className='buttonText'>
+                      Przejdź do instalacji
+                    </a>
                   </Link>
                 </div>
                 <div className='button-outline'>
-                  <Link href='/'>
+                  <Link href='#cards'>
                     <a className='buttonText'>Dowiedz się więcej</a>
                   </Link>
                 </div>
@@ -44,7 +46,7 @@ const Home: NextPage = () => {
           </div>
         </section>
 
-        <section className={`${styles.section} ${styles.cardsSection}`}>
+        <section id='cards' className={`${styles.section} ${styles.cardsSection}`}>
           <div className={styles.cardsContainer}>
             <div className={styles.card}>
               <div className={styles.cardImage}>
@@ -70,7 +72,7 @@ const Home: NextPage = () => {
           </div>
         </section>
 
-        <section className={styles.section}>
+        <section id='why' className={styles.section}>
           <h2>Dlaczego Faktyczka?</h2>
           <div className={styles.whyWrapper}>
             <div className={styles.whyContainer}>
@@ -95,37 +97,51 @@ const Home: NextPage = () => {
               </div>
             </div>
             <div className='button'>
-              <Link href='/'>
-                <a className='buttonText'>Przejdź do instalacji</a>
+              <Link href='/installation'>
+                <a target='_blank' className='buttonText'>
+                  Przejdź do instalacji
+                </a>
               </Link>
             </div>
           </div>
         </section>
 
-        <section className={styles.section}>
+        <section id='partners' className={styles.section}>
           <h2>Nasi partnerzy</h2>
           <p className={styles.partnersText}>
             Współpracujemy z różnymi portalami informacyjnymi i społecznościowymi. Jeżeli chcesz dołączyć do grona
             naszych partnerów i umożliwić swoim odbiorcom bezpieczne zdobywanie informacji,{' '}
-            <Link href='/'>
+            <Link href='#contact'>
               <a className={styles.link}>skontaktuj się z nami</a>
             </Link>
             !
           </p>
           <div className={styles.logosContainer}>
             <div className={styles.logoImage}>
-              <Image src='/demagog.jpg' alt='Logo' layout='fill' objectFit='contain' />
+              <Link href='https://demagog.org.pl/'>
+                <a target='_blank'>
+                  <Image src='/demagog.jpg' alt='Logo' layout='fill' objectFit='contain' />
+                </a>
+              </Link>
             </div>
             <div className={styles.logoImage}>
-              <Image src='/fakehunter.jpg' alt='Logo' layout='fill' objectFit='contain' />
+              <Link href='https://fakehunter.pap.pl/'>
+                <a target='_blank'>
+                  <Image src='/fakehunter.jpg' alt='Logo' layout='fill' objectFit='contain' />
+                </a>
+              </Link>
             </div>
             <div className={styles.logoImage}>
-              <Image src='/zglostrolla.jpg' alt='Logo' layout='fill' objectFit='contain' />
+              <Link href='https://zglostrolla.pl/'>
+                <a target='_blank'>
+                  <Image src='/zglostrolla.jpg' alt='Logo' layout='fill' objectFit='contain' />
+                </a>
+              </Link>
             </div>
           </div>
         </section>
 
-        <section className={`${styles.section} ${styles.contactSection}`}>
+        <section id='contact' className={`${styles.section} ${styles.contactSection}`}>
           <h2>Skontaktuj się z nami</h2>
           <div className={styles.contactWrapper}>
             <div className={styles.contactInfoContainer}>
@@ -144,7 +160,7 @@ const Home: NextPage = () => {
                 <input className={styles.contactFormEmail}></input>
               </div>
               <div>
-                <p className={styles.formLabel}>Treśc wiadomości</p>
+                <p className={styles.formLabel}>Treść wiadomości</p>
                 <textarea className={styles.contactFormContent}></textarea>
               </div>
               <div className='button'>

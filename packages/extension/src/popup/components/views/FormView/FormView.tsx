@@ -117,7 +117,7 @@ const FormView = () => {
         <input
           id={checkboxId}
           checked={isChecked}
-          onClick={() => setIsChecked((prev) => !prev)}
+          onChange={() => setIsChecked((prev) => !prev)}
           type='checkbox'
           css={css`
             opacity: 0;
@@ -129,8 +129,7 @@ const FormView = () => {
       </label>
       <Button
         onClick={() => {
-          send();
-          alert(JSON.stringify({ name, email, description, url: 'TODO' }));
+          send({ name, email, description, url: 'TODO' });
         }}
         disabled={disabled}
       >
