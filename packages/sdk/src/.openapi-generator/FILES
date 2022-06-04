@@ -1,9 +1,13 @@
-apis/HelloApi.ts
+apis/FactcheckApi.ts
 apis/index.ts
 index.ts
+models/CreateFactcheckDto.ts
 models/DefaultResponseDto.ts
 models/ErrorDetailsDto.ts
-models/HelloDto.ts
+models/FactcheckDataDto.ts
+models/FactcheckDto.ts
+models/FactcheckEventDto.ts
+models/FactcheckStatusEnum.ts
 models/ValidationErrorDto.ts
 models/index.ts
 runtime.ts
