@@ -2,10 +2,10 @@ import { css } from '@emotion/react';
 import { useState } from 'react';
 
 import { Tabs, TopBar } from './components';
+import { FormView, ReportView, ResultView } from './components/tabs';
 import { useFormFeedback } from './contexts';
 import { TabId } from './shared/tabs';
 import { colors } from './shared/theme';
-import { FormView, ReportView, ResultView } from './tabs';
 
 interface ViewProps {
   selectedTab: TabId;

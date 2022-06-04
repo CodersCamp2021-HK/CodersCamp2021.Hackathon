@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import { useId, useState } from 'react';
 
-import { Button } from '../../components';
-import { useFormFeedback } from '../../contexts';
-import checkboxPath from '../../images/checkbox.svg';
-import { colors } from '../../shared';
+import { useFormFeedback } from '../../../contexts';
+import checkboxPath from '../../../images/checkbox.svg';
+import { colors } from '../../../shared';
+import { Button } from '../..';
 
 const control = css`
   display: flex;
