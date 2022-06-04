@@ -1,4 +1,4 @@
-.heroSection {
+.section {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,6 +32,36 @@
 .heroButtons {
   display: flex;
   gap: 2rem;
+}
+
+/** Cards Section **/
+
+.cardsSection {
+  background-color: var(--common-gray);
+}
+
+.cardsContainer {
+  display: flex;
+  gap: 2rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 26.6875rem;
+  height: 43.125rem;
+  padding: 4rem 3rem;
+  background-color: var(--common-white);
+  border-radius: 25px;
+  box-shadow: 10px 20px 30px 0px #00000040;
+}
+
+.cardImage {
+  width: 11.3125rem;
+  height: 8rem;
+  position: relative;
 }
 
 /**
