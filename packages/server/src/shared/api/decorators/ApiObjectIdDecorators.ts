@@ -1,10 +1,5 @@
 import { applyDecorators } from '@nestjs/common';
-import {
-  ApiParam,
-  ApiParamOptions,
-  ApiProperty,
-  ApiPropertyOptions,
-} from '@nestjs/swagger';
+import { ApiParam, ApiParamOptions, ApiProperty, ApiPropertyOptions } from '@nestjs/swagger';
 
 const OBJECT_ID_SCHEMA = Object.freeze({
   type: 'string',
@@ -12,15 +7,9 @@ const OBJECT_ID_SCHEMA = Object.freeze({
   example: '6200218668fc82e7bdf15088',
 });
 
-type ApiObjectIdParamOptions = { name?: string } & Pick<
-  ApiParamOptions,
-  'description'
->;
+type ApiObjectIdParamOptions = { name?: string } & Pick<ApiParamOptions, 'description'>;
 
-function ApiObjectIdParam({
-  name = 'id',
-  ...rest
-}: ApiObjectIdParamOptions = {}): MethodDecorator {
+function ApiObjectIdParam({ name = 'id', ...rest }: ApiObjectIdParamOptions = {}): MethodDecorator {
   return applyDecorators(
     ApiParam({
       ...rest,
@@ -30,11 +19,9 @@ function ApiObjectIdParam({
   );
 }
 
-type ApiObjectIdPropertyOptions = Pick<ApiPropertyOptions, 'description'>;
+type ApiObjectIdPropertyOptions = Pick<ApiPropertyOptions, 'description' | 'required'>;
 
-function ApiObjectIdProperty(
-  options: ApiObjectIdPropertyOptions = {},
-): PropertyDecorator {
+function ApiObjectIdProperty(options: ApiObjectIdPropertyOptions = {}): PropertyDecorator {
   return applyDecorators(
     ApiProperty({
       ...options,
