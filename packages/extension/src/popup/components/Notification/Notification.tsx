@@ -88,6 +88,7 @@ const Notification = ({ factcheck }: NotificationProps) => {
           ${oneRowStyles}
         `}
       >
+        {/* TODO */}
         <Badge size={20} status={Status.Truth}></Badge>
         <a
           href={factcheck.verificationSrc}

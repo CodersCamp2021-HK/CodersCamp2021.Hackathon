@@ -23,13 +23,15 @@ const ALLOWED_PROTOCOLS = ['http:', 'https:'];
 
 interface ViewSelectorProps {
   url: string;
+  hasFactcheck: boolean;
 }
 
-const ViewSelector = ({ url }: ViewSelectorProps) => {
+const ViewSelector = ({ url, hasFactcheck }: ViewSelectorProps) => {
   const isHttp = ALLOWED_PROTOCOLS.includes(new URL(url).protocol);
 
-  const disabledTabs = isHttp ? [] : (['report', 'form'] as TabId[]);
-  const defaultTab = isHttp ? 'report' : 'history';
+  // TODO: refactor
+  const disabledTabs = isHttp ? (hasFactcheck ? [] : (['report'] as TabId[])) : (['report', 'form'] as TabId[]);
+  const defaultTab = isHttp ? (hasFactcheck ? 'report' : 'form') : 'history';
   const [selectedTab, setSelectedTab] = useState<TabId>(defaultTab);
 
   return (
