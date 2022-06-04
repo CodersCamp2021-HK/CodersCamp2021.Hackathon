@@ -8,7 +8,7 @@ import Image from 'next/image';
 const Footer = () => {
   return (
     <div className={styles.gridContainer}>
-      <section className={styles.gridItem}>
+      <section className={styles.gridItem} style={{ padding: '0 10rem 0 10rem' }}>
         <h3 className={styles.text}>Przetwarzanie danych</h3>
         <p className={styles.text}>
           Żadne dane udostępnione nam nie są przez nas zbierane a wszelkie ich przetwarzanie odbywa się po stronie
@@ -29,7 +29,7 @@ const Footer = () => {
       </section>
 
       <section className={styles.gridItem}>
-        <div className={styles.icon}>
+        <div className={styles.icon} style={{ padding: '0 5rem 0 0' }}>
           <Image src={GitIcon} alt='github' />
           <Image src={FbIcon} alt='fb' />
           <Image src={IgIcon} alt='ig' />
