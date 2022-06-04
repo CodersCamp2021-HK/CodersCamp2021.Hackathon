@@ -1,0 +1,33 @@
+{
+  "name": "@faktyczka/monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "yarn": "3.x",
+    "node": "16.x"
+  },
+  "packageManager": "yarn@3.2.1",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "yarn workspaces foreach -tpi run build",
+    "start": "yarn workspace @faktyczka/server run start",
+    "dev": "yarn workspaces foreach -pi -j 3 run dev",
+    "test": "yarn workspaces foreach -tpi run test",
+    "lint": "yarn workspaces foreach -tpi run lint",
+    "format": "yarn workspaces foreach -tpi run format",
+    "gen:sdk": "yarn workspace @faktyczka/server tools:gen && yarn workspace @faktyczka/sdk gen"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8",
+    "@types/prettier": "^2",
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
+    "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.6.2",
+    "typescript": "^4.7.2"
+  }
+}

@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  mongo1:
+    container_name: mongo1
+    image: mongo:latest
+    restart: always
+    networks:
+      - mongors-network
+    ports:
+      - 27017:27017
+    command: --bind_ip_all --replSet rs0
+
+  mongors-setup:
+    container_name: mongors-setup
+    image: mongo:latest
+    depends_on:
+      - mongo1
+    volumes:
+      - ./scripts/init_rs.sh:/scripts/init_rs.sh
+    networks:
+      - mongors-network
+    restart: "no"
+    entrypoint: ["/scripts/init_rs.sh"]
+
+networks:
+  mongors-network:
+    driver: bridge

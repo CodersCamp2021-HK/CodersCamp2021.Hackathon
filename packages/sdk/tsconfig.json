@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "strict": false,
+    "noImplicitReturns": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "module": "ESNext",
+    "lib": ["ESNext", "dom"]
+  },
+  "include": ["src"]
+}

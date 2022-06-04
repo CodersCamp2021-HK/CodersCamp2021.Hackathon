@@ -1,0 +1,74 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/hello": {
+      "get": {
+        "operationId": "HelloController_getHello",
+        "summary": "Retrieve a HelloDto by id.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successfully returned HelloDto.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/HelloDto" } } }
+          },
+          "400": {
+            "description": "Parameters are not valid or they are missing.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ValidationErrorDto" } } }
+          },
+          "404": { "description": "Hellodto does not exist." },
+          "default": {
+            "description": "",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/DefaultResponseDto" } } }
+          }
+        },
+        "tags": ["Hello"]
+      }
+    }
+  },
+  "info": { "title": "Faktyczka API", "description": "Faktyczka API is an ", "version": "1.0.0", "contact": {} },
+  "tags": [{ "name": "Hello", "description": "Hello operations" }],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "DefaultResponseDto": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "status": { "type": "string" },
+          "path": { "type": "string" },
+          "message": { "type": "string" }
+        },
+        "required": ["name", "status", "path"]
+      },
+      "HelloDto": {
+        "type": "object",
+        "properties": { "msg": { "type": "string", "example": "Hello" } },
+        "required": ["msg"]
+      },
+      "ErrorDetailsDto": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string" },
+          "message": { "type": "string" },
+          "errorCode": { "type": "string" }
+        },
+        "required": ["path", "message", "errorCode"]
+      },
+      "ValidationErrorDto": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "status": { "type": "string" },
+          "path": { "type": "string" },
+          "message": { "type": "string" },
+          "errors": { "type": "array", "items": { "$ref": "#/components/schemas/ErrorDetailsDto" } }
+        },
+        "required": ["name", "status", "path"]
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "CodersCamp 2021 - Hackathon - GitHub",
+    "url": "https://github.com/CodersCamp2021-HK/CodersCamp2021.Project.Hackathon"
+  }
+}
