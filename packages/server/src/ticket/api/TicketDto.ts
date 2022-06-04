@@ -1,15 +1,20 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger';
+import { Exclude, Expose } from 'class-transformer';
 
-import { ApiEmailProperty, ApiUrlProperty } from '../../shared';
+import { ApiEmailProperty, ApiObjectIdProperty, ApiUrlProperty } from '../../shared';
 import { TICKET_CONSTANTS } from '../domain';
 
+@Exclude()
 class TicketDto {
-  //@ApiObjectIdProperty()
+  @Expose()
+  @ApiObjectIdProperty()
   readonly id: string;
 
+  @Expose()
   @ApiUrlProperty()
   readonly url: string;
 
+  @Expose()
   @ApiProperty({
     minLength: TICKET_CONSTANTS.description.minLength,
     maxLength: TICKET_CONSTANTS.description.maxLength,
@@ -17,11 +22,13 @@ class TicketDto {
   })
   readonly name: string;
 
+  @Expose()
   @ApiEmailProperty({
     example: 'jan.kowalski@email.com',
   })
   readonly email: string;
 
+  @Expose()
   @ApiProperty({
     minLength: TICKET_CONSTANTS.description.minLength,
     maxLength: TICKET_CONSTANTS.description.maxLength,

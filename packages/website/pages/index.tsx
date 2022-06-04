@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../styles/Home.module.css';
+import InstructionSlider from '../components/InstructionSlider/InstructionSlider';
 
 const Home: NextPage = () => {
   return (
@@ -46,7 +47,7 @@ const Home: NextPage = () => {
           </div>
         </section>
 
-        <section id='cards' className={`${styles.section} ${styles.cardsSection}`}>
+        <section id='cards' className={`${styles.section} ${styles.sectionGray}`}>
           <div className={styles.cardsContainer}>
             <div className={styles.card}>
               <div className={styles.cardImage}>
@@ -106,6 +107,11 @@ const Home: NextPage = () => {
           </div>
         </section>
 
+        <section id='instruction' className={`${styles.section} ${styles.sectionGray}`}>
+          <h2>Jak to działa?</h2>
+          <InstructionSlider />
+        </section>
+
         <section id='partners' className={styles.section}>
           <h2>Nasi partnerzy</h2>
           <p className={styles.partnersText}>
@@ -141,7 +147,7 @@ const Home: NextPage = () => {
           </div>
         </section>
 
-        <section id='contact' className={`${styles.section} ${styles.contactSection}`}>
+        <section id='contact' className={`${styles.section} ${styles.sectionGray}`}>
           <h2>Skontaktuj się z nami</h2>
           <div className={styles.contactWrapper}>
             <div className={styles.contactInfoContainer}>
