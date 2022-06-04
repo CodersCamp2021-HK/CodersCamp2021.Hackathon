@@ -11,11 +11,15 @@ const Navbar = () => {
       </a>
       <div className={styles.leftFlexContainer}>
         <p>O nas</p>
-        <a href='/installation'>
+        <a target='_blank' href='/installation'>
           <p>Instalacja</p>
         </a>
-        <p>Partnerzy</p>
-        <p>Kontakt</p>
+        <a href='/#partners'>
+          <p>Partnerzy</p>
+        </a>
+        <a href='/#contact'>
+          <p>Kontakt</p>
+        </a>
       </div>
     </div>
   );
