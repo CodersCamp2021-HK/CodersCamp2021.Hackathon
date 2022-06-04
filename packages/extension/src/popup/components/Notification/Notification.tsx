@@ -44,7 +44,7 @@ const Notification = ({ factcheck }: NotificationProps) => {
           align-items: center;
         `}
       >
-        <img height='16' src={faviconUrl} alt={reportedWebsite}></img>
+        <img height='16' src={faviconUrl} alt=''></img>
         <p
           css={css`
             color: ${colors.text.disabled};

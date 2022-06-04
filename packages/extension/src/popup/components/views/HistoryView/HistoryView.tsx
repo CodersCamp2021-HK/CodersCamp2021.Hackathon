@@ -13,6 +13,19 @@ const HistoryView = () => {
       .then(({ factchecks }) =>
         setHistory(((factchecks as StorageFactchecks) ?? []).filter(({ inHistory }) => inHistory)),
       );
+
+    const onChange = (changes: chrome.storage.StorageChange, area: 'sync' | 'local' | 'managed') => {
+      for (const [key, { newValue }] of Object.entries(changes)) {
+        if (key === 'factchecks' && area === 'sync') {
+          setHistory(newValue);
+        }
+      }
+    };
+
+    chrome.storage.onChanged.addListener(onChange);
+    return () => {
+      chrome.storage.onChanged.removeListener(onChange);
+    };
   }, []);
 
   return (
@@ -26,9 +39,12 @@ const HistoryView = () => {
         overflow-y: scroll;
       `}
     >
-      {history.map((factcheck) => {
-        return <Notification key={factcheck.id} factcheck={factcheck}></Notification>;
-      })}
+      {history
+        .slice(-10)
+        .reverse()
+        .map((factcheck) => {
+          return <Notification key={factcheck.id} factcheck={factcheck}></Notification>;
+        })}
     </div>
   );
 };
