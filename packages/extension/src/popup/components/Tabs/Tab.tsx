@@ -21,7 +21,7 @@ const Tab = ({ name, iconComponent, state, status, onClick, disabled }: TabProps
       disabled={disabled}
       className={state}
       css={css`
-        cursor: pointer;
+        cursor: ${disabled ? 'default' : 'pointer'};
         background-color: transparent;
         border: 0;
         border-bottom: 2px solid ${state === 'active' ? colors.primary.main : colors.common.white};
@@ -32,7 +32,7 @@ const Tab = ({ name, iconComponent, state, status, onClick, disabled }: TabProps
         flex-direction: column;
         align-items: center;
         padding: 12px 0;
-        &:hover,
+        &:not([disabled]):hover,
         &.active {
           p {
             color: ${colors.primary.dark};

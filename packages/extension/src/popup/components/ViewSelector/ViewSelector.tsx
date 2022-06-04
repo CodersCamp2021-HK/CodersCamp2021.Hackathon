@@ -26,10 +26,10 @@ interface ViewSelectorProps {
 }
 
 const ViewSelector = ({ url }: ViewSelectorProps) => {
-  const { protocol } = new URL(url);
-  console.log(protocol);
-  const disabledTabs = ALLOWED_PROTOCOLS.includes(protocol) ? [] : (['report', 'form'] as TabId[]);
-  const defaultTab = ALLOWED_PROTOCOLS.includes(protocol) ? 'report' : 'history';
+  const isHttp = ALLOWED_PROTOCOLS.includes(new URL(url).protocol);
+
+  const disabledTabs = isHttp ? [] : (['report', 'form'] as TabId[]);
+  const defaultTab = isHttp ? 'report' : 'history';
   const [selectedTab, setSelectedTab] = useState<TabId>(defaultTab);
 
   return (
