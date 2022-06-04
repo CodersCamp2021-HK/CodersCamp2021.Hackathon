@@ -10,13 +10,16 @@ export type TabProps = {
   iconComponent: ReactNode;
   state?: string;
   status?: Status | undefined;
+  onClick: () => void;
 };
 
-const Tab = ({ name, iconComponent, state, status = undefined }: TabProps) => {
+const Tab = ({ name, iconComponent, state, status, onClick }: TabProps) => {
   return (
     <button
+      onClick={onClick}
       className={state}
       css={css`
+        cursor: pointer;
         background-color: transparent;
         border: 0;
         flex: 1;
