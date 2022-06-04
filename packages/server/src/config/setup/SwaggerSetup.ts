@@ -1,14 +1,9 @@
 import { INestApplication } from '@nestjs/common';
-import {
-  DocumentBuilder,
-  OpenAPIObject,
-  SwaggerCustomOptions,
-  SwaggerModule,
-} from '@nestjs/swagger';
+import { DocumentBuilder, OpenAPIObject, SwaggerCustomOptions, SwaggerModule } from '@nestjs/swagger';
 
 import { TagMap } from '../../shared';
 
-const APP_NAME = 'Faktyczka API';
+const APP_NAME = 'Faktyczka';
 
 type SwaggerDocumentConfig = Readonly<{
   title: string;
@@ -24,8 +19,8 @@ type SwaggerConfig = Readonly<{
 }>;
 
 const defaultSwaggerDocumentConfig: SwaggerDocumentConfig = Object.freeze({
-  title: `${APP_NAME}`,
-  description: `${APP_NAME} is an `,
+  title: `${APP_NAME} API`,
+  description: `${APP_NAME} API is an server side of ${APP_NAME} extension.`,
   externalDoc: {
     description: 'CodersCamp 2021 - Hackathon - GitHub',
     url: 'https://github.com/CodersCamp2021-HK/CodersCamp2021.Project.Hackathon',
@@ -57,16 +52,10 @@ function getTags() {
           }
         : undefined,
     )
-    .filter(
-      (x): x is Readonly<{ name: string; description: string }> =>
-        x !== undefined,
-    );
+    .filter((x): x is Readonly<{ name: string; description: string }> => x !== undefined);
 }
 
-function createSwaggerDocument(
-  app: INestApplication,
-  config: SwaggerDocumentConfig = defaultSwaggerDocumentConfig,
-) {
+function createSwaggerDocument(app: INestApplication, config: SwaggerDocumentConfig = defaultSwaggerDocumentConfig) {
   const documentBase = new DocumentBuilder()
     .setTitle(config.title)
     .setDescription(config.description)
@@ -80,11 +69,7 @@ function createSwaggerDocument(
   return document;
 }
 
-function setupSwagger(
-  app: INestApplication,
-  document: OpenAPIObject,
-  config: SwaggerConfig = defaultSwaggerConfig,
-) {
+function setupSwagger(app: INestApplication, document: OpenAPIObject, config: SwaggerConfig = defaultSwaggerConfig) {
   SwaggerModule.setup(config.document.path, app, document, config.ui);
   return app;
 }

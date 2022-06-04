@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import { FormIcon } from '../../images/form';
 import { HistoryIcon } from '../../images/history';
 import { ReportIcon } from '../../images/report';
+import { Status } from '../../shared/statuses';
 import { colors } from '../../shared/theme';
 import { Tab } from './Tab';
 

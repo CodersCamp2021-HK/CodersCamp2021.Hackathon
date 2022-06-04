@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 
 import { AppConfigModule } from './config';
-import { HelloModule } from './hello';
+import { FactcheckModule } from './factcheck';
 
-const featureModules = [HelloModule];
+const featureModules = [FactcheckModule];
 
 @Module({
   imports: [AppConfigModule, ...featureModules],

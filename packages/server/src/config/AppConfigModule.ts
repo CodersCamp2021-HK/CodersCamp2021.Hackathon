@@ -4,19 +4,12 @@ import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { NullInterceptor, UndefinedInterceptor } from './api';
 import { MongoExceptionFilter, MongoModule } from './database';
 import { env } from './Env';
-import {
-  HttpExceptionFilter,
-  OpenApiExceptionFilter,
-  UnhandledExceptionFilter,
-} from './exceptions';
+import { HttpExceptionFilter, OpenApiExceptionFilter, UnhandledExceptionFilter } from './exceptions';
 import { SecurityModule } from './SecurityModule';
 
 const devConfigModules = [MongoModule];
 const prodConfigModules = [SecurityModule];
-const configModules = [
-  ...devConfigModules,
-  ...(env.NODE_ENV === 'production' ? prodConfigModules : []),
-];
+const configModules = [...devConfigModules, ...(env.NODE_ENV === 'production' ? prodConfigModules : [])];
 const expectionFilters = [
   UnhandledExceptionFilter,
   HttpExceptionFilter,
@@ -26,12 +19,10 @@ const expectionFilters = [
   provide: APP_FILTER,
   useClass: ExceptionFilter,
 }));
-const interceptors = [NullInterceptor, UndefinedInterceptor].map(
-  (Interceptor) => ({
-    provide: APP_INTERCEPTOR,
-    useClass: Interceptor,
-  }),
-);
+const interceptors = [NullInterceptor, UndefinedInterceptor].map((Interceptor) => ({
+  provide: APP_INTERCEPTOR,
+  useClass: Interceptor,
+}));
 
 @Module({
   imports: [...configModules],

@@ -1,32 +1,94 @@
 {
   "openapi": "3.0.0",
   "paths": {
-    "/api/hello": {
+    "/api/factchecks/sync": {
       "get": {
-        "operationId": "HelloController_getHello",
-        "summary": "Retrieve a HelloDto by id.",
-        "parameters": [],
+        "operationId": "FactcheckController_sync",
+        "summary": "Synchronize with server.",
+        "description": "Synchronize with server.",
+        "parameters": [
+          {
+            "name": "token",
+            "required": false,
+            "in": "query",
+            "example": "6200218668fc82e7bdf15088",
+            "schema": { "pattern": "^[0-9a-fA-F]{24}$", "type": "string" }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Successfully returned HelloDto.",
-            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/HelloDto" } } }
+            "description": "Successfully initialized sse stream of factchecks.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/FactcheckEventDto" } } }
           },
           "400": {
             "description": "Parameters are not valid or they are missing.",
             "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ValidationErrorDto" } } }
           },
-          "404": { "description": "Hellodto does not exist." },
           "default": {
             "description": "",
             "content": { "application/json": { "schema": { "$ref": "#/components/schemas/DefaultResponseDto" } } }
           }
         },
-        "tags": ["Hello"]
+        "tags": ["Factcheck"]
+      }
+    },
+    "/api/factchecks": {
+      "post": {
+        "operationId": "FactcheckController_create",
+        "summary": "Create a new factcheck.",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateFactcheckDto" } } }
+        },
+        "responses": {
+          "201": {
+            "description": "The factcheck has been successfully created.",
+            "headers": { "Location": { "schema": { "type": "string" } } }
+          },
+          "400": {
+            "description": "Parameters are not valid or they are missing.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ValidationErrorDto" } } }
+          },
+          "default": {
+            "description": "",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/DefaultResponseDto" } } }
+          }
+        },
+        "tags": ["Factcheck"]
+      }
+    },
+    "/api/factchecks/{id}": {
+      "get": {
+        "operationId": "FactcheckController_findById",
+        "summary": "Retrieve a factcheck by id.",
+        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "responses": {
+          "200": {
+            "description": "Successfully returned factcheck.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/FactcheckDto" } } }
+          },
+          "400": {
+            "description": "Parameters are not valid or they are missing.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ValidationErrorDto" } } }
+          },
+          "404": { "description": "Factcheck does not exist." },
+          "default": {
+            "description": "",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/DefaultResponseDto" } } }
+          }
+        },
+        "tags": ["Factcheck"]
       }
     }
   },
-  "info": { "title": "Faktyczka API", "description": "Faktyczka API is an ", "version": "1.0.0", "contact": {} },
-  "tags": [{ "name": "Hello", "description": "Hello operations" }],
+  "info": {
+    "title": "Faktyczka API",
+    "description": "Faktyczka API is an server side of Faktyczka extension.",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [{ "name": "Factcheck", "description": "Operations on factchecks" }],
   "servers": [],
   "components": {
     "schemas": {
@@ -40,10 +102,25 @@
         },
         "required": ["name", "status", "path"]
       },
-      "HelloDto": {
+      "FactcheckStatusEnum": { "type": "string", "enum": ["Truth", "Fake", "Warning", "Unverifable"] },
+      "FactcheckDataDto": {
         "type": "object",
-        "properties": { "msg": { "type": "string", "example": "Hello" } },
-        "required": ["msg"]
+        "properties": {
+          "url": { "type": "string" },
+          "status": {
+            "example": ["Truth", "Fake", "Warning", "Unverifable"],
+            "$ref": "#/components/schemas/FactcheckStatusEnum"
+          }
+        },
+        "required": ["url", "status"]
+      },
+      "FactcheckEventDto": {
+        "type": "object",
+        "properties": {
+          "data": { "$ref": "#/components/schemas/FactcheckDataDto" },
+          "type": { "type": "string", "enum": ["factcheck"] }
+        },
+        "required": ["data", "type"]
       },
       "ErrorDetailsDto": {
         "type": "object",
@@ -64,6 +141,34 @@
           "errors": { "type": "array", "items": { "$ref": "#/components/schemas/ErrorDetailsDto" } }
         },
         "required": ["name", "status", "path"]
+      },
+      "CreateFactcheckDto": {
+        "type": "object",
+        "properties": {
+          "url": { "type": "string" },
+          "status": {
+            "example": ["Truth", "Fake", "Warning", "Unverifable"],
+            "$ref": "#/components/schemas/FactcheckStatusEnum"
+          },
+          "verifiedBy": { "type": "string" },
+          "verificationSrc": { "type": "string" },
+          "description": { "type": "string" }
+        },
+        "required": ["url", "status", "verifiedBy", "verificationSrc", "description"]
+      },
+      "FactcheckDto": {
+        "type": "object",
+        "properties": {
+          "url": { "type": "string" },
+          "status": {
+            "example": ["Truth", "Fake", "Warning", "Unverifable"],
+            "$ref": "#/components/schemas/FactcheckStatusEnum"
+          },
+          "verifiedBy": { "type": "string" },
+          "verificationSrc": { "type": "string" },
+          "description": { "type": "string" }
+        },
+        "required": ["url", "status", "verifiedBy", "verificationSrc", "description"]
       }
     }
   },
