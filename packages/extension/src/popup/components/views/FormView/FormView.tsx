@@ -117,7 +117,7 @@ const FormView = () => {
         <input
           id={checkboxId}
           checked={isChecked}
-          onClick={() => setIsChecked((prev) => !prev)}
+          onChange={() => setIsChecked((prev) => !prev)}
           type='checkbox'
           css={css`
             opacity: 0;
