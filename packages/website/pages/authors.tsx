@@ -29,7 +29,7 @@ const Authors = () => {
           </div>
         </section>
         <section>
-          <Image src={TeamImg} alt='Team Image' />
+          <Image src={TeamImg} alt='Team Image' objectFit='contain' />
         </section>
 
         <section id='cards' className={styles.cardsSection}>
