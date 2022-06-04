@@ -1,27 +1,26 @@
 import { css } from '@emotion/react';
 
-import { colors } from '../../shared/theme';
+import { colors, Status } from '../../shared';
 
 interface BadgeProps {
-  children: string;
+  status: Status;
   size: number;
-  color: string;
 }
 
-const Badge = ({ children, size, color }: BadgeProps) => {
+const Badge = ({ status, size }: BadgeProps) => {
   return (
     <div
       css={css`
-        background-color: ${color};
+        background-color: ${status.color};
         color: ${colors.common.white};
         width: ${size}px;
         height: ${size}px;
-        text-align: center;
-        line-height: ${size}px;
         border-radius: 50%;
+        display: grid;
+        place-items: center;
       `}
     >
-      {children}
+      <img width={size * 0.66} height={size * 0.66} alt='' src={status.iconPath} />
     </div>
   );
 };

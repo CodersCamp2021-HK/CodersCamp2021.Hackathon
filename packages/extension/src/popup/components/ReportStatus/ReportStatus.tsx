@@ -1,14 +1,13 @@
 import { css } from '@emotion/react';
 
-import { colors } from '../../shared/theme';
+import { Status } from '../../shared';
 import { Badge } from '../Badge';
 
 interface ReportStatusProps {
-  icon: string;
-  text: string;
+  status: Status;
 }
 
-export const ReportStatus = ({ icon, text }: ReportStatusProps) => {
+export const ReportStatus = ({ status }: ReportStatusProps) => {
   return (
     <div
       css={css`
@@ -18,16 +17,15 @@ export const ReportStatus = ({ icon, text }: ReportStatusProps) => {
         gap: 4px;
       `}
     >
-      <Badge size={32} color={colors.status.fake}>
-        {icon}
-      </Badge>
+      <Badge status={status} size={32} />
       <span
         css={css`
-          color: ${colors.status.fake};
+          color: ${status.color};
           font-weight: bold;
+          text-transform: uppercase;
         `}
       >
-        {text}
+        {status.text}
       </span>
     </div>
   );
