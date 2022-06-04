@@ -1,13 +1,4 @@
-import {
-  applyDecorators,
-  Delete,
-  Get,
-  HttpCode,
-  HttpStatus,
-  Post,
-  Put,
-  Type,
-} from '@nestjs/common';
+import { applyDecorators, Delete, Get, HttpCode, HttpStatus, Post, Put, Type } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
   ApiCreatedResponse,
@@ -52,10 +43,7 @@ type ApiOptions = Readonly<
   }>
 >;
 
-type ApiResponseOptionsBase = Omit<
-  ApiResponseOptions,
-  'type' | 'headers' | 'status'
->;
+type ApiResponseOptionsBase = Omit<ApiResponseOptions, 'type' | 'headers' | 'status'>;
 
 type ApiGetOptions = Readonly<
   ApiOptions &
@@ -75,9 +63,7 @@ type ApiDeleteOptions = Readonly<
     }>
 >;
 
-type ApiListOptions = Readonly<
-  Omit<ApiGetOptions, 'notFound'> & { link?: true }
->;
+type ApiListOptions = Readonly<Omit<ApiGetOptions, 'notFound'> & { link?: true }>;
 
 type ApiCreateOptions = Readonly<
   Partial<
@@ -88,9 +74,7 @@ type ApiCreateOptions = Readonly<
   >
 >;
 
-type ApiUpdateOptions = Readonly<
-  Partial<ApiGetOptions & { noContent: ApiResponseOptionsBase }>
->;
+type ApiUpdateOptions = Readonly<Partial<ApiGetOptions & { noContent: ApiResponseOptionsBase }>>;
 
 function ApiCreate(options: ApiCreateOptions): MethodDecorator {
   const path = options.path ?? '';
@@ -239,9 +223,7 @@ function ApiList(options: ApiListOptions): MethodDecorator {
       description: `Successfully returned list of ${rname}.`,
       ...options.ok,
       type: options.response,
-      headers: options.link
-        ? { link: { schema: { type: 'string' } } }
-        : undefined,
+      headers: options.link ? { link: { schema: { type: 'string' } } } : undefined,
     }),
     ApiBadRequestResponse({
       description: `Parameters are not valid or they are missing.`,

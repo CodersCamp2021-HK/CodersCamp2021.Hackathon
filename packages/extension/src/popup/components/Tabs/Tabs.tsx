@@ -1,25 +1,23 @@
-import { css, jsx } from '@emotion/react';
+import { css } from '@emotion/react';
 
-import form from '../../images/form.svg';
-import history from '../../images/history.svg';
-import report from '../../images/report.svg';
+import { FormIcon } from '../../images/form';
+import { HistoryIcon } from '../../images/history';
+import { ReportIcon } from '../../images/report';
+import { colors } from '../../shared/theme';
 import { Tab } from './Tab';
 
 const tabs = [
   {
     name: 'Raport',
-    iconPath: report,
-    iconAlt: 'Raport',
+    iconComponent: <ReportIcon></ReportIcon>,
   },
   {
     name: 'Zgłoś',
-    iconPath: form,
-    iconAlt: 'Zgłoś',
+    iconComponent: <FormIcon></FormIcon>,
   },
   {
     name: 'Historia',
-    iconPath: history,
-    iconAlt: 'Historia',
+    iconComponent: <HistoryIcon></HistoryIcon>,
   },
 ];
 
@@ -28,10 +26,11 @@ const Tabs = () => {
     <div
       css={css`
         display: flex;
+        border-bottom: 2px solid ${colors.common.white};
       `}
     >
-      {tabs.map(({ name, iconPath, iconAlt }) => {
-        return <Tab key={name} name={name} iconPath={iconPath} iconAlt={iconAlt}></Tab>;
+      {tabs.map(({ name, iconComponent }) => {
+        return <Tab key={name} name={name} iconComponent={iconComponent}></Tab>;
       })}
     </div>
   );
