@@ -1,7 +1,7 @@
 .gridContainer {
   display: grid;
   row-gap: 50px;
-  grid-template-columns: 25% auto auto auto;
+  grid-template-columns: 40% 20% 20% 20%;
   padding: 10px;
   background-color: var(--text-secondary);
   color: var(--common-white);
