@@ -28,6 +28,12 @@ import {
 export interface FactcheckEventDto {
   /**
    *
+   * @type {string}
+   * @memberof FactcheckEventDto
+   */
+  id: string;
+  /**
+   *
    * @type {FactcheckDataDto}
    * @memberof FactcheckEventDto
    */
@@ -42,11 +48,11 @@ export interface FactcheckEventDto {
 
 /**
  * @export
- * @enum {string}
  */
-export enum FactcheckEventDtoTypeEnum {
-  Factcheck = 'factcheck',
-}
+export const FactcheckEventDtoTypeEnum = {
+  Factcheck: 'factcheck',
+} as const;
+export type FactcheckEventDtoTypeEnum = typeof FactcheckEventDtoTypeEnum[keyof typeof FactcheckEventDtoTypeEnum];
 
 export function FactcheckEventDtoFromJSON(json: any): FactcheckEventDto {
   return FactcheckEventDtoFromJSONTyped(json, false);
@@ -57,6 +63,7 @@ export function FactcheckEventDtoFromJSONTyped(json: any, ignoreDiscriminator: b
     return json;
   }
   return {
+    id: json['id'],
     data: FactcheckDataDtoFromJSON(json['data']),
     type: json['type'],
   };
@@ -70,6 +77,7 @@ export function FactcheckEventDtoToJSON(value?: FactcheckEventDto | null): any {
     return null;
   }
   return {
+    id: value.id,
     data: FactcheckDataDtoToJSON(value.data),
     type: value.type,
   };

@@ -3,7 +3,7 @@ import { useId, useState } from 'react';
 
 import { useFormFeedback } from '../../../contexts';
 import checkboxPath from '../../../images/checkbox.svg';
-import { colors } from '../../../shared';
+import { colors, useCurrentUrl } from '../../../shared';
 import { Button } from '../..';
 
 const control = css`
@@ -32,6 +32,7 @@ const control = css`
 
 const FormView = () => {
   const { send } = useFormFeedback();
+  const url = useCurrentUrl();
 
   const nameId = useId();
   const [name, setName] = useState('');
@@ -39,8 +40,9 @@ const FormView = () => {
   const emailId = useId();
   const [email, setEmail] = useState('');
 
-  const descriptionId = useId();
-  const [description, setDescription] = useState('');
+  const reasonId = useId();
+  const [reason, setReason] = useState('');
+  const description = reason.length === 0 ? undefined : reason;
 
   const checkboxId = useId();
   const [isChecked, setIsChecked] = useState(false);
@@ -65,13 +67,8 @@ const FormView = () => {
         <input id={emailId} value={email} onChange={({ target }) => setEmail(target.value)} />
       </p>
       <p css={control}>
-        <label htmlFor={descriptionId}>Uzasadnienie</label>
-        <textarea
-          id={descriptionId}
-          value={description}
-          onChange={({ target }) => setDescription(target.value)}
-          rows={5}
-        />
+        <label htmlFor={reasonId}>Uzasadnienie</label>
+        <textarea id={reasonId} value={reason} onChange={({ target }) => setReason(target.value)} rows={5} />
       </p>
       <p
         css={css`
@@ -79,7 +76,7 @@ const FormView = () => {
           color: ${colors.primary.dark};
         `}
       >
-        Pola zaznacone * są obowiązkowe
+        Pola zaznaczone * są obowiązkowe
       </p>
       <label
         htmlFor={checkboxId}
@@ -129,7 +126,7 @@ const FormView = () => {
       </label>
       <Button
         onClick={() => {
-          send({ name, email, description, url: 'TODO' });
+          send({ name, email, description, url });
         }}
         disabled={disabled}
       >

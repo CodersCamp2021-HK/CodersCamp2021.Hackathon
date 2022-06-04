@@ -10,6 +10,7 @@ models/FactcheckDataDto.ts
 models/FactcheckDto.ts
 models/FactcheckEventDto.ts
 models/FactcheckStatusEnum.ts
+models/TicketCountDto.ts
 models/TicketDto.ts
 models/TicketListDto.ts
 models/ValidationErrorDto.ts
