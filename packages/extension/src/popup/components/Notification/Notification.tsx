@@ -1,18 +1,18 @@
 import { css } from '@emotion/react';
 
-import close from '../../images/close.svg';
 import { Status } from '../../shared';
 import { colors } from '../../shared/theme';
 import { Badge } from '../Badge';
 
 const linkStyles = {
-  'text-decoration': 'none',
+  textDecoration: 'none',
   color: colors.text.primary,
 };
 
 const oneRowStyles = {
   display: 'flex',
   gap: '10px',
+  alignItems: 'center',
 };
 
 type NotificationProps = {
@@ -24,15 +24,7 @@ type NotificationProps = {
   reportLink: string;
   partnerDomain: string;
 };
-const Notification = ({
-  reportedWebsiteLogo,
-  reportedWebsite,
-  title,
-  status,
-  sourceLink,
-  reportLink,
-  partnerDomain,
-}: NotificationProps) => {
+const Notification = ({ reportedWebsiteLogo, reportedWebsite, title, status, partnerDomain }: NotificationProps) => {
   return (
     <div
       css={css`
@@ -42,17 +34,9 @@ const Notification = ({
         border-radius: 16px;
         box-shadow: 0px 4px 4px rgba(54, 0, 141, 0.15);
         position: relative;
+        font-size: 0.75rem;
       `}
     >
-      <div
-        css={css`
-          position: absolute;
-          top: 20px;
-          right: 20px;
-        `}
-      >
-        <img src={close} alt=''></img>
-      </div>
       <div
         css={css`
           display: flex;
@@ -64,7 +48,7 @@ const Notification = ({
         <p
           css={css`
             color: ${colors.text.disabled};
-            font-weight: '100';
+            font-weight: 100;
           `}
         >
           {reportedWebsite}
@@ -82,38 +66,7 @@ const Notification = ({
         css={css`
           margin-bottom: 10px;
         `}
-      >
-        <p
-          css={css`
-            ${oneRowStyles}
-          `}
-        >
-          Źródło:
-          <a
-            href={sourceLink}
-            css={css`
-              ${linkStyles}
-            `}
-          >
-            {sourceLink}
-          </a>
-        </p>
-        <p
-          css={css`
-            ${oneRowStyles}
-          `}
-        >
-          Analiza
-          <a
-            href={reportLink}
-            css={css`
-              ${linkStyles}
-            `}
-          >
-            {reportLink}
-          </a>
-        </p>
-      </div>
+      ></div>
       <div
         css={css`
           ${oneRowStyles}

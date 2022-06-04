@@ -46,7 +46,6 @@ const Tab = ({ name, iconComponent, state, status, onClick, disabled }: TabProps
           transition: ${transition.default};
           background-color: ${colors.primary.main};
         }
-        &:hover,
         &:not([disabled]):hover,
         &.active {
           &:before {
