@@ -25,11 +25,17 @@ const installation = () => {
             Naciśnij przycisk “Pobierz wtyczkę”. Zostaniesz przeniesiony na stronę gdzie znajduje się do pobrania
             wtyczka w sekcji “Assets”.
           </p>
-          <button className='button' style={{ width: 'fit-content' }}>
-            <a href='https://github.com/CodersCamp2021-HK/CodersCamp2021.Hackathon' target='_blank' rel='noreferrer'>
+
+          <div className='button' style={{ width: 'fit-content' }}>
+            <a
+              className='buttonText'
+              href='https://github.com/CodersCamp2021-HK/CodersCamp2021.Hackathon'
+              target='_blank'
+              rel='noreferrer'
+            >
               Pobierz wtyczkę
             </a>
-          </button>
+          </div>
         </div>
         <Image src={SafariBrowserImg} alt='Safari Browser' />
       </section>

@@ -27,7 +27,7 @@ import {
  */
 export interface CreateFactcheckDto {
   /**
-   *
+   * RFC 3886 standard url format
    * @type {string}
    * @memberof CreateFactcheckDto
    */
@@ -45,7 +45,7 @@ export interface CreateFactcheckDto {
    */
   verifiedBy: string;
   /**
-   *
+   * RFC 3886 standard url format
    * @type {string}
    * @memberof CreateFactcheckDto
    */

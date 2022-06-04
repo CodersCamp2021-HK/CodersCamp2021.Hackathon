@@ -1,4 +1,3 @@
-.openapi-generator-ignore
 apis/FactcheckApi.ts
 apis/TicketsApi.ts
 apis/index.ts

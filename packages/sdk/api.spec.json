@@ -232,48 +232,116 @@
       "CreateFactcheckDto": {
         "type": "object",
         "properties": {
-          "url": { "type": "string" },
+          "url": {
+            "type": "string",
+            "format": "url",
+            "maxLength": 1000,
+            "example": "https://twitter.com/JkmMikke/status/1511628185150136325",
+            "description": "RFC 3886 standard url format"
+          },
           "status": {
             "example": ["Truth", "Fake", "Warning", "Unverifable"],
             "$ref": "#/components/schemas/FactcheckStatusEnum"
           },
-          "verifiedBy": { "type": "string" },
-          "verificationSrc": { "type": "string" },
-          "description": { "type": "string" }
+          "verifiedBy": { "type": "string", "minLength": 5, "maxLength": 200, "example": "demagog@.org.pl" },
+          "verificationSrc": {
+            "type": "string",
+            "format": "url",
+            "maxLength": 1000,
+            "example": "https://demagog.org.pl/wypowiedzi/w-mariupolu-doszlo-do-tragedii-janusz-korwin-mikke-powiela-fake-newsy/",
+            "description": "RFC 3886 standard url format"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 2000,
+            "example": "9 marca doszło do zbombardowania szpitala w Mariupolu, co oprócz władz ukraińskich potwierdziła Światowa Organizacja Zdrowia (WHO) oraz Biuro Wysokiego Komisarza Narodów Zjednoczonych ds. Praw Człowieka (OHCHR)."
+          }
         },
         "required": ["url", "status", "verifiedBy", "verificationSrc", "description"]
       },
       "FactcheckDto": {
         "type": "object",
         "properties": {
-          "url": { "type": "string" },
+          "url": {
+            "type": "string",
+            "format": "url",
+            "maxLength": 1000,
+            "example": "https://twitter.com/JkmMikke/status/1511628185150136325",
+            "description": "RFC 3886 standard url format"
+          },
           "status": {
             "example": ["Truth", "Fake", "Warning", "Unverifable"],
             "$ref": "#/components/schemas/FactcheckStatusEnum"
           },
-          "verifiedBy": { "type": "string" },
-          "verificationSrc": { "type": "string" },
-          "description": { "type": "string" }
+          "verifiedBy": { "type": "string", "minLength": 5, "maxLength": 200, "example": "demagog@.org.pl" },
+          "verificationSrc": {
+            "type": "string",
+            "format": "url",
+            "maxLength": 1000,
+            "example": "https://demagog.org.pl/wypowiedzi/w-mariupolu-doszlo-do-tragedii-janusz-korwin-mikke-powiela-fake-newsy/",
+            "description": "RFC 3886 standard url format"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 2000,
+            "example": "9 marca doszło do zbombardowania szpitala w Mariupolu, co oprócz władz ukraińskich potwierdziła Światowa Organizacja Zdrowia (WHO) oraz Biuro Wysokiego Komisarza Narodów Zjednoczonych ds. Praw Człowieka (OHCHR)."
+          }
         },
         "required": ["url", "status", "verifiedBy", "verificationSrc", "description"]
       },
       "CreateTicketDto": {
         "type": "object",
         "properties": {
-          "url": { "type": "string" },
-          "name": { "type": "string" },
-          "email": { "type": "string" },
-          "description": { "type": "string" }
+          "url": {
+            "type": "string",
+            "format": "url",
+            "maxLength": 1000,
+            "example": "https://twitter.com/JkmMikke/status/1511628185150136325",
+            "description": "RFC 3886 standard url format"
+          },
+          "name": { "type": "string", "minLength": 5, "maxLength": 2000, "example": "Jan Kowalski" },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 64,
+            "example": "jan.kowalski@email.com",
+            "description": "RFC 5322 standard email format"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 2000,
+            "example": "Przedstawiony artykuł zawiera fałszywe informację, proszę sprawdzić tą stronę https://www.ohchr.org/en/statements/2022/03/situation-ukraine"
+          }
         },
         "required": ["url", "name", "email", "description"]
       },
       "TicketDto": {
         "type": "object",
         "properties": {
-          "url": { "type": "string" },
-          "name": { "type": "string" },
-          "email": { "type": "string" },
-          "description": { "type": "string" }
+          "url": {
+            "type": "string",
+            "format": "url",
+            "maxLength": 1000,
+            "example": "https://twitter.com/JkmMikke/status/1511628185150136325",
+            "description": "RFC 3886 standard url format"
+          },
+          "name": { "type": "string", "minLength": 5, "maxLength": 2000, "example": "Jan Kowalski" },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 64,
+            "example": "jan.kowalski@email.com",
+            "description": "RFC 5322 standard email format"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 2000,
+            "example": "Przedstawiony artykuł zawiera fałszywe informację, proszę sprawdzić tą stronę https://www.ohchr.org/en/statements/2022/03/situation-ukraine"
+          }
         },
         "required": ["url", "name", "email", "description"]
       },

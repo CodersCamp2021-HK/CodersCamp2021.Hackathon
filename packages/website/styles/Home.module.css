@@ -3,8 +3,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
   height: 100vh;
+  padding: 5rem 0;
 }
 
 .heroContainer {
@@ -12,11 +12,15 @@
   gap: 3rem;
   justify-content: center;
   align-items: center;
-  width: 100.875rem;
+}
+
+.heroLeftContainer {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
 }
 
 .heroTextContainer {
-  width: 53.75rem;
   margin-bottom: 5rem;
 }
 
@@ -82,7 +86,7 @@
 }
 
 .whyTextContainer {
-  width: 57.5rem;
+  width: 50%;
 }
 
 .whyImage {
@@ -170,5 +174,38 @@
 .contactFormContent {
   height: 20rem;
   resize: none; 
+}
+
+@media (max-width: 1700px) {
+  .section {
+    height: auto;
+  }
+
+  .heroContainer,
+  .whyContainer,
+  .cardsContainer, 
+  .logosContainer,
+  .contactWrapper {
+    flex-direction: column;
+  }
+
+  .heroLeftContainer {
+    align-items: center;
+    text-align: center;
+    width: 80%;
+    order: 2;
+  }
+
+  .heroImage {
+    order: 1;
+  }
+
+  .heroButtons {
+    flex-direction: column;
+  }
+
+  .logosContainer {
+    margin: 6rem 0;
+  }
 }
 
