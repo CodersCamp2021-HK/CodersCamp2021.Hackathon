@@ -11,7 +11,7 @@ const Navbar = () => {
       </a>
       <div className={styles.leftFlexContainer}>
         <p>O nas</p>
-        <a href='/installation'>
+        <a target='_blank' href='/installation'>
           <p>Instalacja</p>
         </a>
         <a href='/#partners'>
