@@ -67,6 +67,10 @@ p {
   border-radius: 50px;
 }
 
+.button:hover {
+  background-color: var(--text-secondary);
+}
+
 .button-outline {
   display: inline-block;
   padding: 1.25rem 2.8125rem;
