@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { TabId } from '../../shared';
 import { Tabs } from '../Tabs';
-import { FormView, ReportView } from '../views';
+import { FormView, HistoryView, ReportView } from '../views';
 
 interface ViewProps {
   selectedTab: TabId;
@@ -15,7 +15,7 @@ const View = ({ selectedTab }: ViewProps) => {
     case 'form':
       return <FormView />;
     case 'history':
-      return <div />;
+      return <HistoryView />;
   }
 };
 
