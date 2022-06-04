@@ -23,19 +23,17 @@ const InstructionSlider = () => {
         </div>
         <div className={styles.instructionText}>
           <h3>Sprawdź status artykułu</h3>
-          <p>
-            Jeżeli czytany przez Ciebie artykuł znalazł się w naszej bazie, to może mieć on jeden z kilku statusów.
-            <ul>
-              <li>
-                Informacja, która po zweryfikowaniu przez nas okazała się prawdziwa, będzie oznaczona zieloną ikoną.
-                Śmiało możesz zapoznać się z artykułem.
-              </li>
-              <li>
-                Jeżeli tekst będzie zawierał nieprawdziwe informacje, ikona będzie czerwona. Wtedy najlepiej ostrzec
-                bliskich i wyjść ze strony, która propaguje fake newsy.
-              </li>
-            </ul>
-          </p>
+          <p>Jeżeli czytany przez Ciebie artykuł znalazł się w naszej bazie, to może mieć on jeden z kilku statusów.</p>
+          <ul>
+            <li>
+              Informacja, która po zweryfikowaniu przez nas okazała się prawdziwa, będzie oznaczona zieloną ikoną.
+              Śmiało możesz zapoznać się z artykułem.
+            </li>
+            <li>
+              Jeżeli tekst będzie zawierał nieprawdziwe informacje, ikona będzie czerwona. Wtedy najlepiej ostrzec
+              bliskich i wyjść ze strony, która propaguje fake newsy.
+            </li>
+          </ul>
         </div>
       </div>
       <div className={styles.instructionDots}>
