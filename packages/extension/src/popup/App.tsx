@@ -5,7 +5,7 @@ import { useFormFeedback } from './contexts';
 import { colors } from './shared/theme';
 
 const App = () => {
-  const { wasSent } = useFormFeedback();
+  const { result } = useFormFeedback();
 
   return (
     <>
@@ -15,7 +15,7 @@ const App = () => {
           background-color: ${colors.common.grey};
         `}
       >
-        {wasSent ? <ResultView /> : <ViewSelector />}
+        {result !== null ? <ResultView result={result} /> : <ViewSelector />}
       </main>
     </>
   );
