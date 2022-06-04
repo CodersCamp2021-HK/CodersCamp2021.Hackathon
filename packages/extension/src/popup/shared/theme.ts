@@ -9,6 +9,9 @@ const colors = {
   },
   secondary: {},
   action: {},
+  status: {
+    fake: '#ff3366',
+  },
 };
 
 export { colors };

@@ -27,6 +27,7 @@ const ReportView = () => {
             display: flex;
             flex-direction: column;
             gap: 8px;
+            font-size: 0.75rem;
           `}
         >
           <p>
