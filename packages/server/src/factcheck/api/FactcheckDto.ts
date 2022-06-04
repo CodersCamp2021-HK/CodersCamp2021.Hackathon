@@ -1,13 +1,13 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger';
 
-import { ApiObjectIdProperty } from '../../shared';
-import { FactcheckStatus } from '../domain';
+import { ApiObjectIdProperty, ApiUrlProperty } from '../../shared';
+import { FACTCHECK_CONSTANTS, FactcheckStatus } from '../domain';
 
 class FactcheckDto {
   //@ApiObjectIdProperty()
   readonly id: string;
 
-  @ApiProperty()
+  @ApiUrlProperty()
   readonly url: string;
 
   @ApiProperty({
@@ -17,13 +17,24 @@ class FactcheckDto {
   })
   readonly status: string;
 
-  @ApiProperty()
+  @ApiProperty({
+    minLength: FACTCHECK_CONSTANTS.verifiedBy.minLength,
+    maxLength: FACTCHECK_CONSTANTS.verifiedBy.maxLength,
+    example: 'demagog@.org.pl',
+  })
   readonly verifiedBy: string;
 
-  @ApiProperty()
+  @ApiUrlProperty({
+    example: 'https://demagog.org.pl/wypowiedzi/w-mariupolu-doszlo-do-tragedii-janusz-korwin-mikke-powiela-fake-newsy/',
+  })
   readonly verificationSrc: string;
 
-  @ApiProperty()
+  @ApiProperty({
+    minLength: FACTCHECK_CONSTANTS.description.minLength,
+    maxLength: FACTCHECK_CONSTANTS.description.maxLength,
+    example:
+      '9 marca doszło do zbombardowania szpitala w Mariupolu, co oprócz władz ukraińskich potwierdziła Światowa Organizacja Zdrowia (WHO) oraz Biuro Wysokiego Komisarza Narodów Zjednoczonych ds. Praw Człowieka (OHCHR).',
+  })
   readonly description: string;
 }
 
