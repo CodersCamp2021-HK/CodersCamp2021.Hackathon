@@ -10,15 +10,20 @@ export type TabProps = {
   iconComponent: ReactNode;
   state?: string;
   status?: Status | undefined;
+  onClick: () => void;
 };
 
-const Tab = ({ name, iconComponent, state, status = undefined }: TabProps) => {
+const Tab = ({ name, iconComponent, state, status, onClick }: TabProps) => {
   return (
     <button
+      onClick={onClick}
       className={state}
       css={css`
+        cursor: pointer;
         background-color: transparent;
         border: 0;
+        border-bottom: 2px solid ${state === 'active' ? colors.primary.main : colors.common.white};
+        transition: ${transition.default};
         flex: 1;
         display: flex;
         justify-content: center;

@@ -1,5 +1,6 @@
 import { Body, ConflictException, HttpStatus, Param, Query, Res, Sse } from '@nestjs/common';
 import { ApiBadRequestResponse, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { plainToInstance } from 'class-transformer';
 import { Response } from 'express';
 import { Observable, Subject } from 'rxjs';
 import { v4 as uuid } from 'uuid';
@@ -55,7 +56,7 @@ class FactcheckController {
   //@ApiObjectIdParam()
   @ApiGet({ name: 'factcheck', response: FactcheckDto })
   findById(@Param('id') id: string) {
-    return this.repository.get(id) ?? null;
+    return plainToInstance(FactcheckDto, this.repository.get(id)) ?? null;
   }
 }
 
