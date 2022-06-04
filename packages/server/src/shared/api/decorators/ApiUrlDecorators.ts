@@ -52,4 +52,4 @@ const ApiUrlFormat = Object.freeze({
   validate: (v: string) => isValidHttpUrl(v),
 });
 
-export { ApiUrlFormat, ApiUrlParam, ApiUrlProperty };
+export { ApiUrlFormat, ApiUrlParam, ApiUrlProperty, URL_CONSTANTS };

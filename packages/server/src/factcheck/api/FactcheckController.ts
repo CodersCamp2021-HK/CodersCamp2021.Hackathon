@@ -1,18 +1,21 @@
-import { Body, ConflictException, HttpStatus, Param, Query, Res, Sse } from '@nestjs/common';
+import { Body, HttpStatus, Param, Query, Res, Sse } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
 import { ApiBadRequestResponse, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { plainToInstance } from 'class-transformer';
 import { Response } from 'express';
+import { Model } from 'mongoose';
 import { Observable, Subject } from 'rxjs';
-import { v4 as uuid } from 'uuid';
 
-import { ApiController, ApiCreate, ApiGet, Url, ValidationErrorDto } from '../../shared';
+import { ApiController, ApiCreate, ApiGet, ApiObjectIdParam, Url, ValidationErrorDto } from '../../shared';
+import { Factcheck, FactcheckDocument } from '../database';
 import { CreateFactcheckDto, FactcheckDto } from './FactcheckDto';
 import { FactcheckEventDto } from './FactcheckEventDto';
 import { FactcheckSyncQuery } from './FactcheckSyncQuery';
 
 @ApiController({ path: 'factchecks', name: 'Factcheck', description: 'Operations on factchecks' })
 class FactcheckController {
-  private readonly repository = new Map<string, FactcheckDto>();
+  constructor(@InjectModel(Factcheck.name) private factcheckModel: Model<FactcheckDocument>) {}
+
   private readonly subject = new Subject<FactcheckEventDto>();
 
   @Sse('sync')
@@ -33,30 +36,19 @@ class FactcheckController {
   }
 
   @ApiCreate({ name: 'factcheck' })
-  create(@Body() dto: CreateFactcheckDto, @Res() res: Response, @Url() url: URL) {
-    const id = uuid();
-    if ([...this.repository.values()].find((x) => x.url === dto.url) !== undefined) {
-      throw new ConflictException('Unique url violation');
-    }
-    const entity = { id, ...dto };
-    this.repository.set(id, entity);
-    this.subject.next({
-      data: {
-        id: entity.id,
-        status: entity.status,
-        url: entity.url,
-      },
-      id: entity.id,
-      type: 'factcheck',
-    });
-    res.setHeader('Location', `${url.origin}/api/factchecks/${id}`);
+  async create(@Body() dto: CreateFactcheckDto, @Res() res: Response, @Url() url: URL) {
+    const entity = await this.factcheckModel.create(dto);
+    this.subject.next(FactcheckEventDto.from(entity));
+    res.setHeader('Location', `${url.origin}/api/factchecks/${entity.id}`);
     res.sendStatus(HttpStatus.CREATED);
   }
 
-  //@ApiObjectIdParam()
+  @ApiObjectIdParam()
   @ApiGet({ name: 'factcheck', response: FactcheckDto })
-  findById(@Param('id') id: string) {
-    return plainToInstance(FactcheckDto, this.repository.get(id)) ?? null;
+  async findById(@Param('id') id: string) {
+    const entity = await this.factcheckModel.findById(id);
+    if (!entity) return null;
+    return plainToInstance(FactcheckDto, entity);
   }
 }
 

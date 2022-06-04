@@ -15,14 +15,14 @@
 /**
  *
  * @export
- * @enum {string}
  */
-export enum FactcheckStatusEnum {
-  Truth = 'Truth',
-  Fake = 'Fake',
-  Warning = 'Warning',
-  Unverifable = 'Unverifable',
-}
+export const FactcheckStatusEnum = {
+  Truth: 'Truth',
+  Fake: 'Fake',
+  Warning: 'Warning',
+  Unverifable: 'Unverifable',
+} as const;
+export type FactcheckStatusEnum = typeof FactcheckStatusEnum[keyof typeof FactcheckStatusEnum];
 
 export function FactcheckStatusEnumFromJSON(json: any): FactcheckStatusEnum {
   return FactcheckStatusEnumFromJSONTyped(json, false);

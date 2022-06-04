@@ -27,6 +27,12 @@ import {
  */
 export interface FactcheckDto {
   /**
+   *
+   * @type {string}
+   * @memberof FactcheckDto
+   */
+  id: string;
+  /**
    * RFC 3886 standard url format
    * @type {string}
    * @memberof FactcheckDto
@@ -67,6 +73,7 @@ export function FactcheckDtoFromJSONTyped(json: any, ignoreDiscriminator: boolea
     return json;
   }
   return {
+    id: json['id'],
     url: json['url'],
     status: FactcheckStatusEnumFromJSON(json['status']),
     verifiedBy: json['verifiedBy'],
@@ -83,6 +90,7 @@ export function FactcheckDtoToJSON(value?: FactcheckDto | null): any {
     return null;
   }
   return {
+    id: value.id,
     url: value.url,
     status: FactcheckStatusEnumToJSON(value.status),
     verifiedBy: value.verifiedBy,

@@ -62,7 +62,14 @@
       "get": {
         "operationId": "FactcheckController_findById",
         "summary": "Retrieve a factcheck by id.",
-        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string", "pattern": "^[0-9a-fA-F]{24}$", "example": "6200218668fc82e7bdf15088" }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successfully returned factcheck.",
@@ -164,6 +171,38 @@
         },
         "tags": ["Tickets"]
       }
+    },
+    "/api/tickets/count/{url}": {
+      "get": {
+        "operationId": "TicketController_countTicketsByUrl",
+        "summary": "Retrive number of tickets for specific url",
+        "parameters": [
+          {
+            "name": "url",
+            "required": true,
+            "in": "path",
+            "example": "https://twitter.com/JkmMikke/status/1511628185150136325",
+            "description": "RFC 3886 standard url format",
+            "schema": { "format": "url", "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully returned TicketCountDto.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/TicketCountDto" } } }
+          },
+          "400": {
+            "description": "Parameters are not valid or they are missing.",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ValidationErrorDto" } } }
+          },
+          "404": { "description": "Ticketcountdto does not exist." },
+          "default": {
+            "description": "",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/DefaultResponseDto" } } }
+          }
+        },
+        "tags": ["Tickets"]
+      }
     }
   },
   "info": {
@@ -193,21 +232,23 @@
       "FactcheckDataDto": {
         "type": "object",
         "properties": {
+          "id": { "type": "string", "pattern": "^[0-9a-fA-F]{24}$", "example": "6200218668fc82e7bdf15088" },
           "url": { "type": "string" },
           "status": {
             "example": ["Truth", "Fake", "Warning", "Unverifable"],
             "$ref": "#/components/schemas/FactcheckStatusEnum"
           }
         },
-        "required": ["url", "status"]
+        "required": ["id", "url", "status"]
       },
       "FactcheckEventDto": {
         "type": "object",
         "properties": {
+          "id": { "type": "string", "pattern": "^[0-9a-fA-F]{24}$", "example": "6200218668fc82e7bdf15088" },
           "data": { "$ref": "#/components/schemas/FactcheckDataDto" },
           "type": { "type": "string", "enum": ["factcheck"] }
         },
-        "required": ["data", "type"]
+        "required": ["id", "data", "type"]
       },
       "ErrorDetailsDto": {
         "type": "object",
@@ -263,6 +304,7 @@
       "FactcheckDto": {
         "type": "object",
         "properties": {
+          "id": { "type": "string", "pattern": "^[0-9a-fA-F]{24}$", "example": "6200218668fc82e7bdf15088" },
           "url": {
             "type": "string",
             "format": "url",
@@ -289,7 +331,7 @@
             "example": "9 marca doszło do zbombardowania szpitala w Mariupolu, co oprócz władz ukraińskich potwierdziła Światowa Organizacja Zdrowia (WHO) oraz Biuro Wysokiego Komisarza Narodów Zjednoczonych ds. Praw Człowieka (OHCHR)."
           }
         },
-        "required": ["url", "status", "verifiedBy", "verificationSrc", "description"]
+        "required": ["id", "url", "status", "verifiedBy", "verificationSrc", "description"]
       },
       "CreateTicketDto": {
         "type": "object",
@@ -316,7 +358,7 @@
             "example": "Przedstawiony artykuł zawiera fałszywe informację, proszę sprawdzić tą stronę https://www.ohchr.org/en/statements/2022/03/situation-ukraine"
           }
         },
-        "required": ["url", "name", "email", "description"]
+        "required": ["url", "name", "email"]
       },
       "TicketDto": {
         "type": "object",
@@ -343,7 +385,7 @@
             "example": "Przedstawiony artykuł zawiera fałszywe informację, proszę sprawdzić tą stronę https://www.ohchr.org/en/statements/2022/03/situation-ukraine"
           }
         },
-        "required": ["url", "name", "email", "description"]
+        "required": ["url", "name", "email"]
       },
       "TicketListDto": {
         "type": "object",
@@ -352,6 +394,11 @@
           "pages": { "type": "number" }
         },
         "required": ["data", "pages"]
+      },
+      "TicketCountDto": {
+        "type": "object",
+        "properties": { "count": { "type": "number", "minimum": 0 } },
+        "required": ["count"]
       }
     }
   },
