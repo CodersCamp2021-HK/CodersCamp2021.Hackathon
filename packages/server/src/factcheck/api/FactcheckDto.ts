@@ -38,6 +38,15 @@ class FactcheckDto {
 
   @Expose()
   @ApiProperty({
+    minLength: FACTCHECK_CONSTANTS.title.minLength,
+    maxLength: FACTCHECK_CONSTANTS.title.maxLength,
+    example:
+      'Wygląda na to, że Ukraińcy powtórzyli scenariusz szpitala położniczego w Kuwejcie z 1990 roku, który został całkowicie zainscenizowany przez firmę Hill & Knowlton za $10,7 mln',
+  })
+  readonly title: string;
+
+  @Expose()
+  @ApiProperty({
     minLength: FACTCHECK_CONSTANTS.description.minLength,
     maxLength: FACTCHECK_CONSTANTS.description.maxLength,
     example:
