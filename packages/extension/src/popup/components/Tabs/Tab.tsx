@@ -11,12 +11,14 @@ export type TabProps = {
   state?: string;
   status?: Status | undefined;
   onClick: () => void;
+  disabled?: boolean;
 };
 
-const Tab = ({ name, iconComponent, state, status, onClick }: TabProps) => {
+const Tab = ({ name, iconComponent, state, status, onClick, disabled }: TabProps) => {
   return (
     <button
       onClick={onClick}
+      disabled={disabled}
       className={state}
       css={css`
         cursor: pointer;

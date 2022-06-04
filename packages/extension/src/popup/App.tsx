@@ -2,10 +2,11 @@ import { css } from '@emotion/react';
 
 import { ResultView, TopBar, ViewSelector } from './components';
 import { useFormFeedback } from './contexts';
-import { colors } from './shared/theme';
+import { colors, useCurrentUrl } from './shared';
 
 const App = () => {
   const { result } = useFormFeedback();
+  const url = useCurrentUrl();
 
   return (
     <>
@@ -15,7 +16,7 @@ const App = () => {
           background-color: ${colors.common.grey};
         `}
       >
-        {result !== null ? <ResultView result={result} /> : <ViewSelector />}
+        {result !== null ? <ResultView result={result} /> : url && <ViewSelector url={url} />}
       </main>
     </>
   );

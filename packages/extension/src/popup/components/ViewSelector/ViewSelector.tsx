@@ -19,12 +19,22 @@ const View = ({ selectedTab }: ViewProps) => {
   }
 };
 
-const ViewSelector = () => {
-  const [selectedTab, setSelectedTab] = useState<TabId>('report');
+const ALLOWED_PROTOCOLS = ['http:', 'https:'];
+
+interface ViewSelectorProps {
+  url: string;
+}
+
+const ViewSelector = ({ url }: ViewSelectorProps) => {
+  const { protocol } = new URL(url);
+  console.log(protocol);
+  const disabledTabs = ALLOWED_PROTOCOLS.includes(protocol) ? [] : (['report', 'form'] as TabId[]);
+  const defaultTab = ALLOWED_PROTOCOLS.includes(protocol) ? 'report' : 'history';
+  const [selectedTab, setSelectedTab] = useState<TabId>(defaultTab);
 
   return (
     <>
-      <Tabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+      <Tabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} disabledTabs={disabledTabs} />
       <View selectedTab={selectedTab} />
     </>
   );

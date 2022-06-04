@@ -6,9 +6,10 @@ import { Tab } from './Tab';
 interface TabsProps {
   selectedTab: TabId;
   setSelectedTab: (tabId: TabId) => void;
+  disabledTabs: TabId[];
 }
 
-const Tabs = ({ selectedTab, setSelectedTab }: TabsProps) => {
+const Tabs = ({ selectedTab, setSelectedTab, disabledTabs }: TabsProps) => {
   return (
     <div
       css={css`
@@ -23,6 +24,7 @@ const Tabs = ({ selectedTab, setSelectedTab }: TabsProps) => {
             iconComponent={iconComponent}
             state={selectedTab === id ? 'active' : undefined}
             onClick={() => setSelectedTab(id)}
+            disabled={disabledTabs.includes(id)}
           />
         );
       })}
