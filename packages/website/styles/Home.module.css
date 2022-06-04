@@ -123,6 +123,10 @@
   position: relative;
 }
 
+.logoImage:hover {
+  filter: grayscale(60%);
+}
+
 /** Contact Section **/
 
 .contactSection {
@@ -175,6 +179,8 @@
   height: 20rem;
   resize: none; 
 }
+
+/** Media **/
 
 @media (max-width: 1700px) {
   .section {
