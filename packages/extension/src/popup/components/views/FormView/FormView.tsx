@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { useId, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 
 import { useFormFeedback } from '../../../contexts';
 import checkboxPath from '../../../images/checkbox.svg';
@@ -49,6 +49,17 @@ const FormView = () => {
 
   const disabled = !isChecked || !name || !email;
 
+  useEffect(() => {
+    chrome.storage.sync.get(['name', 'email'], ({ name, email }) => {
+      if (name) {
+        setName(name);
+      }
+      if (email) {
+        setEmail(email);
+      }
+    });
+  }, []);
+
   return (
     <div
       css={css`
@@ -68,7 +79,15 @@ const FormView = () => {
       </p>
       <p css={control}>
         <label htmlFor={reasonId}>Uzasadnienie</label>
-        <textarea id={reasonId} value={reason} onChange={({ target }) => setReason(target.value)} rows={5} />
+        <textarea
+          id={reasonId}
+          value={reason}
+          onChange={({ target }) => setReason(target.value)}
+          rows={5}
+          css={css`
+            resize: none;
+          `}
+        />
       </p>
       <p
         css={css`
