@@ -8,6 +8,7 @@ export * from './FactcheckDataDto';
 export * from './FactcheckDto';
 export * from './FactcheckEventDto';
 export * from './FactcheckStatusEnum';
+export * from './TicketCountDto';
 export * from './TicketDto';
 export * from './TicketListDto';
 export * from './ValidationErrorDto';

@@ -42,7 +42,7 @@ export interface CreateTicketDto {
    * @type {string}
    * @memberof CreateTicketDto
    */
-  description: string;
+  description?: string;
 }
 
 export function CreateTicketDtoFromJSON(json: any): CreateTicketDto {
@@ -57,7 +57,7 @@ export function CreateTicketDtoFromJSONTyped(json: any, ignoreDiscriminator: boo
     url: json['url'],
     name: json['name'],
     email: json['email'],
-    description: json['description'],
+    description: !exists(json, 'description') ? undefined : json['description'],
   };
 }
 

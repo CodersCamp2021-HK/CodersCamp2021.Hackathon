@@ -31,6 +31,12 @@ export interface FactcheckDataDto {
    * @type {string}
    * @memberof FactcheckDataDto
    */
+  id: string;
+  /**
+   *
+   * @type {string}
+   * @memberof FactcheckDataDto
+   */
   url: string;
   /**
    *
@@ -49,6 +55,7 @@ export function FactcheckDataDtoFromJSONTyped(json: any, ignoreDiscriminator: bo
     return json;
   }
   return {
+    id: json['id'],
     url: json['url'],
     status: FactcheckStatusEnumFromJSON(json['status']),
   };
@@ -62,6 +69,7 @@ export function FactcheckDataDtoToJSON(value?: FactcheckDataDto | null): any {
     return null;
   }
   return {
+    id: value.id,
     url: value.url,
     status: FactcheckStatusEnumToJSON(value.status),
   };

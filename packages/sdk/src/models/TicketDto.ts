@@ -42,7 +42,7 @@ export interface TicketDto {
    * @type {string}
    * @memberof TicketDto
    */
-  description: string;
+  description?: string;
 }
 
 export function TicketDtoFromJSON(json: any): TicketDto {
@@ -57,7 +57,7 @@ export function TicketDtoFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     url: json['url'],
     name: json['name'],
     email: json['email'],
-    description: json['description'],
+    description: !exists(json, 'description') ? undefined : json['description'],
   };
 }
 

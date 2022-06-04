@@ -20,6 +20,9 @@ import {
   DefaultResponseDto,
   DefaultResponseDtoFromJSON,
   DefaultResponseDtoToJSON,
+  TicketCountDto,
+  TicketCountDtoFromJSON,
+  TicketCountDtoToJSON,
   TicketDto,
   TicketDtoFromJSON,
   TicketDtoToJSON,
@@ -30,6 +33,10 @@ import {
   ValidationErrorDtoFromJSON,
   ValidationErrorDtoToJSON,
 } from '../models';
+
+export interface TicketsApiCountTicketsByUrlRequest {
+  url: string;
+}
 
 export interface TicketsApiCreateRequest {
   createTicketDto: CreateTicketDto;
@@ -50,11 +57,53 @@ export interface TicketsApiListTicketsByUrlRequest {
  */
 export class TicketsApi extends runtime.BaseAPI {
   /**
+   * Retrive number of tickets for specific url
+   */
+  async countTicketsByUrlRaw(
+    requestParameters: TicketsApiCountTicketsByUrlRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<runtime.ApiResponse<TicketCountDto>> {
+    if (requestParameters.url === null || requestParameters.url === undefined) {
+      throw new runtime.RequiredError(
+        'url',
+        'Required parameter requestParameters.url was null or undefined when calling countTicketsByUrl.',
+      );
+    }
+
+    const queryParameters: any = {};
+
+    const headerParameters: runtime.HTTPHeaders = {};
+
+    const response = await this.request(
+      {
+        path: `/api/tickets/count/{url}`.replace(`{${'url'}}`, encodeURIComponent(String(requestParameters.url))),
+        method: 'GET',
+        headers: headerParameters,
+        query: queryParameters,
+      },
+      initOverrides,
+    );
+
+    return new runtime.JSONApiResponse(response, (jsonValue) => TicketCountDtoFromJSON(jsonValue));
+  }
+
+  /**
+   * Retrive number of tickets for specific url
+   */
+  async countTicketsByUrl(
+    requestParameters: TicketsApiCountTicketsByUrlRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<TicketCountDto> {
+    const response = await this.countTicketsByUrlRaw(requestParameters, initOverrides);
+    return await response.value();
+  }
+
+  /**
    * Create a new ticket.
    */
   async createRaw(
     requestParameters: TicketsApiCreateRequest,
-    initOverrides?: RequestInit,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
   ): Promise<runtime.ApiResponse<void>> {
     if (requestParameters.createTicketDto === null || requestParameters.createTicketDto === undefined) {
       throw new runtime.RequiredError(
@@ -86,7 +135,10 @@ export class TicketsApi extends runtime.BaseAPI {
   /**
    * Create a new ticket.
    */
-  async create(requestParameters: TicketsApiCreateRequest, initOverrides?: RequestInit): Promise<void> {
+  async create(
+    requestParameters: TicketsApiCreateRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<void> {
     await this.createRaw(requestParameters, initOverrides);
   }
 
@@ -95,7 +147,7 @@ export class TicketsApi extends runtime.BaseAPI {
    */
   async findByIdRaw(
     requestParameters: TicketsApiFindByIdRequest,
-    initOverrides?: RequestInit,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
   ): Promise<runtime.ApiResponse<TicketDto>> {
     if (requestParameters.id === null || requestParameters.id === undefined) {
       throw new runtime.RequiredError(
@@ -124,7 +176,10 @@ export class TicketsApi extends runtime.BaseAPI {
   /**
    * Retrieve a ticket by id.
    */
-  async findById(requestParameters: TicketsApiFindByIdRequest, initOverrides?: RequestInit): Promise<TicketDto> {
+  async findById(
+    requestParameters: TicketsApiFindByIdRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<TicketDto> {
     const response = await this.findByIdRaw(requestParameters, initOverrides);
     return await response.value();
   }
@@ -134,7 +189,7 @@ export class TicketsApi extends runtime.BaseAPI {
    */
   async listTicketsByUrlRaw(
     requestParameters: TicketsApiListTicketsByUrlRequest,
-    initOverrides?: RequestInit,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
   ): Promise<runtime.ApiResponse<TicketListDto>> {
     if (requestParameters.url === null || requestParameters.url === undefined) {
       throw new runtime.RequiredError(
@@ -177,7 +232,7 @@ export class TicketsApi extends runtime.BaseAPI {
    */
   async listTicketsByUrl(
     requestParameters: TicketsApiListTicketsByUrlRequest,
-    initOverrides?: RequestInit,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
   ): Promise<TicketListDto> {
     const response = await this.listTicketsByUrlRaw(requestParameters, initOverrides);
     return await response.value();

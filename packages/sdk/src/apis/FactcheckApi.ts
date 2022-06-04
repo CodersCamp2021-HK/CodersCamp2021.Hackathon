@@ -52,7 +52,7 @@ export class FactcheckApi extends runtime.BaseAPI {
    */
   async createRaw(
     requestParameters: FactcheckApiCreateRequest,
-    initOverrides?: RequestInit,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
   ): Promise<runtime.ApiResponse<void>> {
     if (requestParameters.createFactcheckDto === null || requestParameters.createFactcheckDto === undefined) {
       throw new runtime.RequiredError(
@@ -84,7 +84,10 @@ export class FactcheckApi extends runtime.BaseAPI {
   /**
    * Create a new factcheck.
    */
-  async create(requestParameters: FactcheckApiCreateRequest, initOverrides?: RequestInit): Promise<void> {
+  async create(
+    requestParameters: FactcheckApiCreateRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<void> {
     await this.createRaw(requestParameters, initOverrides);
   }
 
@@ -93,7 +96,7 @@ export class FactcheckApi extends runtime.BaseAPI {
    */
   async findByIdRaw(
     requestParameters: FactcheckApiFindByIdRequest,
-    initOverrides?: RequestInit,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
   ): Promise<runtime.ApiResponse<FactcheckDto>> {
     if (requestParameters.id === null || requestParameters.id === undefined) {
       throw new runtime.RequiredError(
@@ -122,7 +125,10 @@ export class FactcheckApi extends runtime.BaseAPI {
   /**
    * Retrieve a factcheck by id.
    */
-  async findById(requestParameters: FactcheckApiFindByIdRequest, initOverrides?: RequestInit): Promise<FactcheckDto> {
+  async findById(
+    requestParameters: FactcheckApiFindByIdRequest,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<FactcheckDto> {
     const response = await this.findByIdRaw(requestParameters, initOverrides);
     return await response.value();
   }
@@ -133,7 +139,7 @@ export class FactcheckApi extends runtime.BaseAPI {
    */
   async syncRaw(
     requestParameters: FactcheckApiSyncRequest,
-    initOverrides?: RequestInit,
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
   ): Promise<runtime.ApiResponse<FactcheckEventDto>> {
     const queryParameters: any = {};
 
@@ -160,7 +166,10 @@ export class FactcheckApi extends runtime.BaseAPI {
    * Synchronize with server.
    * Synchronize with server.
    */
-  async sync(requestParameters: FactcheckApiSyncRequest = {}, initOverrides?: RequestInit): Promise<FactcheckEventDto> {
+  async sync(
+    requestParameters: FactcheckApiSyncRequest = {},
+    initOverrides?: RequestInit | runtime.InitOverrideFunction,
+  ): Promise<FactcheckEventDto> {
     const response = await this.syncRaw(requestParameters, initOverrides);
     return await response.value();
   }
