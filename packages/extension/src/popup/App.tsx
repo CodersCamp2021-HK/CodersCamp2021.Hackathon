@@ -1,13 +1,22 @@
-import './App.css';
+import { css } from '@emotion/react';
 
 import { Tabs, TopBar } from './components';
+import { colors } from './shared/theme';
+import { ReportView } from './tabs';
 
 const App = () => {
   return (
-    <div className='App'>
+    <>
       <TopBar />
-      <Tabs />
-    </div>
+      <main
+        css={css`
+          background-color: ${colors.common.grey};
+        `}
+      >
+        <Tabs />
+        <ReportView />
+      </main>
+    </>
   );
 };
 
