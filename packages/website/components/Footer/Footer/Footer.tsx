@@ -20,7 +20,7 @@ const Footer = () => {
         <a href='/#hero'>
           <p className={styles.text}>O wtyczce</p>
         </a>
-        <a href='#cards'>
+        <a href='/#cards'>
           <p className={styles.text}>Jak to działa</p>
         </a>
         <p className={styles.text}>Zostań partnerem</p>
@@ -28,7 +28,7 @@ const Footer = () => {
 
       <section className={styles.gridItem}>
         <p className={styles.text}>O nas</p>
-        <a href='#contact'>
+        <a href='/#contact'>
           <p className={styles.text}>Kontakt</p>
         </a>
         <p className={styles.text}>Kariera</p>

@@ -14,10 +14,10 @@ const Navbar = () => {
         <a href='/installation'>
           <p>Instalacja</p>
         </a>
-        <a href='#partners'>
+        <a href='/#partners'>
           <p>Partnerzy</p>
         </a>
-        <a href='#contact'>
+        <a href='/#contact'>
           <p>Kontakt</p>
         </a>
       </div>
