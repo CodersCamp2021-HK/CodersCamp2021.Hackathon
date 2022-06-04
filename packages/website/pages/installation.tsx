@@ -18,47 +18,64 @@ const installation = () => {
       <section className={styles.section}>
         <div className={styles.text}>
           <h1>Jak zainstalować Faktyczkę?</h1>
-          <h2>Krok 1</h2>
+          <h2>
+            Krok <span style={{ color: 'var(--primary-main)' }}>1</span>
+          </h2>
           <p>
             Naciśnij przycisk “Pobierz wtyczkę”. Zostaniesz przeniesiony na stronę gdzie znajduje się do pobrania
             wtyczka w sekcji “Assets”.
           </p>
-          <button className={styles.btn}>Pobierz wtyczkę</button>
+
+          <button className='button' style={{ width: 'fit-content' }}>
+            Pobierz wtyczkę
+          </button>
         </div>
-        <Image src={SafariBrowserImg} alt='Safari Browser' className={styles.responsive} />
+        <Image src={SafariBrowserImg} alt='Safari Browser' />
       </section>
 
       <section className={styles.section}>
-        <Image className={styles.responsive} src={MacbookImg} alt='Macbook Image' />
+        <Image src={MacbookImg} alt='Macbook Image' />
         <div className={styles.text}>
-          <h2>Krok 2</h2>
+          <h2>
+            Krok <span style={{ color: 'var(--primary-main)' }}>2</span>
+          </h2>
           <p>Rozpakuj archiwum z wtyczką do folderu.</p>
         </div>
       </section>
 
       <section className={styles.section}>
         <div className={styles.text}>
-          <h2>Krok 3</h2>
+          <h2>
+            Krok <span style={{ color: 'var(--primary-main)' }}>3</span>
+          </h2>
           <p>Wejdź na chrome://extensions.</p>
         </div>
-        <Image src={SearchFieldImg} alt='Safari Browser' className={styles.responsive} />
+        <Image src={SearchFieldImg} alt='Safari Browser' />
       </section>
+
       <section className={styles.section}>
-        <Image src={SafariExtensionImg} alt='Safari Browser' className={styles.responsive} />
+        <Image src={SafariExtensionImg} alt='Safari Browser' />
         <div className={styles.text}>
-          <h2>Krok 4</h2>
+          <h2>
+            Krok <span style={{ color: 'var(--primary-main)' }}>4</span>
+          </h2>
           <p>Zaznacz “Developer mode” i kliknij “Load unpacked” i wybierz wypakowaną wtyczkę.</p>
         </div>
       </section>
+
       <section className={styles.section}>
         <div className={styles.text}>
-          <h2>Krok 5</h2>
+          <h2>
+            Krok <span style={{ color: 'var(--primary-main)' }}>5</span>
+          </h2>
+
           <p>Kliknij w ikonkę rozszerzeń obok paska wyszukiwania i kliknij pinezkę przy zainstalowanej wtyczce.</p>
         </div>
-        <Image src={ExtensionViewImg} alt='Macbook Image' className={styles.responsive} />
+        <Image src={ExtensionViewImg} alt='Macbook Image' />
       </section>
-      <section className={styles.section}>
-        <h1>Od teraz chroni Cię Faktyczka!</h1>
+
+      <section className={styles.section} style={{ borderTop: '10px solid black' }}>
+        <h1 style={{ color: 'var(--primary-main)' }}>Od teraz chroni Cię Faktyczka!</h1>
       </section>
     </div>
   );

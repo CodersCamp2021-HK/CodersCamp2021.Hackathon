@@ -19,11 +19,6 @@
   flex-direction: column;
 }
 
-.responsive {
-  width: 20%;
-  height: 10px;
-}
-
 .btn {
   width: fit-content;
   border-radius: 10px;
