@@ -22,6 +22,8 @@ const Tab = ({ name, iconComponent, state, status, onClick }: TabProps) => {
         cursor: pointer;
         background-color: transparent;
         border: 0;
+        border-bottom: 2px solid ${state === 'active' ? colors.primary.main : colors.common.white};
+        transition: ${transition.default};
         flex: 1;
         display: flex;
         justify-content: center;

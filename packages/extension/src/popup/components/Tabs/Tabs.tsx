@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 
 import { TabId, TABS_DATA } from '../../shared/tabs';
-import { colors } from '../../shared/theme';
 import { Tab } from './Tab';
 
 interface TabsProps {
@@ -14,7 +13,6 @@ const Tabs = ({ selectedTab, setSelectedTab }: TabsProps) => {
     <div
       css={css`
         display: flex;
-        border-bottom: 2px solid ${colors.common.white};
       `}
     >
       {TABS_DATA.map(({ id, name, iconComponent }) => {
