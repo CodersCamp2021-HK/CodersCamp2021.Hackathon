@@ -14,4 +14,8 @@ const colors = {
   },
 };
 
-export { colors };
+const transition = {
+  default: 'all 0.3s cubic-bezier(0.17, 0.67, 0.83, 0.67)',
+};
+
+export { colors, transition };
