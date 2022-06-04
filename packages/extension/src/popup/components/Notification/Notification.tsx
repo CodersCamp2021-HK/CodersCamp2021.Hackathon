@@ -44,7 +44,7 @@ const Notification = ({ factcheck }: NotificationProps) => {
           align-items: center;
         `}
       >
-        <img height='16' src={faviconUrl} alt={reportedWebsite}></img>
+        <img height='16' src={faviconUrl} alt=''></img>
         <p
           css={css`
             color: ${colors.text.disabled};
@@ -88,8 +88,7 @@ const Notification = ({ factcheck }: NotificationProps) => {
           ${oneRowStyles}
         `}
       >
-        {/* TODO */}
-        <Badge size={20} status={Status.Truth}></Badge>
+        <Badge size={20} status={Status.deserialize(factcheck.status)}></Badge>
         <a
           href={factcheck.verificationSrc}
           target='_blank'

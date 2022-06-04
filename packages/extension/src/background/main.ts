@@ -1,6 +1,7 @@
 import { FactcheckApi, FactcheckDataDto } from '@faktyczka/sdk';
 
 import logo from '../../public/icons/Icon128.png';
+import { readFactchecks, storeFactchecks } from '../popup/shared';
 import { apiConfiguration } from '../shared';
 
 const factcheckApi = new FactcheckApi(apiConfiguration);
@@ -13,8 +14,7 @@ eventSource.addEventListener('factcheck', async (event) => {
   const userSawArticle = visitsItems.length > 0;
 
   const factcheck = await factcheckApi.findById({ id });
-  const { factchecks } = await chrome.storage.sync.get(['factchecks']);
-  chrome.storage.sync.set({ factchecks: [...(factchecks ?? []), { ...factcheck, inHistory: userSawArticle }] });
+  storeFactchecks([...(await readFactchecks()), { ...factcheck, inHistory: userSawArticle }]);
 
   if (userSawArticle) {
     chrome.notifications.create(id, {

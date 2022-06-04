@@ -2,18 +2,16 @@ import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 
 import { Notification } from '../../../components/Notification';
-import { StorageFactchecks } from '../../../shared';
+import { readFactchecks, StorageFactchecks, useOnFactchecksChange } from '../../../shared';
 
 const HistoryView = () => {
   const [history, setHistory] = useState<StorageFactchecks>([]);
 
   useEffect(() => {
-    chrome.storage.sync
-      .get(['factchecks'])
-      .then(({ factchecks }) =>
-        setHistory(((factchecks as StorageFactchecks) ?? []).filter(({ inHistory }) => inHistory)),
-      );
+    readFactchecks().then((factchecks) => setHistory(factchecks.filter(({ inHistory }) => inHistory)));
   }, []);
+
+  useOnFactchecksChange((newFactchecks) => setHistory(newFactchecks.filter(({ inHistory }) => inHistory)));
 
   return (
     <div
@@ -26,9 +24,12 @@ const HistoryView = () => {
         overflow-y: scroll;
       `}
     >
-      {history.map((factcheck) => {
-        return <Notification key={factcheck.id} factcheck={factcheck}></Notification>;
-      })}
+      {history
+        .slice(-10)
+        .reverse()
+        .map((factcheck) => {
+          return <Notification key={factcheck.id} factcheck={factcheck}></Notification>;
+        })}
     </div>
   );
 };
