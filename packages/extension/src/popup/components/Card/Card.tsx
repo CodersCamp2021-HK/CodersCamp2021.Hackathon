@@ -17,6 +17,7 @@ const Card = ({ children }: CardProps) => {
         border-radius: 16px;
         width: 100%;
         font-size: 0.75rem;
+        box-shadow: 0px 4px 4px rgba(3, 0, 157, 0.15);
       `}
     >
       {children}
