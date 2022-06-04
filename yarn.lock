@@ -687,6 +687,7 @@ __metadata:
   resolution: "@faktyczka/extension@workspace:packages/extension"
   dependencies:
     "@emotion/react": ^11.9.0
+    "@faktyczka/sdk": "workspace:^"
     "@types/chrome": ^0.0.188
     "@types/eslint": ^8
     "@types/prettier": ^2
@@ -728,7 +729,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@faktyczka/sdk@workspace:packages/sdk":
+"@faktyczka/sdk@workspace:^, @faktyczka/sdk@workspace:packages/sdk":
   version: 0.0.0-use.local
   resolution: "@faktyczka/sdk@workspace:packages/sdk"
   dependencies:
