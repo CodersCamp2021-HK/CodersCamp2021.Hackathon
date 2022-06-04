@@ -10,7 +10,9 @@ const Navbar = () => {
         <Image src={LogoIcon} alt='Logo' />
       </a>
       <div className={styles.leftFlexContainer}>
-        <p>O nas</p>
+        <a href='/authors'>
+          <p>O nas</p>
+        </a>
         <a target='_blank' href='/installation'>
           <p>Instalacja</p>
         </a>
