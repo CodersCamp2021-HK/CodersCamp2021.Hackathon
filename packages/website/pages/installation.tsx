@@ -25,9 +25,10 @@ const installation = () => {
             Naciśnij przycisk “Pobierz wtyczkę”. Zostaniesz przeniesiony na stronę gdzie znajduje się do pobrania
             wtyczka w sekcji “Assets”.
           </p>
-
           <button className='button' style={{ width: 'fit-content' }}>
-            Pobierz wtyczkę
+            <a href='https://github.com/CodersCamp2021-HK/CodersCamp2021.Hackathon' target='_blank' rel='noreferrer'>
+              Pobierz wtyczkę
+            </a>
           </button>
         </div>
         <Image src={SafariBrowserImg} alt='Safari Browser' />
@@ -50,7 +51,7 @@ const installation = () => {
           </h2>
           <p>Wejdź na chrome://extensions.</p>
         </div>
-        <Image src={SearchFieldImg} alt='Safari Browser' />
+        <Image src={SearchFieldImg} alt='Serch Field' />
       </section>
 
       <section className={styles.section}>
@@ -71,7 +72,7 @@ const installation = () => {
 
           <p>Kliknij w ikonkę rozszerzeń obok paska wyszukiwania i kliknij pinezkę przy zainstalowanej wtyczce.</p>
         </div>
-        <Image src={ExtensionViewImg} alt='Macbook Image' />
+        <Image src={ExtensionViewImg} alt='Extension View Image' />
       </section>
 
       <section className={styles.section} style={{ borderTop: '10px solid black' }}>
