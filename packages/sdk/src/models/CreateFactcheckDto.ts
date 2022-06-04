@@ -55,6 +55,12 @@ export interface CreateFactcheckDto {
    * @type {string}
    * @memberof CreateFactcheckDto
    */
+  title: string;
+  /**
+   *
+   * @type {string}
+   * @memberof CreateFactcheckDto
+   */
   description: string;
 }
 
@@ -71,6 +77,7 @@ export function CreateFactcheckDtoFromJSONTyped(json: any, ignoreDiscriminator: 
     status: FactcheckStatusEnumFromJSON(json['status']),
     verifiedBy: json['verifiedBy'],
     verificationSrc: json['verificationSrc'],
+    title: json['title'],
     description: json['description'],
   };
 }
@@ -87,6 +94,7 @@ export function CreateFactcheckDtoToJSON(value?: CreateFactcheckDto | null): any
     status: FactcheckStatusEnumToJSON(value.status),
     verifiedBy: value.verifiedBy,
     verificationSrc: value.verificationSrc,
+    title: value.title,
     description: value.description,
   };
 }

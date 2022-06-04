@@ -61,6 +61,12 @@ export interface FactcheckDto {
    * @type {string}
    * @memberof FactcheckDto
    */
+  title: string;
+  /**
+   *
+   * @type {string}
+   * @memberof FactcheckDto
+   */
   description: string;
 }
 
@@ -78,6 +84,7 @@ export function FactcheckDtoFromJSONTyped(json: any, ignoreDiscriminator: boolea
     status: FactcheckStatusEnumFromJSON(json['status']),
     verifiedBy: json['verifiedBy'],
     verificationSrc: json['verificationSrc'],
+    title: json['title'],
     description: json['description'],
   };
 }
@@ -95,6 +102,7 @@ export function FactcheckDtoToJSON(value?: FactcheckDto | null): any {
     status: FactcheckStatusEnumToJSON(value.status),
     verifiedBy: value.verifiedBy,
     verificationSrc: value.verificationSrc,
+    title: value.title,
     description: value.description,
   };
 }

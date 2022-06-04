@@ -12,17 +12,16 @@ eventSource.addEventListener('factcheck', async (event) => {
   const visitsItems = await chrome.history.getVisits({ url });
   const userSawArticle = visitsItems.length > 0;
 
+  const factcheck = await factcheckApi.findById({ id });
   const { factchecks } = await chrome.storage.sync.get(['factchecks']);
-  chrome.storage.sync.set({ factchecks: [...(factchecks ?? []), { id, url, inHistory: userSawArticle }] });
-
-  const { verificationSrc } = await factcheckApi.findById({ id });
+  chrome.storage.sync.set({ factchecks: [...(factchecks ?? []), { ...factcheck, inHistory: userSawArticle }] });
 
   if (userSawArticle) {
     chrome.notifications.create(id, {
       type: 'basic',
       title: 'Czytany przez Ciebie artykuł został zweryfikowany!',
       iconUrl: logo,
-      message: verificationSrc,
+      message: factcheck.verificationSrc,
     });
   }
 });

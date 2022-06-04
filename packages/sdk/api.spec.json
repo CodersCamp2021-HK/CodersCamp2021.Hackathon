@@ -153,7 +153,14 @@
       "get": {
         "operationId": "TicketController_findById",
         "summary": "Retrieve a ticket by id.",
-        "parameters": [{ "name": "id", "required": true, "in": "path", "schema": { "type": "string" } }],
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "string", "pattern": "^[0-9a-fA-F]{24}$", "example": "6200218668fc82e7bdf15088" }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successfully returned ticket.",
@@ -292,6 +299,12 @@
             "example": "https://demagog.org.pl/wypowiedzi/w-mariupolu-doszlo-do-tragedii-janusz-korwin-mikke-powiela-fake-newsy/",
             "description": "RFC 3886 standard url format"
           },
+          "title": {
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 200,
+            "example": "Wygląda na to, że Ukraińcy powtórzyli scenariusz szpitala położniczego w Kuwejcie z 1990 roku, który został całkowicie zainscenizowany przez firmę Hill & Knowlton za $10,7 mln"
+          },
           "description": {
             "type": "string",
             "minLength": 5,
@@ -299,7 +312,7 @@
             "example": "9 marca doszło do zbombardowania szpitala w Mariupolu, co oprócz władz ukraińskich potwierdziła Światowa Organizacja Zdrowia (WHO) oraz Biuro Wysokiego Komisarza Narodów Zjednoczonych ds. Praw Człowieka (OHCHR)."
           }
         },
-        "required": ["url", "status", "verifiedBy", "verificationSrc", "description"]
+        "required": ["url", "status", "verifiedBy", "verificationSrc", "title", "description"]
       },
       "FactcheckDto": {
         "type": "object",
@@ -324,6 +337,12 @@
             "example": "https://demagog.org.pl/wypowiedzi/w-mariupolu-doszlo-do-tragedii-janusz-korwin-mikke-powiela-fake-newsy/",
             "description": "RFC 3886 standard url format"
           },
+          "title": {
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 200,
+            "example": "Wygląda na to, że Ukraińcy powtórzyli scenariusz szpitala położniczego w Kuwejcie z 1990 roku, który został całkowicie zainscenizowany przez firmę Hill & Knowlton za $10,7 mln"
+          },
           "description": {
             "type": "string",
             "minLength": 5,
@@ -331,7 +350,7 @@
             "example": "9 marca doszło do zbombardowania szpitala w Mariupolu, co oprócz władz ukraińskich potwierdziła Światowa Organizacja Zdrowia (WHO) oraz Biuro Wysokiego Komisarza Narodów Zjednoczonych ds. Praw Człowieka (OHCHR)."
           }
         },
-        "required": ["id", "url", "status", "verifiedBy", "verificationSrc", "description"]
+        "required": ["id", "url", "status", "verifiedBy", "verificationSrc", "title", "description"]
       },
       "CreateTicketDto": {
         "type": "object",
@@ -363,6 +382,7 @@
       "TicketDto": {
         "type": "object",
         "properties": {
+          "id": { "type": "string", "pattern": "^[0-9a-fA-F]{24}$", "example": "6200218668fc82e7bdf15088" },
           "url": {
             "type": "string",
             "format": "url",
@@ -385,7 +405,7 @@
             "example": "Przedstawiony artykuł zawiera fałszywe informację, proszę sprawdzić tą stronę https://www.ohchr.org/en/statements/2022/03/situation-ukraine"
           }
         },
-        "required": ["url", "name", "email"]
+        "required": ["id", "url", "name", "email"]
       },
       "TicketListDto": {
         "type": "object",
