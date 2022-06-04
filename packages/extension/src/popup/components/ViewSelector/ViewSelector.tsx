@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { TabId } from '../../shared/tabs';
+import { TabId } from '../../shared';
 import { Tabs } from '../Tabs';
 import { FormView, ReportView } from '../views';
 
