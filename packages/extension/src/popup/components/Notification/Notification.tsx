@@ -22,7 +22,7 @@ type NotificationProps = {
   status: Status;
   sourceLink: string;
   reportLink: string;
-  partnerDomain: string;
+  verifierLink: string;
 };
 const Notification = ({
   reportedWebsiteLogo,
@@ -31,7 +31,7 @@ const Notification = ({
   status,
   sourceLink,
   reportLink,
-  partnerDomain,
+  verifierLink,
 }: NotificationProps) => {
   return (
     <div
@@ -121,13 +121,13 @@ const Notification = ({
       >
         <Badge size={20} status={status}></Badge>
         <a
-          href={partnerDomain}
+          href={verifierLink}
           css={css`
             ${linkStyles};
             color: ${colors.primary.light};
           `}
         >
-          {partnerDomain}
+          {verifierLink}
         </a>
       </div>
     </div>

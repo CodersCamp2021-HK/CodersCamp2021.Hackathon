@@ -12,7 +12,7 @@ const historyFeed = [
     status: Status.Fake,
     sourceLink: 'fakt.pl/24353y',
     reportLink: 'demagog.pl/24353',
-    partnerDomain: 'demagog.pl',
+    verifierLink: 'demagog.pl',
   },
   {
     reportedWebsiteLogo: websiteLogo,
@@ -21,7 +21,7 @@ const historyFeed = [
     status: Status.Warning,
     sourceLink: 'fakt.pl/24353y',
     reportLink: 'demagog.pl/24353',
-    partnerDomain: 'demagog.pl',
+    verifierLink: 'demagog.pl',
   },
   {
     reportedWebsiteLogo: websiteLogo,
@@ -30,7 +30,7 @@ const historyFeed = [
     status: Status.Truth,
     sourceLink: 'fakt.pl/24353y',
     reportLink: 'demagog.pl/24353',
-    partnerDomain: 'demagog.pl',
+    verifierLink: 'demagog.pl',
   },
   {
     reportedWebsiteLogo: websiteLogo,
@@ -39,7 +39,7 @@ const historyFeed = [
     status: Status.Warning,
     sourceLink: 'fakt.pl/24353y',
     reportLink: 'demagog.pl/24353',
-    partnerDomain: 'demagog.pl',
+    verifierLink: 'demagog.pl',
   },
   {
     reportedWebsiteLogo: websiteLogo,
@@ -48,7 +48,7 @@ const historyFeed = [
     status: Status.Warning,
     sourceLink: 'fakt.pl/24353y',
     reportLink: 'demagog.pl/24353',
-    partnerDomain: 'demagog.pl',
+    verifierLink: 'demagog.pl',
   },
 ];
 const HistoryView = () => {
