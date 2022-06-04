@@ -1,7 +1,7 @@
 import { FactcheckDto } from '@faktyczka/sdk';
 import { useEffect, useState } from 'react';
 
-import { readFactchecks } from './storage';
+import { readFactchecks } from '../../shared';
 
 /**
  * Returns `undefined` when factcheck was not yet checked, `null` when there isn't a factcheck for a given

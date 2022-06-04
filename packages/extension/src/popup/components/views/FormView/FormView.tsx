@@ -1,9 +1,10 @@
 import { css } from '@emotion/react';
 import { useEffect, useId, useState } from 'react';
 
+import { useCurrentUrl } from '../../../../shared';
 import { useFormFeedback } from '../../../contexts';
 import checkboxPath from '../../../images/checkbox.svg';
-import { colors, useCurrentUrl } from '../../../shared';
+import { colors } from '../../../shared';
 import { Button } from '../..';
 
 const control = css`

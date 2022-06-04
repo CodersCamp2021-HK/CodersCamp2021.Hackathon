@@ -1,8 +1,9 @@
 import { css } from '@emotion/react';
 
+import { useCurrentUrl } from '../shared';
 import { ResultView, TopBar, ViewSelector } from './components';
 import { useFormFeedback } from './contexts';
-import { colors, useCurrentUrl } from './shared';
+import { colors } from './shared';
 import { useArticleFactcheck } from './shared/useArticleFactcheck';
 
 const App = () => {

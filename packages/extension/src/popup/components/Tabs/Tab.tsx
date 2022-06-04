@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ReactNode } from 'react';
 
-import { Status } from '../../shared';
+import { Status } from '../../../shared';
 import { colors, transition } from '../../shared/theme';
 import { Badge } from '../Badge';
 

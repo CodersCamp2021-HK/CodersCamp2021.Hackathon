@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 
+import { readFactchecks, StorageFactchecks, useOnFactchecksChange } from '../../../../shared';
 import { Notification } from '../../../components/Notification';
-import { readFactchecks, StorageFactchecks, useOnFactchecksChange } from '../../../shared';
 
 const HistoryView = () => {
   const [history, setHistory] = useState<StorageFactchecks>([]);

@@ -1,8 +1,7 @@
 import { FactcheckApi, FactcheckDataDto } from '@faktyczka/sdk';
 
 import logo from '../../public/icons/Icon128.png';
-import { readFactchecks, storeFactchecks } from '../popup/shared';
-import { apiConfiguration } from '../shared';
+import { apiConfiguration, fetchCurrentUrl, readFactchecks, Status, storeFactchecks } from '../shared';
 
 const factcheckApi = new FactcheckApi(apiConfiguration);
 const eventSource = new EventSource(`${apiConfiguration.basePath}/api/factchecks/sync`);
@@ -25,3 +24,16 @@ eventSource.addEventListener('factcheck', async (event) => {
     });
   }
 });
+
+const updateIcon = async () => {
+  const url = await fetchCurrentUrl();
+  const factchecks = await readFactchecks();
+  const statusString = factchecks.find((fc) => fc.url === url)?.status;
+  const status = statusString ? Status.deserialize(statusString) : null;
+  chrome.action.setIcon({
+    path: `icons/${status?.badgePath ?? 'Icon128'}.png`,
+  });
+};
+
+chrome.tabs.onUpdated.addListener(updateIcon);
+chrome.tabs.onActivated.addListener(updateIcon);

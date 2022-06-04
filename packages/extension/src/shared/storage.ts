@@ -14,7 +14,7 @@ const useOnFactchecksChange = (onChange: (newValue: StorageFactchecks) => void) 
   useEffect(() => {
     const handleChange = (changes: chrome.storage.StorageChange, area: 'sync' | 'local' | 'managed') => {
       for (const [key, { newValue }] of Object.entries(changes)) {
-        if (key === 'factchecks' && area === 'sync') {
+        if (key === 'factchecks' && area === 'local') {
           onChange(newValue);
         }
       }

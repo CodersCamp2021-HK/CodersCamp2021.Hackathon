@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 
-import { TabId, TABS_DATA } from '../../shared';
-import { colors } from '../../shared/theme';
+import { colors, TabId, TABS_DATA } from '../../shared';
 import { Tab } from './Tab';
 
 interface TabsProps {
