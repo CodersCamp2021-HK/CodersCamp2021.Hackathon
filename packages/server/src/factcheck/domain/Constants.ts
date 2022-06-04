@@ -1,4 +1,8 @@
 const FACTCHECK_CONSTANTS = Object.freeze({
+  title: Object.freeze({
+    minLength: 5,
+    maxLength: 200,
+  }),
   verifiedBy: Object.freeze({
     minLength: 5,
     maxLength: 200,

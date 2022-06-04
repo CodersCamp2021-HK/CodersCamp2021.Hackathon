@@ -36,6 +36,13 @@ class Factcheck {
 
   @Prop({
     required: true,
+    minLength: FACTCHECK_CONSTANTS.title.minLength,
+    maxLength: FACTCHECK_CONSTANTS.title.maxLength,
+  })
+  readonly title: string;
+
+  @Prop({
+    required: true,
     minLength: FACTCHECK_CONSTANTS.description.minLength,
     maxLength: FACTCHECK_CONSTANTS.description.maxLength,
   })
