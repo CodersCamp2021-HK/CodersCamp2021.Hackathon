@@ -4,10 +4,12 @@ const colors = {
     grey: '#f7f7f7',
   },
   text: {
+    primary: '#292929',
     disabled: '#ACACAC',
   },
   primary: {
     main: '#0500ff',
+    light: '#9997FF',
     dark: '#03009d',
   },
   secondary: {},

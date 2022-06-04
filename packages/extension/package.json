@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",
+    "@faktyczka/sdk": "workspace:^",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "@faktyczka/sdk": "workspace:^"
+    "react-dom": "^18.0.0"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.188",
