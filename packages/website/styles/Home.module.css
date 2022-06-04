@@ -1,5 +1,6 @@
 .section {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -63,6 +64,33 @@
   height: 8rem;
   position: relative;
 }
+
+/** Why Faktyczka Section **/
+
+.whyWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+.whyContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 7rem;
+}
+
+.whyTextContainer {
+  width: 57.5rem;
+}
+
+.whyImage {
+  width: 38.875rem;
+  height: 25.3125rem;
+  position: relative;
+}
+
 
 /**
 .container {
