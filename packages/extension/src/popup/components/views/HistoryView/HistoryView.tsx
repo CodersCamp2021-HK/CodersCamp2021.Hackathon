@@ -62,7 +62,9 @@ const HistoryView = () => {
         display: flex;
         flex-direction: column;
         gap: 20px;
-        margin: 20px 15px;
+        padding: 20px 15px;
+        max-height: 350px;
+        overflow-y: scroll;
       `}
     >
       {mappedHistory}
