@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 
 import { TopBar } from './components';
+import { ReportView } from './tabs';
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         `}
       >
         {/* TODO: Tabs go here */}
+        <ReportView />
       </div>
     </div>
   );
