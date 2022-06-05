@@ -161,11 +161,11 @@ const Home: NextPage = () => {
               </div>
             </div>
             <div className={styles.contactForm}>
-              <div>
+              <div className={styles.contactFormGroup}>
                 <p className={styles.formLabel}>Twój adres e-mail</p>
                 <input className={styles.contactFormEmail}></input>
               </div>
-              <div>
+              <div className={styles.contactFormGroup}>
                 <p className={styles.formLabel}>Treść wiadomości</p>
                 <textarea className={styles.contactFormContent}></textarea>
               </div>

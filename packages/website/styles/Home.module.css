@@ -188,8 +188,16 @@
   .section {
     height: auto;
     min-height: auto;
+    padding: 5rem 0rem;
+  }
+  .contactInfoContainer {
+    padding: 4rem 2rem;
   }
   .whyTextContainer {
+    width: 100%;
+  }
+  .contactFormEmail,
+  .contactFormContent {
     width: 100%;
   }
 
@@ -223,5 +231,13 @@
   .card {
     width: auto;
     height: auto;
+  }
+
+  .contactFormGroup {
+    width: 100%;
+  }
+
+  .partnersText {
+    padding: 0;
   }
 }
