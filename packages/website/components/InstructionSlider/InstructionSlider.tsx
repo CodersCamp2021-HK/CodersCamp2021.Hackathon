@@ -26,24 +26,9 @@ const InstructionSlider = () => {
       slidesPerView={1}
     >
       <SwiperSlide className={styles.instructionSlide}>
-        <div className={`${styles.instructionStep} ${styles.imageLeft}`}>
-          <div className={styles.instructionImage}>
-            <Image src='/placeholder.jpg' alt='Placeholder' layout='fill' objectFit='contain' />
-          </div>
-          <div className={styles.instructionText}>
-            <h3>Udostępnij nam swoje dane</h3>
-            <p>
-              Abyśmy mogli skutecznie ostrzegać Cię przed ewentualnym niebezpieczeństwem i zapewniać, że czytasz tylko
-              sprawdzone informacje, możesz udostępnić nam swoje dane przeglądania. Zapewniamy Cię, że będziemy z nich
-              korzystać tylko po to, aby zweryfikować przeglądane przez Ciebie artykuły.
-            </p>
-          </div>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide className={styles.instructionSlide}>
         <div className={`${styles.instructionStep} ${styles.imageRight}`}>
           <div className={styles.instructionImage}>
-            <Image src='/placeholder.jpg' alt='Placeholder' layout='fill' objectFit='contain' />
+            <Image src='/slider1.png' alt='Placeholder' layout='fill' objectFit='contain' />
           </div>
           <div className={styles.instructionText}>
             <h3>Sprawdź status artykułu</h3>
@@ -66,7 +51,7 @@ const InstructionSlider = () => {
       <SwiperSlide className={styles.instructionSlide}>
         <div className={`${styles.instructionStep} ${styles.imageLeft}`}>
           <div className={styles.instructionImage}>
-            <Image src='/placeholder.jpg' alt='Placeholder' layout='fill' objectFit='contain' />
+            <Image src='/slider2.png' alt='Placeholder' layout='fill' objectFit='contain' />
           </div>
           <div className={styles.instructionText}>
             <h3>Sprawdź status artykułu</h3>
@@ -84,7 +69,7 @@ const InstructionSlider = () => {
       <SwiperSlide className={styles.instructionSlide}>
         <div className={`${styles.instructionStep} ${styles.imageRight}`}>
           <div className={styles.instructionImage}>
-            <Image src='/placeholder.jpg' alt='Placeholder' layout='fill' objectFit='contain' />
+            <Image src='/slider3.png' alt='Placeholder' layout='fill' objectFit='contain' />
           </div>
           <div className={styles.instructionText}>
             <h3>Zgłoś podejrzany artykuł</h3>
@@ -100,7 +85,7 @@ const InstructionSlider = () => {
       <SwiperSlide className={styles.instructionSlide}>
         <div className={`${styles.instructionStep} ${styles.imageLeft}`}>
           <div className={styles.instructionImage}>
-            <Image src='/placeholder.jpg' alt='Placeholder' layout='fill' objectFit='contain' />
+            <Image src='/slider4.png' alt='Placeholder' layout='fill' objectFit='contain' />
           </div>
           <div className={styles.instructionText}>
             <h3>Aktualizuj swoją wiedzę</h3>
