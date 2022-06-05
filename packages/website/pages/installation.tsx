@@ -37,7 +37,7 @@ const installation = () => {
           <div className='button' style={{ width: 'fit-content' }}>
             <a
               className='buttonText'
-              href='https://github.com/CodersCamp2021-HK/CodersCamp2021.Hackathon/releases/tag/1.0.0'
+              href='https://github.com/CodersCamp2021-HK/CodersCamp2021.Hackathon/releases/download/1.0.0/faktyczka.zip'
               target='_blank'
               rel='noreferrer'
             >
