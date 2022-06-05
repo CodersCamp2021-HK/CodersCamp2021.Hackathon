@@ -14,7 +14,9 @@ const App = () => {
   const count = useCountNumberOfTickets(url);
 
   if (count !== null && count !== 0) {
-    chrome.storage.local.set({ [`fc#${url}`]: { url: url, status: 'Warning', count: count } });
+    chrome.storage.local
+      .set({ [`fc#${url}`]: { url: url, status: 'Warning', count: count } })
+      .then(() => chrome.runtime.sendMessage('noop'));
   }
 
   return (

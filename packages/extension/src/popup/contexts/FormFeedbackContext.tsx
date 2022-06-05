@@ -26,7 +26,13 @@ const FormFeedbackContextProvider = ({ children }: { children: ReactNode }) => {
   const [result, setResult] = useState<boolean | null>(null);
 
   const send = (createTicketDto: CreateTicketDto) => {
-    submitTicket(createTicketDto).then(setResult);
+    submitTicket(createTicketDto)
+      .then(setResult)
+      .then(() =>
+        chrome.storage.local
+          .set({ [`fc#${createTicketDto.url}`]: { url: createTicketDto.url, status: 'Warning', count: 0 } })
+          .then(() => chrome.runtime.sendMessage('noop')),
+      );
     chrome.storage.sync.set({ name: createTicketDto.name, email: createTicketDto.email });
   };
 
