@@ -21,7 +21,7 @@ const Tab = ({ name, iconComponent, state, status, onClick, disabled }: TabProps
       disabled={disabled}
       className={state}
       css={css`
-        cursor: ${disabled ? 'default' : 'pointer'};
+        cursor: ${disabled ? 'not-allowed' : 'pointer'};
         background-color: transparent;
         border: 0;
         transition: ${transition.default};

@@ -4,7 +4,11 @@ import logo from '../../public/icons/Icon128.png';
 import { apiConfiguration, fetchCurrentUrl, readFactchecks, Status, storeFactchecks } from '../shared';
 
 const factcheckApi = new FactcheckApi(apiConfiguration);
-const eventSource = new EventSource(`${apiConfiguration.basePath}/api/factchecks/sync`);
+
+let eventSource: EventSource | undefined;
+if (!eventSource || eventSource.readyState === EventSource.CLOSED) {
+  eventSource = new EventSource(`${apiConfiguration.basePath}/api/factchecks/sync`);
+}
 
 eventSource.addEventListener('factcheck', async (event) => {
   const { id, url } = JSON.parse(event.data) as FactcheckDataDto;
