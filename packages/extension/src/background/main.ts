@@ -17,6 +17,7 @@ const updateIcon = async () => {
 
 chrome.tabs.onUpdated.addListener(updateIcon);
 chrome.tabs.onActivated.addListener(updateIcon);
+chrome.runtime.onMessage.addListener(updateIcon);
 
 let eventSource: EventSource | undefined;
 (async () => {

@@ -5,11 +5,19 @@ import { ResultView, TopBar, ViewSelector } from './components';
 import { useFormFeedback } from './contexts';
 import { colors } from './shared';
 import { useArticleFactcheck } from './shared/useArticleFactcheck';
+import { useCountNumberOfTickets } from './shared/useCountNumberOfTickets';
 
 const App = () => {
   const { result } = useFormFeedback();
   const url = useCurrentUrl();
   const factcheck = useArticleFactcheck(url);
+  const count = useCountNumberOfTickets(url);
+
+  if (count !== null && count !== 0) {
+    chrome.storage.local
+      .set({ [`fc#${url}`]: { url: url, status: 'Warning', count: count } })
+      .then(() => chrome.runtime.sendMessage('noop'));
+  }
 
   return (
     <>
