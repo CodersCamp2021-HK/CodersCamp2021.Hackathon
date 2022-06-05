@@ -1,7 +1,7 @@
 import { FactcheckApi, FactcheckDataDto } from '@faktyczka/sdk';
 
 import logo from '../../public/icons/Icon128.png';
-import { addFactcheck, apiConfiguration, fetchCurrentUrl, readFactchecks, Status } from '../shared';
+import { addFactcheck, apiConfiguration, fetchCurrentUrl, hasFactcheck, readFactchecks, Status } from '../shared';
 
 const factcheckApi = new FactcheckApi(apiConfiguration);
 
@@ -26,6 +26,8 @@ let eventSource: EventSource | undefined;
 
     eventSource.addEventListener('factcheck', async (event) => {
       const { id, url } = JSON.parse(event.data) as FactcheckDataDto;
+
+      if (await hasFactcheck(id)) return;
 
       const visitsItems = await chrome.history.getVisits({ url });
       const userSawArticle = visitsItems.length > 0;

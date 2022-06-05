@@ -11,6 +11,11 @@ const readFactchecks = async () => {
     .map((entry) => entry[1]) as StorageFactchecks;
 };
 
+const hasFactcheck = async (id: string) => {
+  const items = await chrome.storage.local.get([`fc#${id}`]);
+  return Object.keys(items).length > 0;
+};
+
 const addFactcheck = async (factcheck: StorageFactchecks[number]) =>
   chrome.storage.local.set({ [`fc#${factcheck.id}`]: factcheck });
 
@@ -31,5 +36,5 @@ const useNewFactcheckListener = (onNew: () => void) => {
   }, [onNew]);
 };
 
-export { addFactcheck, readFactchecks, useNewFactcheckListener };
+export { addFactcheck, hasFactcheck, readFactchecks, useNewFactcheckListener };
 export type { StorageFactchecks };
