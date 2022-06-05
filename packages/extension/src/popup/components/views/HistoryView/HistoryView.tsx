@@ -30,7 +30,7 @@ const HistoryView = () => {
       `}
     >
       {history
-        .slice(-10)
+        .slice(-20)
         .reverse()
         .map((factcheck) => {
           return <Notification key={factcheck.id} factcheck={factcheck}></Notification>;

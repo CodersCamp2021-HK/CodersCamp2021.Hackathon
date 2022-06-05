@@ -32,7 +32,7 @@ let eventSource: EventSource | undefined;
 
       const factcheck = await factcheckApi.findById({ id });
 
-      if (userSawArticle) {
+      if (token && userSawArticle) {
         chrome.notifications.create(id, {
           type: 'basic',
           title: 'Czytany przez Ciebie artykuł został zweryfikowany!',
