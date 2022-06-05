@@ -11,18 +11,20 @@
 .cardsContainer {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   flex-direction: column;
   row-gap: 20px;
   padding: 4rem 3rem 6rem 3rem;
 }
 
 .card {
+  width: 60%;
   align-items: center;
   text-align: center;
   background-color: var(--common-white);
   border-radius: 25px;
   box-shadow: 10px 20px 30px 0px #00000040;
-  padding: 3rem 3rem 0.125rem 3rem;
+  padding: 3rem;
 }
 
 .cardImage {

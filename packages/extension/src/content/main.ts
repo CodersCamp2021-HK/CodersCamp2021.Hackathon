@@ -16,7 +16,7 @@ const readFactchecks = async () => {
 
   return Object.entries(storageObj)
     .filter(([key]) => key.startsWith('fc#'))
-    .map((entry) => entry[1]) as { url: string; status: keyof typeof BADGES }[];
+    .map((entry) => entry[1]) as { url: string; status: keyof typeof BADGES; verificationSrc: string }[];
 };
 
 readFactchecks().then((factchecks) => {
@@ -30,6 +30,10 @@ readFactchecks().then((factchecks) => {
       img.src = BADGES[factcheck.status];
       img.style.position = 'absolute';
       anchor.appendChild(img);
+      img.onclick = (e) => {
+        e.preventDefault();
+        window.location.href = factcheck.verificationSrc;
+      };
 
       if (width > 50 && height > 50) {
         img.width = 40;
