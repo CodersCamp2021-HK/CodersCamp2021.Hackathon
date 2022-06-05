@@ -3,36 +3,19 @@ import { css } from '@emotion/react';
 import { Status, useCurrentUrl } from '../../../../shared';
 import { useArticleFactcheck } from '../../../shared';
 import { Button, Card, ReportStatus } from '../..';
-
-interface ReportLinkProps {
-  children: string;
-}
-
-const ReportLink = ({ children }: ReportLinkProps) => {
-  const url = new URL(children);
-  return (
-    <a
-      css={css`
-        display: block;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      `}
-      target='_blank'
-      href={children}
-      rel='noreferrer'
-    >
-      {url.hostname}
-      {url.pathname !== '/' && url.pathname}
-    </a>
-  );
-};
+import { isWarning } from './IsWarning';
+import { ReportLink } from './ReportLink';
+import { ReportWarning } from './ReportWarning';
 
 const ReportView = () => {
   const url = useCurrentUrl();
   const report = useArticleFactcheck(url);
 
   if (!report) return null;
+
+  if (isWarning(report)) {
+    return <ReportWarning {...report} />;
+  }
 
   return (
     <div
