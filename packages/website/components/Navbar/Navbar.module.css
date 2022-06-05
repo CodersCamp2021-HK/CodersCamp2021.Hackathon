@@ -12,3 +12,10 @@
   padding: 5px;
   gap: 3rem;
 }
+
+.flexContainer a {
+  font-size: 1.75rem;
+  font-weight: 200;
+  line-height: 3.125rem;
+  color: var(--text-primary);
+}
