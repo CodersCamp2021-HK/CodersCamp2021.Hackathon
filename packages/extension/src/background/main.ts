@@ -13,7 +13,6 @@ eventSource.addEventListener('factcheck', async (event) => {
   const userSawArticle = visitsItems.length > 0;
 
   const factcheck = await factcheckApi.findById({ id });
-  storeFactchecks([...(await readFactchecks()), { ...factcheck, inHistory: userSawArticle }]);
 
   if (userSawArticle) {
     chrome.notifications.create(id, {
@@ -23,6 +22,12 @@ eventSource.addEventListener('factcheck', async (event) => {
       message: factcheck.verificationSrc,
     });
   }
+
+  await storeFactchecks([
+    ...(await readFactchecks()).filter((fc) => fc.id !== factcheck.id),
+    { ...factcheck, inHistory: userSawArticle },
+  ]);
+  await updateIcon();
 });
 
 const updateIcon = async () => {
