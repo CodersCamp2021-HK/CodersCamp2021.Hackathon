@@ -20,11 +20,11 @@ const Authors = () => {
             <p>
               Chęć wykorzystania naszej wiedzy i umiejętności do poprawy bezpieczeństwa osób korzystających z Internetu
               zmotywowała nas do rozpoczęcia prac nad rozwiązaniem, które usprawni ostrzeganie użytkowników przed
-              nieprawdziwymi informacjami.{' '}
+              nieprawdziwymi informacjami.
             </p>
             <p>
               Tak powstał pomysł stworzenia Faktyczki („fakt” + „wtyczka”) – rozszerzenia do przeglądarki, dzięki
-              któremu użytkownik od razu może sprawdzić, czy czytany artykuł jest prawdziwy i nie zawiera fake newsów.{' '}
+              któremu użytkownik od razu może sprawdzić, czy czytany artykuł jest prawdziwy i nie zawiera fake newsów.
             </p>
           </div>
         </section>
@@ -36,19 +36,25 @@ const Authors = () => {
           <div className={styles.cardsContainer}>
             <div className={styles.card}>
               <div className={styles.cardImage}>
+                <Image src='/Tomek_cartoon.svg' alt='Card Illustration' layout='fill' objectFit='contain' />
+              </div>
+              <div className={styles.authorText}>
+                <h3>Tomasz Chojnacki</h3>
+                <a href='https://github.com/tchojnacki' target='blank'>
+                  <Image src={GithubIcon} alt='Github Tomek' />
+                </a>
+              </div>
+            </div>
+
+            <div className={styles.card}>
+              <div className={styles.cardImage}>
                 <Image src='/Marta_cartoon.svg' alt='Card Illustration' layout='fill' objectFit='contain' />
               </div>
               <div className={styles.authorText}>
-                <h3>
-                  Marta Mejer{' '}
-                  <a href='https://github.com/mmejer' target='blank'>
-                    <Image src={GithubIcon} alt='Github Marta' />
-                  </a>
-                </h3>
-                <p>
-                  Bla bla bla. Lorem upsum dolor sit. Lorem upsum dolor sit Lorem upsum dolor sit. Lorem upsum dolor
-                  sit.Lorem upsum dolor sit
-                </p>
+                <h3>Marta Mejer</h3>
+                <a href='https://github.com/mmejer' target='blank'>
+                  <Image src={GithubIcon} alt='Github Marta' />
+                </a>
               </div>
             </div>
 
@@ -57,67 +63,34 @@ const Authors = () => {
                 <Image src='/Justyna_cartoon.svg' alt='Card Illustration' layout='fill' objectFit='contain' />
               </div>
               <div className={styles.authorText}>
-                <h3>
-                  Justyna Skrajna{' '}
-                  <a href='https://github.com/jskrajna' target='blank'>
-                    <Image src={GithubIcon} alt='Github Justyna' />
-                  </a>
-                </h3>
-                <p>
-                  Bla bla bla. Lorem upsum dolor sit. Lorem upsum dolor sit Lorem upsum dolor sit. Lorem upsum dolor
-                  sit.Lorem upsum dolor sit
-                </p>
+                <h3>Justyna Skrajna</h3>
+                <a href='https://github.com/jskrajna' target='blank'>
+                  <Image src={GithubIcon} alt='Github Justyna' />
+                </a>
               </div>
             </div>
+
             <div className={styles.card}>
               <div className={styles.cardImage}>
                 <Image src='/Kamil_cartoon.svg' alt='Card Illustration' layout='fill' objectFit='contain' />
               </div>
               <div className={styles.authorText}>
-                <h3>
-                  Kamil Dudek{' '}
-                  <a href='https://github.com/KamilDudek' target='blank'>
-                    <Image src={GithubIcon} alt='Github Kamil' />
-                  </a>
-                </h3>
-                <p>
-                  Bla bla bla. Lorem upsum dolor sit. Lorem upsum dolor sit Lorem upsum dolor sit. Lorem upsum dolor
-                  sit.Lorem upsum dolor sit
-                </p>
+                <h3>Kamil Dudek</h3>
+                <a href='https://github.com/KamilDudek' target='blank'>
+                  <Image src={GithubIcon} alt='Github Kamil' />
+                </a>
               </div>
             </div>
-            <div className={styles.card}>
-              <div className={styles.cardImage}>
-                <Image src='/Tomek_cartoon.svg' alt='Card Illustration' layout='fill' objectFit='contain' />
-              </div>
-              <div className={styles.authorText}>
-                <h3>
-                  Tomasz Hojnacki{' '}
-                  <a href='https://github.com/tchojnacki' target='blank'>
-                    <Image src={GithubIcon} alt='Github Tomek' />
-                  </a>
-                </h3>
-                <p>
-                  Bla bla bla. Lorem upsum dolor sit. Lorem upsum dolor sit Lorem upsum dolor sit. Lorem upsum dolor
-                  sit.Lorem upsum dolor sit
-                </p>
-              </div>
-            </div>
+
             <div className={styles.card}>
               <div className={styles.cardImage}>
                 <Image src='/Hubert_cartoon.svg' alt='Card Illustration' layout='fill' objectFit='contain' />
               </div>
               <div className={styles.authorText}>
-                <h3>
-                  Hubert Kawałek{' '}
-                  <a href='https://github.com/htk4' target='blank'>
-                    <Image src={GithubIcon} alt='Github Hubert' />
-                  </a>
-                </h3>
-                <p>
-                  Bla bla bla. Lorem upsum dolor sit. Lorem upsum dolor sit Lorem upsum dolor sit. Lorem upsum dolor
-                  sit.Lorem upsum dolor sit
-                </p>
+                <h3>Hubert Kawałek</h3>
+                <a href='https://github.com/htk4' target='blank'>
+                  <Image src={GithubIcon} alt='Github Hubert' />
+                </a>
               </div>
             </div>
           </div>
