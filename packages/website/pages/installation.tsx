@@ -2,12 +2,11 @@ import Head from 'next/head';
 import styles from '../styles/installation.module.css';
 import Image from 'next/image';
 
-import Installation1 from '../public/installation1.png';
+import Installation1 from '../public/installation_1.png';
 import MacbookImg from '../public/Macbook Pro 15_.svg';
-import ExtensionViewImg from '../public/obraz 5.svg';
 import SearchFieldImg from '../public/search field.svg';
-import Installation2 from '../public/installation2.PNG';
-import Installation3 from '../public/installation3.PNG';
+import Installation2 from '../public/installation_2.png';
+import Installation3 from '../public/installation_3.png';
 
 const installation = () => {
   return (
