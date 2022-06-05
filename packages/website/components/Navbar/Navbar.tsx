@@ -12,19 +12,19 @@ const Navbar = () => {
       </Link>
       <div className={styles.leftFlexContainer}>
         <Link href='/'>
-          <p>Strona główna</p>
+          <a>Strona główna</a>
         </Link>
         <Link href='/authors'>
-          <p>O nas</p>
+          <a>O nas</a>
         </Link>
         <Link target='_blank' href='/installation'>
-          <p>Instalacja</p>
+          <a>Instalacja</a>
         </Link>
         <Link href='/#partners'>
-          <p>Partnerzy</p>
+          <a>Partnerzy</a>
         </Link>
         <Link href='/#contact'>
-          <p>Kontakt</p>
+          <a>Kontakt</a>
         </Link>
       </div>
     </div>
