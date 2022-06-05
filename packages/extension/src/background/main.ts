@@ -1,7 +1,7 @@
 import { FactcheckApi, FactcheckDataDto } from '@faktyczka/sdk';
 
 import logo from '../../public/icons/Icon128.png';
-import { apiConfiguration, fetchCurrentUrl, readFactchecks, Status, storeFactchecks } from '../shared';
+import { addFactcheck, apiConfiguration, fetchCurrentUrl, readFactchecks, Status } from '../shared';
 
 const factcheckApi = new FactcheckApi(apiConfiguration);
 
@@ -23,13 +23,10 @@ let eventSource: EventSource | undefined;
   if (!eventSource || eventSource.readyState === EventSource.CLOSED) {
     const { token } = await chrome.storage.local.get(['token']);
     eventSource = new EventSource(`${apiConfiguration.basePath}/api/factchecks/sync${token ? `?token=${token}` : ''}`);
-  }
 
-  eventSource.addEventListener('factcheck', async (event) => {
-    const { id, url } = JSON.parse(event.data) as FactcheckDataDto;
+    eventSource.addEventListener('factcheck', async (event) => {
+      const { id, url } = JSON.parse(event.data) as FactcheckDataDto;
 
-    const factchecks = await readFactchecks();
-    if (!factchecks.some((fc) => fc.id === id)) {
       const visitsItems = await chrome.history.getVisits({ url });
       const userSawArticle = visitsItems.length > 0;
 
@@ -44,14 +41,9 @@ let eventSource: EventSource | undefined;
         });
       }
 
-      await storeFactchecks([
-        ...factchecks.filter((fc) => fc.id !== factcheck.id),
-        { ...factcheck, inHistory: userSawArticle },
-      ]);
-
+      await addFactcheck({ ...factcheck, inHistory: userSawArticle });
       await chrome.storage.local.set({ token: id });
-    }
-
-    await updateIcon();
-  });
+      await updateIcon();
+    });
+  }
 })();

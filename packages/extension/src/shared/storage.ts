@@ -4,11 +4,15 @@ import { useEffect } from 'react';
 type StorageFactchecks = (FactcheckDto & { inHistory: boolean })[];
 
 const readFactchecks = async () => {
-  const { factchecks } = await chrome.storage.local.get(['factchecks']);
-  return (factchecks ?? []) as StorageFactchecks;
+  const storageObj = await chrome.storage.local.get();
+
+  return Object.entries(storageObj)
+    .filter(([key]) => key.startsWith('fc#'))
+    .map((entry) => entry[1]) as StorageFactchecks;
 };
 
-const storeFactchecks = async (factchecks: StorageFactchecks) => chrome.storage.local.set({ factchecks });
+const addFactcheck = async (factcheck: StorageFactchecks[number]) =>
+  chrome.storage.local.set({ [`fc#${factcheck.id}`]: factcheck });
 
 const useOnFactchecksChange = (onChange: (newValue: StorageFactchecks) => void) => {
   useEffect(() => {
@@ -27,5 +31,5 @@ const useOnFactchecksChange = (onChange: (newValue: StorageFactchecks) => void) 
   }, [onChange]);
 };
 
-export { readFactchecks, storeFactchecks, useOnFactchecksChange };
+export { addFactcheck, readFactchecks, useOnFactchecksChange };
 export type { StorageFactchecks };
