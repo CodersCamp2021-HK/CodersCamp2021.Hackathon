@@ -80,3 +80,15 @@
 .dot:hover {
   background-color: var(--primary-main);
 }
+
+/** Media **/
+
+@media (max-width: 1100px) {
+  .instructionStep {
+    flex-direction: column;
+    padding: 0;
+  }
+  .instructionText {
+    width: 100%;
+  }
+}

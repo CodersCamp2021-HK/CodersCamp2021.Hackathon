@@ -3,7 +3,7 @@
   justify-content: space-between;
   padding: 5px;
   gap: 5px;
-  margin-left: 6.25rem;
+  padding: 5px 4rem;
 }
 
 .leftFlexContainer {
@@ -11,5 +11,4 @@
   justify-content: flex-end;
   padding: 5px;
   gap: 3rem;
-  margin-right: 6.25rem;
 }

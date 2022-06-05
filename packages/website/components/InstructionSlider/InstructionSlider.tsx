@@ -63,6 +63,60 @@ const InstructionSlider = () => {
           </div>
         </div>
       </SwiperSlide>
+      <SwiperSlide className={styles.instructionSlide}>
+        <div className={`${styles.instructionStep} ${styles.imageLeft}`}>
+          <div className={styles.instructionImage}>
+            <Image src='/placeholder.jpg' alt='Placeholder' layout='fill' objectFit='contain' />
+          </div>
+          <div className={styles.instructionText}>
+            <h3>Sprawdź status artykułu</h3>
+            <ul>
+              <li>
+                Artykuł w trakcie sprawdzania będzie oznaczony żółtą ikoną. Możesz go przeczytać, ale ostrożnie z
+                zaufaniem.
+              </li>
+              <li>Informacja, która nie została do nas jeszcze zgłoszona, będzie oznaczona kolorem niebieskim.</li>
+            </ul>
+            <p>W obydwu przypadkach, gdy status odwiedzonej strony się zmieni, zostaniesz o tym poinformowany.</p>
+          </div>
+        </div>
+      </SwiperSlide>
+      <SwiperSlide className={styles.instructionSlide}>
+        <div className={`${styles.instructionStep} ${styles.imageRight}`}>
+          <div className={styles.instructionImage}>
+            <Image src='/placeholder.jpg' alt='Placeholder' layout='fill' objectFit='contain' />
+          </div>
+          <div className={styles.instructionText}>
+            <h3>Zgłoś podejrzany artykuł</h3>
+            <p>
+              Czytając wiadomości na stronie jakaś informacja wydała Ci się podejrzana lub nie masz przekonania co do
+              jej prawdziwości? A może już wiesz, że w artykule pojawił się fake news? Śmiało, zgłoś go do nas!
+              Wystarczy, że otworzysz rozszerzenie i wybierzesz opcję „zgłoś fake news”. Jeżeli chcesz, możesz dodać
+              uzasadnienie, np. link do sprawdzonego artykułu.
+            </p>
+          </div>
+        </div>
+      </SwiperSlide>
+      <SwiperSlide className={styles.instructionSlide}>
+        <div className={`${styles.instructionStep} ${styles.imageLeft}`}>
+          <div className={styles.instructionImage}>
+            <Image src='/placeholder.jpg' alt='Placeholder' layout='fill' objectFit='contain' />
+          </div>
+          <div className={styles.instructionText}>
+            <h3>Aktualizuj swoją wiedzę</h3>
+            <p>
+              Codziennie trafiasz na dziesiątki artykułów. Nie wszystkie będą przez nas sprawdzone w momencie, w którym
+              będziesz je czytać. Aby żaden fake news nie umknął Twojej uwadze, na bieżąco będziemy aktualizować statusy
+              artykułów i poinformujemy Cię, kiedy odwiedzona przez Ciebie strona zostanie zweryfikowana.
+              <br />
+              <br />
+              Żeby szybko dowiedzieć się, czy przypadkiem artykuł sprzed tygodnia nie okazał się być nieprawdziwy,
+              zajrzyj do zakładki historia – tam zobaczysz całą listę aktualności dotyczącą odwiedzonych przez Ciebie
+              stron.
+            </p>
+          </div>
+        </div>
+      </SwiperSlide>
     </Swiper>
   );
 };

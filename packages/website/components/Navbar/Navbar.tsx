@@ -2,26 +2,30 @@ import styles from './Navbar.module.css';
 import LogoIcon from '../../public/logo.svg';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Navbar = () => {
   return (
     <div className={styles.flexContainer}>
-      <a href='/'>
+      <Link href='/'>
         <Image src={LogoIcon} alt='Logo' />
-      </a>
+      </Link>
       <div className={styles.leftFlexContainer}>
-        <a href='/authors'>
+        <Link href='/'>
+          <p>Strona główna</p>
+        </Link>
+        <Link href='/authors'>
           <p>O nas</p>
-        </a>
-        <a target='_blank' href='/installation'>
+        </Link>
+        <Link target='_blank' href='/installation'>
           <p>Instalacja</p>
-        </a>
-        <a href='/#partners'>
+        </Link>
+        <Link href='/#partners'>
           <p>Partnerzy</p>
-        </a>
-        <a href='/#contact'>
+        </Link>
+        <Link href='/#contact'>
           <p>Kontakt</p>
-        </a>
+        </Link>
       </div>
     </div>
   );
