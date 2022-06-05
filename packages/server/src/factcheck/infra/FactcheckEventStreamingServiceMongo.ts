@@ -45,6 +45,15 @@ class FactcheckEventStreamingServiceMongo
     this.logger.debug(`Cache initialized (${this.cache.count}/${this.cache.size})`);
   }
 
+  private createCacheStream(clientId: string, token?: string) {
+    const stream = this.cache.stream(clientId, token);
+    return stream.pipe(
+      finalize(() => {
+        this.logger.debug(`Client ${clientId} disconnected`);
+      }),
+    );
+  }
+
   private setupChangeStream() {
     if(this.changeStream) {
       return;
@@ -58,6 +67,10 @@ class FactcheckEventStreamingServiceMongo
     });
 
     // TODO implement recovery on db failure
+  }
+
+  private isCacheHit(token?: string) {
+    return token !== undefined && new ObjectId(token) >= new ObjectId(this.cache.tail?.id);
   }
 
   async onApplicationBootstrap() {
@@ -79,12 +92,12 @@ class FactcheckEventStreamingServiceMongo
     }
     const clientId = uuid();
     this.logger.debug(`New client ${clientId} connected with token(${token})`);
-    const stream = this.cache.stream(clientId, token);
-    return stream.pipe(
-      finalize(() => {
-        this.logger.debug(`Client ${clientId} disconnected`);
-      }),
-    );
+    if(this.cache.empty) {
+      return this.createCacheStream(clientId, token);
+    }
+    // TODO implement batching until cache hit
+
+    return this.createCacheStream(clientId, token);
   }
 }
 
