@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 
-import { Status, useArticleFactcheck, useCurrentUrl } from '../../../shared';
+import { Status, useCurrentUrl } from '../../../../shared';
+import { useArticleFactcheck } from '../../../shared';
 import { Button, Card, ReportStatus } from '../..';
 
 interface ReportLinkProps {

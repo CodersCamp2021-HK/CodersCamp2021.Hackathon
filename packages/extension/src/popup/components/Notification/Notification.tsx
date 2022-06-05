@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { FactcheckDto } from '@faktyczka/sdk';
 
-import { Status } from '../../shared';
-import { colors } from '../../shared/theme';
+import { Status } from '../../../shared';
+import { colors } from '../../shared';
 import { Badge } from '../Badge';
 
 const linkStyles = {

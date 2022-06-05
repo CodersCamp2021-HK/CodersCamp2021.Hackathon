@@ -11,4 +11,4 @@ const useCurrentUrl = () => {
   return url;
 };
 
-export { useCurrentUrl };
+export { fetchCurrentUrl, useCurrentUrl };

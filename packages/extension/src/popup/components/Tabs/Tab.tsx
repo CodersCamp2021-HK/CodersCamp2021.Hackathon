@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
 import { ReactNode } from 'react';
 
-import { Status, useArticleFactcheck, useCurrentUrl } from '../../shared';
+import { Status } from '../../../shared';
 import { colors, transition } from '../../shared/theme';
-import { Badge } from '../Badge';
 
 export type TabProps = {
   name: string;
@@ -15,16 +14,13 @@ export type TabProps = {
 };
 
 const Tab = ({ name, iconComponent, state, onClick, disabled }: TabProps) => {
-  const url = useCurrentUrl();
-  const report = useArticleFactcheck(url);
-
   return (
     <button
       onClick={onClick}
       disabled={disabled}
       className={state}
       css={css`
-        cursor: ${disabled ? 'default' : 'pointer'};
+        cursor: ${disabled ? 'not-allowed' : 'pointer'};
         background-color: transparent;
         border: 0;
         transition: ${transition.default};
@@ -81,9 +77,7 @@ const Tab = ({ name, iconComponent, state, onClick, disabled }: TabProps) => {
             left: 100%;
             transform: translate(-50%, 50%);
           `}
-        >
-          {report ? <Badge size={18} status={Status.deserialize(report.status)}></Badge> : ''}
-        </div>
+        ></div>
       </div>
       <p
         css={css`

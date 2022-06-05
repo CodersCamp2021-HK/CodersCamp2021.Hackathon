@@ -4,19 +4,21 @@ import { ApiBadRequestResponse, ApiOkResponse, ApiOperation } from '@nestjs/swag
 import { plainToInstance } from 'class-transformer';
 import { Response } from 'express';
 import { Model } from 'mongoose';
-import { Observable, Subject } from 'rxjs';
+import { delay, map, Observable } from 'rxjs';
 
 import { ApiController, ApiCreate, ApiGet, ApiObjectIdParam, Url, ValidationErrorDto } from '../../shared';
 import { Factcheck, FactcheckDocument } from '../database';
+import { FactcheckEventStreamingService } from '../domain';
 import { CreateFactcheckDto, FactcheckDto } from './FactcheckDto';
 import { FactcheckEventDto } from './FactcheckEventDto';
 import { FactcheckSyncQuery } from './FactcheckSyncQuery';
 
 @ApiController({ path: 'factchecks', name: 'Factcheck', description: 'Operations on factchecks' })
 class FactcheckController {
-  constructor(@InjectModel(Factcheck.name) private factcheckModel: Model<FactcheckDocument>) {}
-
-  private readonly subject = new Subject<FactcheckEventDto>();
+  constructor(
+    @InjectModel(Factcheck.name) private readonly factcheckModel: Model<FactcheckDocument>,
+    private readonly factcheckEventStreamingService: FactcheckEventStreamingService,
+  ) {}
 
   @Sse('sync')
   @ApiOperation({
@@ -31,14 +33,17 @@ class FactcheckController {
     description: `Parameters are not valid or they are missing.`,
     type: ValidationErrorDto,
   })
-  sync(@Query() query: FactcheckSyncQuery): Observable<FactcheckEventDto> {
-    return this.subject.asObservable();
+  async sync(@Query() query: FactcheckSyncQuery) {
+    const stream = await this.factcheckEventStreamingService.stream(query.token);
+    return stream.pipe(
+      map((x) => FactcheckEventDto.from(x)),
+      delay(100),
+    );
   }
 
   @ApiCreate({ name: 'factcheck' })
   async create(@Body() dto: CreateFactcheckDto, @Res() res: Response, @Url() url: URL) {
     const entity = await this.factcheckModel.create(dto);
-    this.subject.next(FactcheckEventDto.from(entity));
     res.setHeader('Location', `${url.origin}/api/factchecks/${entity.id}`);
     res.sendStatus(HttpStatus.CREATED);
   }

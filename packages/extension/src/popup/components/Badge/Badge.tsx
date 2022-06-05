@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 
-import { colors, Status } from '../../shared';
+import { Status } from '../../../shared';
+import { colors } from '../../shared';
 
 interface BadgeProps {
   status: Status | undefined;

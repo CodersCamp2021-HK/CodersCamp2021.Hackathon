@@ -1,17 +1,22 @@
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 
+import { readFactchecks, StorageFactchecks, useNewFactcheckListener } from '../../../../shared';
 import { Notification } from '../../../components/Notification';
-import { readFactchecks, StorageFactchecks, useOnFactchecksChange } from '../../../shared';
 
 const HistoryView = () => {
   const [history, setHistory] = useState<StorageFactchecks>([]);
 
-  useEffect(() => {
+  const refetchFactchecks = () => {
     readFactchecks().then((factchecks) => setHistory(factchecks.filter(({ inHistory }) => inHistory)));
-  }, []);
+  };
 
-  useOnFactchecksChange((newFactchecks) => setHistory(newFactchecks.filter(({ inHistory }) => inHistory)));
+  useEffect(() => {
+    refetchFactchecks();
+  }, []);
+  useNewFactcheckListener(() => {
+    refetchFactchecks();
+  });
 
   return (
     <div
@@ -25,7 +30,7 @@ const HistoryView = () => {
       `}
     >
       {history
-        .slice(-10)
+        .slice(-20)
         .reverse()
         .map((factcheck) => {
           return <Notification key={factcheck.id} factcheck={factcheck}></Notification>;

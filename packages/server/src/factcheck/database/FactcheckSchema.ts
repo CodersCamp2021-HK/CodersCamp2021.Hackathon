@@ -3,7 +3,7 @@ import { ObjectId } from 'mongodb';
 import { Document } from 'mongoose';
 
 import { URL_CONSTANTS } from '../../shared';
-import { FACTCHECK_CONSTANTS, FactcheckStatus } from '../domain';
+import { FACTCHECK_CONSTANTS, FactcheckEvent, FactcheckStatus } from '../domain';
 
 type FactcheckDocument = Factcheck & Document<ObjectId>;
 
@@ -49,9 +49,18 @@ class Factcheck {
   readonly description: string;
 
   readonly createdAt: Date;
+
+  toEvent(): FactcheckEvent {
+    return Object.freeze({
+      id: this.id,
+      status: this.status,
+      url: this.url,
+    });
+  }
 }
 
 const FactcheckSchema = SchemaFactory.createForClass(Factcheck);
+FactcheckSchema.methods.toEvent = Factcheck.prototype.toEvent;
 
 export type { FactcheckDocument };
 export { Factcheck, FactcheckSchema };

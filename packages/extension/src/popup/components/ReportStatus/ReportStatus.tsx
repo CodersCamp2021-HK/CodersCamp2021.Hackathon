@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { Status } from '../../shared';
+import { Status } from '../../../shared';
 import { Badge } from '../Badge';
 
 interface ReportStatusProps {
