@@ -75,7 +75,7 @@ const InstructionSlider = () => {
                 Artykuł w trakcie sprawdzania będzie oznaczony żółtą ikoną. Możesz go przeczytać, ale ostrożnie z
                 zaufaniem.
               </li>
-              <li>Informacja, która nie została do nas jeszcze zgłoszona, będzie oznaczona kolorem niebieskim.</li>
+              <li>Na stronie, która nie została do nas jeszcze zgłoszona, wtyczka będzie miała domyślne logo.</li>
             </ul>
             <p>W obydwu przypadkach, gdy status odwiedzonej strony się zmieni, zostaniesz o tym poinformowany.</p>
           </div>
