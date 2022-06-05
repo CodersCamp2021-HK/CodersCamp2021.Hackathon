@@ -2,11 +2,12 @@ import Head from 'next/head';
 import styles from '../styles/installation.module.css';
 import Image from 'next/image';
 
-import SafariBrowserImg from '../public/SafariBrowser.svg';
+import Installation1 from '../public/installation1.png';
 import MacbookImg from '../public/Macbook Pro 15_.svg';
 import ExtensionViewImg from '../public/obraz 5.svg';
 import SearchFieldImg from '../public/search field.svg';
-import SafariExtensionImg from '../public/Safari Browser Extension.svg';
+import Installation2 from '../public/installation2.PNG';
+import Installation3 from '../public/installation3.PNG';
 
 const installation = () => {
   return (
@@ -21,7 +22,7 @@ const installation = () => {
         <div className={styles.wrapper}>
           <section className={styles.section}>
             <div className={styles.image}>
-              <Image src={SafariBrowserImg} alt='Safari Browser' />
+              <Image src={Installation1} alt='Safari Browser' />
             </div>
             <div className={styles.text}>
               <h2>
@@ -78,13 +79,13 @@ const installation = () => {
             <p>Zaznacz “Developer mode” i kliknij “Load unpacked” i wybierz wypakowaną wtyczkę.</p>
           </div>
           <div className={styles.image}>
-            <Image src={SafariExtensionImg} alt='Safari Browser' />
+            <Image src={Installation2} alt='Safari Browser' />
           </div>
         </section>
 
         <section className={styles.section}>
           <div className={styles.image}>
-            <Image src={ExtensionViewImg} alt='Extension View Image' />
+            <Image src={Installation3} alt='Extension View Image' />
           </div>
           <div className={styles.text}>
             <h2>
