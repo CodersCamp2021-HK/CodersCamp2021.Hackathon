@@ -51,7 +51,7 @@ const InstructionSlider = () => {
       <SwiperSlide className={styles.instructionSlide}>
         <div className={`${styles.instructionStep} ${styles.imageLeft}`}>
           <div className={styles.instructionImage}>
-            <Image src='/slider2.png' alt='Placeholder' layout='fill' objectFit='contain' />
+            <Image src='/slider2.PNG' alt='Placeholder' layout='fill' objectFit='contain' />
           </div>
           <div className={styles.instructionText}>
             <h3>Sprawdź status artykułu</h3>
