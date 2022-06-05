@@ -186,6 +186,10 @@
 @media (max-width: 1100px) {
   .section {
     height: auto;
+    min-height: auto;
+  }
+  .whyTextContainer {
+    width: 100%;
   }
 
   .heroContainer,
