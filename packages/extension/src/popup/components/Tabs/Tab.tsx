@@ -3,7 +3,6 @@ import { ReactNode } from 'react';
 
 import { Status } from '../../../shared';
 import { colors, transition } from '../../shared/theme';
-import { Badge } from '../Badge';
 
 export type TabProps = {
   name: string;
@@ -14,7 +13,7 @@ export type TabProps = {
   disabled?: boolean;
 };
 
-const Tab = ({ name, iconComponent, state, status, onClick, disabled }: TabProps) => {
+const Tab = ({ name, iconComponent, state, onClick, disabled }: TabProps) => {
   return (
     <button
       onClick={onClick}
@@ -78,9 +77,7 @@ const Tab = ({ name, iconComponent, state, status, onClick, disabled }: TabProps
             left: 100%;
             transform: translate(-50%, 50%);
           `}
-        >
-          {status ? <Badge size={18} status={status}></Badge> : ''}
-        </div>
+        ></div>
       </div>
       <p
         css={css`

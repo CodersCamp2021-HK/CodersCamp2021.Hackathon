@@ -1,21 +1,25 @@
 .container {
-  padding: 0 20rem 0 20rem;
+  padding: 0 7rem;
 }
 
 .section {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  gap: 10px;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 5rem 0;
 }
 
 .text {
   display: flex;
   flex-direction: column;
+  max-width: 40%;
+  width: 100%;
 }
 
 .article {
   display: flex;
   flex-direction: column;
   gap: 70px;
+  /* max-width: 50%; */
 }
