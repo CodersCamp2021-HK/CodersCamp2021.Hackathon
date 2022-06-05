@@ -14,12 +14,12 @@ const readFactchecks = async () => {
 const addFactcheck = async (factcheck: StorageFactchecks[number]) =>
   chrome.storage.local.set({ [`fc#${factcheck.id}`]: factcheck });
 
-const useOnFactchecksChange = (onChange: (newValue: StorageFactchecks) => void) => {
+const useNewFactcheckListener = (onNew: () => void) => {
   useEffect(() => {
     const handleChange = (changes: chrome.storage.StorageChange, area: 'sync' | 'local' | 'managed') => {
-      for (const [key, { newValue }] of Object.entries(changes)) {
-        if (key === 'factchecks' && area === 'local') {
-          onChange(newValue);
+      for (const [key] of Object.entries(changes)) {
+        if (key.startsWith('fc#') && area === 'local') {
+          onNew();
         }
       }
     };
@@ -28,8 +28,8 @@ const useOnFactchecksChange = (onChange: (newValue: StorageFactchecks) => void) 
     return () => {
       chrome.storage.onChanged.removeListener(handleChange);
     };
-  }, [onChange]);
+  }, [onNew]);
 };
 
-export { addFactcheck, readFactchecks, useOnFactchecksChange };
+export { addFactcheck, readFactchecks, useNewFactcheckListener };
 export type { StorageFactchecks };
