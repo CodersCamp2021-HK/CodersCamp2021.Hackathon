@@ -1,9 +1,9 @@
-import { BeforeApplicationShutdown, Injectable, Logger, OnApplicationBootstrap } from '@nestjs/common';
+import { BeforeApplicationShutdown, Injectable, Logger, NotFoundException, OnApplicationBootstrap } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { finalize, Observable } from 'rxjs';
 import { v4 as uuid } from 'uuid';
-import { ChangeStream } from 'mongodb';
+import { ChangeStream, ObjectId } from 'mongodb';
 
 import { env } from '../../config';
 import { Factcheck, FactcheckDocument } from '../database';
@@ -71,7 +71,12 @@ class FactcheckEventStreamingServiceMongo
     await this.changeStream?.close();
   }
 
-  stream(token?: string): Observable<FactcheckEvent> {
+  async stream(token?: string): Promise<Observable<FactcheckEvent>> {
+    if(token) {
+      const maybeEntity = await this.factcheckModel.findById(token);
+      if(!maybeEntity)
+        throw new NotFoundException(`Unable to find factcheck with id(${token})`)
+    }
     const clientId = uuid();
     this.logger.debug(`New client ${clientId} connected with token(${token})`);
     const stream = this.cache.stream(clientId, token);

@@ -33,8 +33,9 @@ class FactcheckController {
     description: `Parameters are not valid or they are missing.`,
     type: ValidationErrorDto,
   })
-  sync(@Query() query: FactcheckSyncQuery): Observable<FactcheckEventDto> {
-    return this.factcheckEventStreamingService.stream(query.token).pipe(
+  async sync(@Query() query: FactcheckSyncQuery) {
+    const stream = await this.factcheckEventStreamingService.stream(query.token);
+    return stream.pipe(
       map((x) => FactcheckEventDto.from(x)),
       delay(100),
     );

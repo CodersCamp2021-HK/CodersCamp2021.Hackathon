@@ -29,5 +29,4 @@ function ApiObjectIdProperty(options: ApiObjectIdPropertyOptions = {}): Property
     }),
   );
 }
-
 export { ApiObjectIdParam, ApiObjectIdProperty };
