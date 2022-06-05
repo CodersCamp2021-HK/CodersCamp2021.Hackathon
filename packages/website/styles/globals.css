@@ -56,7 +56,8 @@ h3 {
   color: var(--text-primary);
 }
 
-p, li {
+p,
+li {
   font-size: 1.75rem;
   font-weight: 200;
   line-height: 3.125rem;
@@ -100,4 +101,10 @@ li {
 .buttonText {
   font-size: 2rem;
   font-weight: 400;
+}
+
+@media (max-width: 1400px) {
+  :root {
+    font-size: 14px;
+  }
 }
