@@ -107,7 +107,7 @@ const Home: NextPage = () => {
           </div>
         </section>
 
-        <section id='instruction' className={`${styles.section} ${styles.sectionGray}`}>
+        <section id='instruction' className={`${styles.section} ${styles.sectionGray}`} style={{ height: 'auto' }}>
           <h2>Jak to działa?</h2>
           <InstructionSlider />
         </section>

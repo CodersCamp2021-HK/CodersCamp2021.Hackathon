@@ -809,6 +809,7 @@ __metadata:
     prettier: ^2.6.2
     react: 18.1.0
     react-dom: 18.1.0
+    swiper: ^8.2.2
     typescript: 4.7.2
   languageName: unknown
   linkType: soft
@@ -3596,6 +3597,15 @@ __metadata:
   dependencies:
     esutils: ^2.0.2
   checksum: fd7673ca77fe26cd5cba38d816bc72d641f500f1f9b25b83e8ce28827fe2da7ad583a8da26ab6af85f834138cf8dae9f69b0cd6ab925f52ddab1754db44d99ce
+  languageName: node
+  linkType: hard
+
+"dom7@npm:^4.0.4":
+  version: 4.0.4
+  resolution: "dom7@npm:4.0.4"
+  dependencies:
+    ssr-window: ^4.0.0
+  checksum: b38604f74e915b4d05b6634f9ff239a708c468180f498a28ff67f2a61233697d9bd7192703b788a24541c3591e7f1a6e83a2cbf70bc871a85e033f82e19abc31
   languageName: node
   linkType: hard
 
@@ -8097,6 +8107,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ssr-window@npm:^4.0.0, ssr-window@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "ssr-window@npm:4.0.2"
+  checksum: df182600927f4f3225224cf8c02338ea637c9750519505bbfb9a9236741a2a7ec088386fb948bca7b447b8303d9109e7dc7672e3de041c79ac2a0e03665af7d2
+  languageName: node
+  linkType: hard
+
 "ssri@npm:^9.0.0":
   version: 9.0.1
   resolution: "ssri@npm:9.0.1"
@@ -8366,6 +8383,16 @@ __metadata:
   peerDependencies:
     express: ">=4.0.0"
   checksum: bdd707bd6db5bd82afede351af7a04adad7de3becb9e4408c770d34d719861d00d79d1ded96b7ae1192dbd1ddd7dc6bea26dffc1d297bf52bbf21b9ec4809d5f
+  languageName: node
+  linkType: hard
+
+"swiper@npm:^8.2.2":
+  version: 8.2.2
+  resolution: "swiper@npm:8.2.2"
+  dependencies:
+    dom7: ^4.0.4
+    ssr-window: ^4.0.2
+  checksum: f734db14dadb7fee7108c444d4c84b1e4708ce797eb1b354e7382a95a21d096ff1bd2edb7b1c728101bbeecc03b225cf2cf405f7385abb34f4a3e6190682f9f8
   languageName: node
   linkType: hard
 
