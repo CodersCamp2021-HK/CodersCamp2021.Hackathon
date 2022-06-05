@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { finalize, Observable } from 'rxjs';
 import { v4 as uuid } from 'uuid';
+import { ChangeStream } from 'mongodb';
 
 import { env } from '../../config';
 import { Factcheck, FactcheckDocument } from '../database';
@@ -32,6 +33,7 @@ class FactcheckEventStreamingServiceMongo
 
   private readonly logger = new Logger(FactcheckEventStreamingServiceMongo.name);
   private readonly cache = new FactcheckEventStreamingCache(env.CACHE_SIZE);
+  private changeStream?: ChangeStream<FactcheckEvent>;
 
   private async fillCacheUsingLastEntries() {
     const count = await this.factcheckModel.estimatedDocumentCount();
@@ -44,10 +46,14 @@ class FactcheckEventStreamingServiceMongo
   }
 
   private setupChangeStream() {
-    const changeStream = this.factcheckModel.watch<FactcheckEvent>(WATCH_PIPELINE);
-    changeStream.on('change', (e) => {
+    if(this.changeStream) {
+      return;
+    }
+
+    this.changeStream = this.factcheckModel.watch<FactcheckEvent>(WATCH_PIPELINE);
+    this.changeStream.on('change', (e) => {
       if (e.fullDocument) {
-        this.cache.put(e.fullDocument);
+        this.cache.put({... e.fullDocument, id: e.fullDocument.id.toString()});
       }
     });
 
@@ -60,8 +66,9 @@ class FactcheckEventStreamingServiceMongo
     this.setupChangeStream();
   }
 
-  beforeApplicationShutdown(signal?: string) {
+  async beforeApplicationShutdown() {
     this.logger.log('beforeApplicationShutdown');
+    await this.changeStream?.close();
   }
 
   stream(token?: string): Observable<FactcheckEvent> {

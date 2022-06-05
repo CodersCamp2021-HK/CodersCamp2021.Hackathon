@@ -77,9 +77,9 @@ class FactcheckEventStreamingCache {
 
   private getAfter(idx: number): FactcheckEvent[] {
     if (this.empty) return [];
-    if (this.count < this.size) return this.buffer.slice(idx + 1, this.ptr) as FactcheckEvent[];
+    if (this.count < this.size) return this.buffer.slice(idx, this.ptr) as FactcheckEvent[];
     if (idx < this.ptr) return this.buffer.slice(idx, this.ptr) as FactcheckEvent[];
-    return [...this.buffer.slice(idx, this.size), ...this.buffer.slice(idx, this.ptr)] as FactcheckEvent[];
+    return [...this.buffer.slice(idx, this.size), ...this.buffer.slice(0, this.ptr)] as FactcheckEvent[];
   }
 }
 
