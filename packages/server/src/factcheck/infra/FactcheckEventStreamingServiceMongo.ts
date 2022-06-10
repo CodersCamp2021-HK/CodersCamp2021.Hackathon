@@ -1,13 +1,20 @@
-import { BeforeApplicationShutdown, Injectable, Logger, NotFoundException, OnApplicationBootstrap } from '@nestjs/common';
+import {
+  BeforeApplicationShutdown,
+  Injectable,
+  Logger,
+  NotFoundException,
+  OnApplicationBootstrap,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { ChangeStream } from 'mongodb';
 import { Model } from 'mongoose';
-import { finalize, Observable } from 'rxjs';
+import { concatWith, defer, finalize, Observable, takeWhile, tap } from 'rxjs';
 import { v4 as uuid } from 'uuid';
-import { ChangeStream, ObjectId } from 'mongodb';
 
 import { env } from '../../config';
 import { Factcheck, FactcheckDocument } from '../database';
 import { FactcheckEvent, FactcheckEventStreamingService } from '../domain';
+import { factcheckEventBatchStream } from './FactcheckEventBatchStream';
 import { FactcheckEventStreamingCache } from './FactcheckEventStreamingCache';
 
 const WATCH_PIPELINE = [
@@ -29,53 +36,15 @@ const WATCH_PIPELINE = [
 class FactcheckEventStreamingServiceMongo
   implements OnApplicationBootstrap, BeforeApplicationShutdown, FactcheckEventStreamingService
 {
-  constructor(@InjectModel(Factcheck.name) private readonly factcheckModel: Model<FactcheckDocument>) {}
-
   private readonly logger = new Logger(FactcheckEventStreamingServiceMongo.name);
   private readonly cache = new FactcheckEventStreamingCache(env.CACHE_SIZE);
   private changeStream?: ChangeStream<FactcheckEvent>;
 
-  private async fillCacheUsingLastEntries() {
-    const count = await this.factcheckModel.estimatedDocumentCount();
-    const lastRecords = (
-      await this.factcheckModel.find({}, { _id: 1, url: 1, status: 1 }).skip(Math.max(0, count - this.cache.size))
-    ).map((x) => x.toEvent());
-    this.logger.debug(`Loaded ${lastRecords.length} records from db`);
-    lastRecords.forEach((x) => this.cache.put(x));
-    this.logger.debug(`Cache initialized (${this.cache.count}/${this.cache.size})`);
-  }
-
-  private createCacheStream(clientId: string, token?: string) {
-    const stream = this.cache.stream(clientId, token);
-    return stream.pipe(
-      finalize(() => {
-        this.logger.debug(`Client ${clientId} disconnected`);
-      }),
-    );
-  }
-
-  private setupChangeStream() {
-    if(this.changeStream) {
-      return;
-    }
-
-    this.changeStream = this.factcheckModel.watch<FactcheckEvent>(WATCH_PIPELINE);
-    this.changeStream.on('change', (e) => {
-      if (e.fullDocument) {
-        this.cache.put({... e.fullDocument, id: e.fullDocument.id.toString()});
-      }
-    });
-
-    // TODO implement recovery on db failure
-  }
-
-  private isCacheHit(token?: string) {
-    return token !== undefined && new ObjectId(token) >= new ObjectId(this.cache.tail?.id);
-  }
+  constructor(@InjectModel(Factcheck.name) private readonly factcheckModel: Model<FactcheckDocument>) {}
 
   async onApplicationBootstrap() {
     this.logger.log('onApplicationBootstrap');
-    await this.fillCacheUsingLastEntries();
+    await this.initCache();
     this.setupChangeStream();
   }
 
@@ -85,19 +54,73 @@ class FactcheckEventStreamingServiceMongo
   }
 
   async stream(token?: string): Promise<Observable<FactcheckEvent>> {
-    if(token) {
+    if (token) {
       const maybeEntity = await this.factcheckModel.findById(token);
-      if(!maybeEntity)
-        throw new NotFoundException(`Unable to find factcheck with id(${token})`)
+      if (!maybeEntity) throw new NotFoundException(`Unable to find factcheck with id(${token})`);
     }
-    const clientId = uuid();
-    this.logger.debug(`New client ${clientId} connected with token(${token})`);
-    if(this.cache.empty) {
-      return this.createCacheStream(clientId, token);
-    }
-    // TODO implement batching until cache hit
 
-    return this.createCacheStream(clientId, token);
+    if (!this.cache.full || this.cache.isCacheHit(token)) {
+      return this.createCacheStream(token);
+    }
+
+    return this.createBatchStream(token);
+  }
+
+  private async initCache() {
+    const count = await this.factcheckModel.estimatedDocumentCount();
+    const lastCount = Math.max(0, count - this.cache.size);
+    const lastRecords = await this.factcheckModel
+      .find({}, { _id: 1, url: 1, status: 1 })
+      .skip(lastCount)
+      .then((x) => x.map((y) => y.toEvent()));
+    this.logger.debug(`Loaded ${lastRecords.length} records from db`);
+    lastRecords.forEach((x) => this.cache.put(x));
+    this.logger.debug(`Cache initialized (${this.cache.count}/${this.cache.size})`);
+  }
+
+  private setupChangeStream() {
+    if (this.changeStream) {
+      return;
+    }
+
+    this.changeStream = this.factcheckModel.watch<FactcheckEvent>(WATCH_PIPELINE);
+    this.changeStream.on('change', (e) => {
+      if (e.fullDocument) {
+        this.cache.put({ ...e.fullDocument, id: e.fullDocument.id.toString() });
+      }
+    });
+
+    // TODO implement recovery on db failure
+  }
+
+  private createCacheStream(token?: string) {
+    return defer(() => {
+      const clientId = uuid();
+      this.logger.debug(`Client(${clientId}): connected with token(${token ?? 'empty'})`);
+      return this.cache.stream(clientId, token).pipe(
+        finalize(() => {
+          this.logger.debug(`Client(${clientId}): disconnected`);
+        }),
+      );
+    });
+  }
+
+  private createBatchStream(token?: string) {
+    return defer(() => {
+      const clientId = uuid();
+      this.logger.debug(`Client(${clientId}): connected with token(${token ?? 'empty'})`);
+      const ref = { current: token ?? 'empty' };
+      const batch$ = factcheckEventBatchStream(this.factcheckModel, clientId, env.BATCH_SIZE, token);
+      const cache$ = defer(() => this.cache.stream(clientId, ref.current));
+      return batch$.pipe(
+        tap((x) => (ref.current = x.id)),
+        takeWhile((x) => !this.cache.isCacheHit(x.id), true),
+        concatWith(cache$),
+        finalize(() => {
+          this.logger.debug(`Client(${clientId}): disconnected`);
+        }),
+      );
+    });
   }
 }
 

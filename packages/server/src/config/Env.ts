@@ -30,13 +30,19 @@ class EnvVariables {
   readonly CACHE_SIZE: number;
 
   @Expose()
+  @IsInt()
+  @IsPositive()
+  readonly BATCH_SIZE: number;
+
+  @Expose()
   @IsString()
   @IsNotEmpty()
   readonly SERVER_URL: string;
 }
 
 const defaultConfig = {
-  CACHE_SIZE: 1000,
+  CACHE_SIZE: 5,
+  BATCH_SIZE: 2,
 };
 
 const env = plainToInstance(
