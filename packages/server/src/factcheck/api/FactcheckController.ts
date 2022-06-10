@@ -4,7 +4,7 @@ import { ApiBadRequestResponse, ApiOkResponse, ApiOperation } from '@nestjs/swag
 import { plainToInstance } from 'class-transformer';
 import { Response } from 'express';
 import { Model } from 'mongoose';
-import { delay, map, Observable } from 'rxjs';
+import { delay, map } from 'rxjs';
 
 import { ApiController, ApiCreate, ApiGet, ApiObjectIdParam, Url, ValidationErrorDto } from '../../shared';
 import { Factcheck, FactcheckDocument } from '../database';

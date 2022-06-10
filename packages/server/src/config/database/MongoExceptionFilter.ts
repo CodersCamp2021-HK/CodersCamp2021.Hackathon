@@ -1,10 +1,4 @@
-import {
-  ArgumentsHost,
-  Catch,
-  ExceptionFilter,
-  HttpStatus,
-  Logger,
-} from '@nestjs/common';
+import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus, Logger } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { Response } from 'express';
 import { MongoError } from 'mongodb';
@@ -44,12 +38,12 @@ class MongoExceptionFilter implements ExceptionFilter {
     }
 
     const body = plainToInstance(DefaultResponseDto, {
-      name: 'Internal Server Error',
-      status: HttpStatus.INTERNAL_SERVER_ERROR.toString(),
+      name: 'Service Unavailable',
+      status: HttpStatus.SERVICE_UNAVAILABLE.toString(),
       path: res.req.originalUrl,
     });
 
-    res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(body);
+    res.status(HttpStatus.SERVICE_UNAVAILABLE).json(body);
   }
 }
 

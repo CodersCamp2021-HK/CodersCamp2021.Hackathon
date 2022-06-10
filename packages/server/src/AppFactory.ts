@@ -11,6 +11,7 @@ async function appFactory(options: NestApplicationOptions = {}) {
     ...options,
   });
   app.setGlobalPrefix('api');
+  app.enableShutdownHooks();
   const apiSpec = createSwaggerDocument(app);
   const setup = _.flow(
     setupSecurity,

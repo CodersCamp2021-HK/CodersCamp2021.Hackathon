@@ -6,7 +6,6 @@ import {
   OnApplicationBootstrap,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { ChangeStream } from 'mongodb';
 import { Model } from 'mongoose';
 import { concatWith, defer, finalize, Observable, takeWhile, tap } from 'rxjs';
 import { v4 as uuid } from 'uuid';
@@ -15,22 +14,8 @@ import { env } from '../../config';
 import { Factcheck, FactcheckDocument } from '../database';
 import { FactcheckEvent, FactcheckEventStreamingService } from '../domain';
 import { factcheckEventBatchStream } from './FactcheckEventBatchStream';
+import { FactcheckEventChangeStream } from './FactcheckEventChangeStream';
 import { FactcheckEventStreamingCache } from './FactcheckEventStreamingCache';
-
-const WATCH_PIPELINE = [
-  {
-    $match: {
-      operationType: 'insert',
-    },
-  },
-  {
-    $project: {
-      'fullDocument.id': '$fullDocument._id',
-      'fullDocument.url': 1,
-      'fullDocument.status': 1,
-    },
-  },
-];
 
 @Injectable()
 class FactcheckEventStreamingServiceMongo
@@ -38,19 +23,21 @@ class FactcheckEventStreamingServiceMongo
 {
   private readonly logger = new Logger(FactcheckEventStreamingServiceMongo.name);
   private readonly cache = new FactcheckEventStreamingCache(env.CACHE_SIZE);
-  private changeStream?: ChangeStream<FactcheckEvent>;
+  private readonly changeStream: FactcheckEventChangeStream;
 
-  constructor(@InjectModel(Factcheck.name) private readonly factcheckModel: Model<FactcheckDocument>) {}
+  constructor(@InjectModel(Factcheck.name) private readonly factcheckModel: Model<FactcheckDocument>) {
+    this.changeStream = new FactcheckEventChangeStream(factcheckModel, (e) => this.cache.put(e));
+  }
 
   async onApplicationBootstrap() {
     this.logger.log('onApplicationBootstrap');
     await this.initCache();
-    this.setupChangeStream();
+    await this.changeStream.open();
   }
 
   async beforeApplicationShutdown() {
     this.logger.log('beforeApplicationShutdown');
-    await this.changeStream?.close();
+    await this.changeStream.close();
   }
 
   async stream(token?: string): Promise<Observable<FactcheckEvent>> {
@@ -76,21 +63,6 @@ class FactcheckEventStreamingServiceMongo
     this.logger.debug(`Loaded ${lastRecords.length} records from db`);
     lastRecords.forEach((x) => this.cache.put(x));
     this.logger.debug(`Cache initialized (${this.cache.count}/${this.cache.size})`);
-  }
-
-  private setupChangeStream() {
-    if (this.changeStream) {
-      return;
-    }
-
-    this.changeStream = this.factcheckModel.watch<FactcheckEvent>(WATCH_PIPELINE);
-    this.changeStream.on('change', (e) => {
-      if (e.fullDocument) {
-        this.cache.put({ ...e.fullDocument, id: e.fullDocument.id.toString() });
-      }
-    });
-
-    // TODO implement recovery on db failure
   }
 
   private createCacheStream(token?: string) {
